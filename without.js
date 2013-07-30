@@ -28,19 +28,59 @@ withOut=(function()
         var e=a[i]
         if(null==e) continue;
         if(nested && ('function'==typeof e))
-        {
-         e()
-         continue
-        }
-        html+=autoesc? h(e):e
+          e()
+        else
+          html+=autoesc? h(e):e
       }
     }
   }
+
+  function makeRaw()
+  {
+    return function(){raw(arguments)}
+    function raw(a)
+    {
+      for(var i in a)
+      {
+        var e=a[i]
+        if(null!=e)html+=e
+      }
+    }
+  }
+
+  function makeRaw()
+  {
+    return function(){raw(arguments)}
+    function raw(a)
+    {
+      for(var i in a)
+      {
+        var e=a[i]
+        if(null!=e)html+=e
+      }
+    }
+  }
+
+  function makeEsc()
+  {
+    return function(){raw(arguments)}
+    function raw(a)
+    {
+      for(var i in a)
+      {
+        var e=a[i]
+        if(null!=e)html+=h(e)
+      }
+    }
+  }
+
 
   var fragments=makeLists()
   var children=makeLists(true)
 
   scope.print=function(){fragments(arguments)}
+  scope.raw=makeRaw();
+  scope.esc=makeEsc();
 
   return {
     dump: function(){ console.log(html); html='' },
