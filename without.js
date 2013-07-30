@@ -50,23 +50,10 @@ withOut=(function()
     }
   }
 
-  function makeRaw()
-  {
-    return function(){raw(arguments)}
-    function raw(a)
-    {
-      for(var i in a)
-      {
-        var e=a[i]
-        if(null!=e)html+=e
-      }
-    }
-  }
-
   function makeEsc()
   {
-    return function(){raw(arguments)}
-    function raw(a)
+    return function(){esc(arguments)}
+    function esc(a)
     {
       for(var i in a)
       {
@@ -115,7 +102,6 @@ withOut=(function()
   for(var i in nTags) scope[nTags[i]]=makeTag(nTags[i])
   for(var i in eTags) scope[eTags[i]]=makeTag(eTags[i], true)
 
-
   function makeVars()
   {
     var v=[];
@@ -138,6 +124,5 @@ withOut=(function()
     wrap: wrap
   }
 })()
-
 
 //--[EOF]------------------------------------------------------------
