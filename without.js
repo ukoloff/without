@@ -88,11 +88,24 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     }
   }
 
+  function makeComment()
+  {
+    var level=0;
+    return function(){ comment.apply(this, arguments) }
+    function comment()
+    {
+      html+= level++? '<comment level="'+level+'">' : "<!--"
+      children(arguments)
+      html+= --level? '</comment>': '-->'
+    }
+  }
+
   var fragments=makeLists()
   var children=makeLists(true)
 
   scope.print=function(){fragments(arguments)}
-  scope.raw=makeRaw();
+  scope.raw=makeRaw()
+  scope.comment=makeComment()
   for(var i in nTags) scope[nTags[i]]=makeTag(nTags[i])
   scope.$var=makeTag('var')
   for(var i in eTags) scope[eTags[i]]=makeTag(eTags[i], true)
