@@ -100,12 +100,21 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     }
   }
 
+  function coffeeScript()
+  {
+    if((1!=arguments.length)||('function'!=typeof arguments[0]))
+      throw 'Usage: coffeescript -> code'
+    html+='<script>\n('+arguments[0].toString()+')()\n</script>';
+  }
+
   var fragments=makeLists()
   var children=makeLists(true)
 
   scope.print=function(){fragments(arguments)}
   scope.raw=makeRaw()
   scope.comment=makeComment()
+  scope.coffeescript=function(){ coffeeScript.apply(this, arguments) }
+
   for(var i in nTags) scope[nTags[i]]=makeTag(nTags[i])
   scope.$var=makeTag('var')
   for(var i in eTags) scope[eTags[i]]=makeTag(eTags[i], true)
