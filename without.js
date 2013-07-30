@@ -7,7 +7,8 @@ withOut=(function()
   var
     html='',
     options= {autoesc: true},
-    entities={amp: '&', lt: '<', gt: '>', quot: '"'}
+    entities={amp: '&', lt: '<', gt: '>', quot: '"'},
+    scope={}
 
   function h(s)
   {
@@ -39,11 +40,14 @@ withOut=(function()
   var fragments=makeLists()
   var children=makeLists(true)
 
+  scope.print=function(){fragments(arguments)}
+
   return {
     dump: function(){ console.log(html); html='' },
     h: h,
     fragments: fragments, 
-    children: children
+    children: children,
+    scope: scope
   }
 })()
 
