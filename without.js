@@ -28,7 +28,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   function makeLists(nested)
   {
-    return function list(a)
+    return function(a)
     {
       for(var i in a)
       {
@@ -37,7 +37,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
         if(nested && ('function'==typeof e))
           e.call(_this)
         else
-          html+=e
+          html+=h(e)
       }
     }
   }
@@ -125,13 +125,6 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   }
 
   return {
-    dump: function(){ console.log(html); html='' },
-    h: h,
-    fragments: fragments, 
-    children: children,
-    scope: scope,
-    v: function(){ return makeVars() },
-    wrap: wrap,
     renderable: renderable
   }
 })()
