@@ -8,7 +8,7 @@ withOut=(function()
     html='',
     options={autoesc: true},
     entities={amp: '&', lt: '<', gt: '>', quot: '"'},
-    nTags='a abbr acronym address applet article aside audio b bdo big blockquote body button canvas caption center cite code colgroup command datalist dd del details dfn dir div dl dt em embed fieldset figcaption figure font footer form frameset h1 h2 h3 h4 h5 h6 head header hgroup html i iframe ins keygen kbd label legend li map mark menu meter nav noframes noscript object ol optgroup option output p pre progress q rp rt ruby s samp script section select small source span strike strong style sub summary sup table tbody td textarea tfoot th thead time title tr tt u ul var video wbr xmp'.split(' '),
+    nTags='a abbr acronym address applet article aside audio b bdo big blockquote body button canvas caption center cite code colgroup command datalist dd del details dfn dir div dl dt em embed fieldset figcaption figure font footer form frameset h1 h2 h3 h4 h5 h6 head header hgroup html i iframe ins keygen kbd label legend li map mark menu meter nav noframes noscript object ol optgroup option output p pre progress q rp rt ruby s samp script section select small source span strike strong style sub summary sup table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.split(' '),
     eTags='area base basefont br col frame hr img input link meta param'.split(' '),
     scope={}
 
@@ -116,12 +116,26 @@ withOut=(function()
   for(var i in eTags) scope[eTags[i]]=makeTag(eTags[i], true)
 
 
+  function makeVars()
+  {
+    var v=[];
+    for(var tag in scope) v.push(tag+'=this.'+tag)
+    return 'var '+v.join(',')+';'
+  }
+
+  function wrap(fn){
+    if('function'!=typeof fn) throw "Call: wrap(function)";
+    return (new Function(makeVars()+'return '+fn.toString())).call(scope)
+  }
+
   return {
     dump: function(){ console.log(html); html='' },
     h: h,
     fragments: fragments, 
     children: children,
-    scope: scope
+    scope: scope,
+    v: function(){ return makeVars() },
+    wrap: wrap
   }
 })()
 
