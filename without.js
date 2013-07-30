@@ -58,25 +58,28 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   function makeTag(name, empty)
   {
     return function(){tag(arguments)}
-    function attrs(a)
+    function attr(k, v)
     {
-      for(var k in a)
+      if((null==v) || (false===v)) return
+      if(('data'==k) && ('object'==typeof v))
       {
-        v=a[k]
-        if((null==v) || (false===v)) continue
-        fragments([' ', k])
-        if(true!==v)
-        {
-          html+='="'
-          fragments([v])
-          html+='"'
-        }
+        for(k in v) attr('data-'+k, v[k])
+        return
       }
+      fragments([' ', k])
+      if(true===v) return
+      html+='="'
+      fragments([v])
+      html+='"'
     }
     function tag(a)
     {
       html+='<'+name;
-      if('object'==typeof a[0]){attrs(a[0]); a=[].slice.call(a, 1)}
+      if('object'==typeof a[0])
+      {
+       for(var k in a[0]) attr(k, a[0][k])
+       a=[].slice.call(a, 1)
+      }
       html+='>'
       if(empty && a.length) throw "<"+name+"> must have no content!"
       if(empty) return
