@@ -6,11 +6,17 @@ withOut=(function()
 {
   var
     html='',
-    options={autoesc: true},
     entities={amp: '&', lt: '<', gt: '>', quot: '"'},
-    nTags='a abbr acronym address applet article aside audio b bdo big blockquote body button canvas caption center cite code colgroup command datalist dd del details dfn dir div dl dt em embed fieldset figcaption figure font footer form frameset h1 h2 h3 h4 h5 h6 head header hgroup html i iframe ins keygen kbd label legend li map mark menu meter nav noframes noscript object ol optgroup option output p pre progress q rp rt ruby s samp script section select small source span strike strong style sub summary sup table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.split(' '),
+    nTags='a abbr acronym address applet article aside audio b bdo big blockquote body button \
+canvas caption center cite code colgroup command datalist dd del details dfn dir div dl dt \
+em embed fieldset figcaption figure font footer form frameset h1 h2 h3 h4 h5 h6 head header hgroup html \
+i iframe ins keygen kbd label legend li map mark menu meter nav noframes noscript object \
+ol optgroup option output p pre progress q rp rt ruby \
+s samp script section select small source span strike strong style sub summary sup \
+table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.split(' '),
     eTags='area base basefont br col frame hr img input link meta param'.split(' '),
-    scope={}
+    scope={},
+    _this
 
   function h(s)
   {
@@ -24,15 +30,14 @@ withOut=(function()
   {
     return function list(a)
     {
-      autoesc=options.autoesc
       for(var i in a)
       {
         var e=a[i]
         if(null==e) continue;
         if(nested && ('function'==typeof e))
-          e()
+          e.call(_this)
         else
-          html+=autoesc? h(e):e
+          html+=e
       }
     }
   }
@@ -46,19 +51,6 @@ withOut=(function()
       {
         var e=a[i]
         if(null!=e)html+=e
-      }
-    }
-  }
-
-  function makeEsc()
-  {
-    return function(){esc(arguments)}
-    function esc(a)
-    {
-      for(var i in a)
-      {
-        var e=a[i]
-        if(null!=e)html+=h(e)
       }
     }
   }
@@ -98,8 +90,8 @@ withOut=(function()
 
   scope.print=function(){fragments(arguments)}
   scope.raw=makeRaw();
-  scope.esc=makeEsc();
   for(var i in nTags) scope[nTags[i]]=makeTag(nTags[i])
+  scope.$var=makeTag('var')
   for(var i in eTags) scope[eTags[i]]=makeTag(eTags[i], true)
 
   function makeVars()
