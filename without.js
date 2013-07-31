@@ -5,8 +5,6 @@
 (function()
 {
   var
-    html='',
-    entities={amp: '&', lt: '<', gt: '>', quot: '"'},
     nTags='a abbr acronym address applet article aside audio b bdo big blockquote body button \
 canvas caption center cite code colgroup command datalist dd del details dfn dir div dl dt \
 em embed fieldset figcaption figure font footer form frameset h1 h2 h3 h4 h5 h6 head header hgroup html \
@@ -16,6 +14,7 @@ s samp script section select small source span strike strong style sub summary s
 table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.split(' '),
     eTags='area base basefont br col frame hr img input link meta param'.split(' '),
     scope={},
+    html='',
     _this
 
   function h(s)
@@ -23,32 +22,35 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function makeLists(nested)
+  function children(a)
   {
-    return function(a)
+    for(var i in a)
     {
-      for(var i in a)
-      {
-        var e=a[i]
-        if(null==e) continue;
-        if(nested && ('function'==typeof e))
-          e.call(_this)
-        else
-          html+=h(e)
-      }
+      var e=a[i]
+      if(null==e) continue;
+      if('function'==typeof e)
+        e.call(_this)
+      else
+        html+=h(e)
     }
   }
 
-  function makeRaw()
+  function fragments(a)
   {
-    return function(){raw(arguments)}
-    function raw(a)
+    for(var i in a)
     {
-      for(var i in a)
-      {
-        var e=a[i]
-        if(null!=e)html+=e
-      }
+      var e=a[i]
+      if(null==e) continue;
+      html+=h(e)
+    }
+  }
+
+  function raw(a)
+  {
+    for(var i in a)
+    {
+      var e=a[i]
+      if(null!=e)html+=e
     }
   }
 
@@ -63,11 +65,9 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
         for(k in v) attr('data-'+k, v[k])
         return
       }
-      fragments([' ', k])
+      html+=' '+h(k)
       if(true===v) return
-      html+='="'
-      fragments([v])
-      html+='"'
+      html+='="'+h(v)+'"'
     }
     function tag(a)
     {
@@ -104,11 +104,8 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     html+='<script>\n('+arguments[0].toString()+')()\n</script>';
   }
 
-  var fragments=makeLists()
-  var children=makeLists(true)
-
   scope.print=function(){fragments(arguments)}
-  scope.raw=makeRaw()
+  scope.raw=function(){raw(arguments)}
   scope.comment=makeComment()
   scope.coffeescript=function(){ coffeeScript.apply(this, arguments) }
 
@@ -120,12 +117,12 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   {
     var v=[];
     for(var tag in scope) v.push(tag+'=this.'+tag)
-    return 'var '+v.join(',')+';'
+    return 'var '+v.join(',')
   }
 
   function setContext(fn){
     if('function'!=typeof fn) throw "Call: renderable(function)";
-    return (new Function(makeVars()+'return '+fn.toString())).call(scope)
+    return (new Function(makeVars()+'\nreturn '+fn.toString())).call(scope)
   }
 
   function renderable(fn)
