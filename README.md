@@ -97,6 +97,53 @@ func=->
       li -> tag.i '#'+i
 ```
 
-## Legacy
+## Pseudo-tags
 
+Inside template function some other methods injected:
+
+### `print`
+Just outputs its arguments
+
+```coffee
+  div =>
+    print "That's ", @user
+    a href: '#', 'Read more'
+```
+
+is equivalent to:
+
+```coffee
+  div "That's ", @user, ->
+    a href: '#', 'Read more'
+```
+
+### `raw`
+Like `print`, but doesn't escape HTML
+
+```coffee
+  raw @breadcrumbs
+```
+
+### `comment`
+Add HTML-comment `<!--...-->`
+
+```coffee
+  div id: @id, =>
+    comment =>
+      span @msg
+    a href: '#'...
+```
+
+Nested comment allowed.
+
+### `coffeescript`
+
+Insert `<script>...</script>` with its argument compiled to JavaScript
+
+```coffee
+  coffeescript ->
+    alert "Alerts suck!"
+```
+
+## Legacy
 Inspired by [ck](https://github.com/aeosynth/ck) and [Teacup](https://github.com/goodeggs/teacup)
