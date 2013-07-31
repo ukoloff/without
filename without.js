@@ -164,9 +164,10 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
       var z=compiledJST[path]
       if(z) return z
       z=JST[path]
-      if('function'==typeof z) return compiledJST[path]=renderable(z)
-      compiledJST[path]=function(){return '#No JST#'}
-      throw "JST['"+path+"'] not found or incorrect!"
+      return compiledJST[path]=
+        'function'==typeof z ?
+          renderable(z) :
+          function(){throw "JST['"+path+"'] not found or incorrect!"}
     }
     function JSTs()
     {
