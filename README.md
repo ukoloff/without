@@ -51,7 +51,51 @@ func=withOut.renderable (data)->
 $('#output').html func msg: "Hello"
 ```
 
-Both ways are supported. You can even mix them.
+Both ways are supported. You can even mix them in one call.
+
+## Fat arrow
+
+With `@` passing style template engine does it best to correctly set `this` in all nested functions.
+It suits most templates but can fail in some complex scenarios.
+
+Fortunately, coffeescript itself can handle it! Just use fat arrow `=>` **inside** template function.
+The arrow **outside** must remain slim `->` (see examples above). If you don't use `@` in template or 
+in some function in it, you can also use `->` in that scope.
+
+## Aliasing tags
+
+Engine uses some `eval` magic to inject all tag names (`div`, `span`, `a`...)into template function.
+It only fails with `<var>...</var>`, because it's reserved word in JavaScript. So function for `<var>`
+tag is named `$var`.
+
+You can also use same tag names (especialy `i`) inside your function as regular variables. But then
+you cannot use that tags.
+
+To fix - create some aliases:
+
+```coffee
+func=->
+  $i=i
+  $a=a
+  div id: 'Main', =>
+    ...
+    for i in[1..@N]
+      li -> $i '#'+i
+```
+
+or even
+
+```coffee
+func=->
+  tag=
+    i: i
+    a: a
+    var: $var
+  div id: 'Main', =>
+    ...
+    for i in[1..@N]
+      li -> tag.i '#'+i
+```
 
 ## Legacy
 
