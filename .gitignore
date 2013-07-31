@@ -11,5 +11,6 @@ pids
 logs
 results
 try
+node_modules
 
 npm-debug.log

@@ -5,9 +5,29 @@
     "name": "Stas Ukolov",
     "email": "ukoloff@gmail.com"
   },
+  "main": "without.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/ukoloff/without"
   },
-  "main": "without.js"
+  "keywords": [
+    "template",
+    "coffeescript",
+    "coffee-script",
+    "coffee",
+    "render",
+    "view",
+    "html",
+    "teakup",
+    "ck"
+  ],
+  "devDependencies": {
+    "coffee-script": "*",
+    "connect-assets": "*",
+    "mocha": "*",
+    "expect.js": "*"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  }
 }
