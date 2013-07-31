@@ -4,7 +4,7 @@ Yet another CoffeScript template (without `with`, coffescript, options and templ
 
 ## Usage
 
-1. General usage
+* General usage
 
 ```coffee
 func=withOut.renderable ->
@@ -14,7 +14,7 @@ func=withOut.renderable ->
 $('#output').html func.call msg: "Hello"
 ```
 
-2. Recompiling JST
+* Recompiling JST
 
 ```coffee
 # app/assets/javascripts/t/t1.jst.coffee
@@ -34,6 +34,24 @@ return ->
 func=withOut.JSTs('t/t1', 't/t2')
 $('#output').html(func({msg: 'Hello'}))
 ```
+
+## Passing data
+
+* Using `@`
+
+See above
+
+* Using argument(s)
+
+```coffee
+func=withOut.renderable (data)->
+  div id: 'Main', ->
+    span data.msg
+
+$('#output').html func msg: "Hello"
+```
+
+Both ways are supported. You can even mix them.
 
 ## Legacy
 
