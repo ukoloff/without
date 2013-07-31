@@ -153,25 +153,25 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     }
   }
 
+  var compiledJST=[]
+
   function JSTs(path)
   {
-    var compiled, paths=arguments
+    var paths=arguments
     return function(){return JSTs.apply(arguments[0], arguments)}
-    function getJST(path)
+    function fetchJST(path)
     {
-      var z=JST[path];
-      if('function'==typeof z) return z;
+      var z=compiledJST[path]
+      if(z) return z
+      z=JST[path]
+      if('function'==typeof z) return compiledJST[path]=renderable(z)
+      compiledJST[path]=function(){return '#No JST#'}
       throw "JST['"+path+"'] not found or incorrect!"
     }
     function JSTs()
     {
-      if(!compiled)
-      {
-        compiled=[]
-        for(var i in paths) compiled.push(renderable(getJST(paths[i])))
-      }
       var S=''
-      for(i in compiled) S+=compiled[i].apply(this, arguments)
+      for(var i in paths) S+=fetchJST(paths[i]).apply(this, arguments)
       return S
     }
   }
