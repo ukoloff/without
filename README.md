@@ -145,5 +145,22 @@ Insert `<script>...</script>` with its argument compiled to JavaScript
     alert "Alerts suck!"
 ```
 
+## HTML attributes
+
+Normal tags (not pseudo-tags) support HTML attributes. Must be first (hash) argument to a tag.
+
+Shorcuts `.class` and `#id` not supported - use general form 
+
+```coffee
+  a id: 'link_'+@i, class: "btn btn-primary", href: '#/item/'+@i, @name
+```
+
+Also `data-*` attributes supported:
+
+```coffee
+  span id: 'X', data: @obj, ->
+    ...
+```
+
 ## Legacy
 Inspired by [ck](https://github.com/aeosynth/ck) and [Teacup](https://github.com/goodeggs/teacup)
