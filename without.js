@@ -20,10 +20,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   function h(s)
   {
-   s=''+s
-   for(var i in entities)
-     s=s.split(entities[i]).join("&"+i+";")
-   return s
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
   function makeLists(nested)
