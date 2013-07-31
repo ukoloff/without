@@ -23,7 +23,6 @@
   ],
   "devDependencies": {
     "coffee-script": "*",
-    "connect-assets": "*",
     "mocha": "*",
     "expect.js": "*"
   },
