@@ -62,6 +62,8 @@ Fortunately, coffeescript itself can handle it! Just use fat arrow `=>` **inside
 The arrow **outside** must remain slim `->` (see examples above). If you don't use `@` in template or 
 in some function in it, you can also use `->` in that scope.
 
+If in doubt, use `=>`.
+
 ## Aliasing tags
 
 Engine uses some `eval` magic to inject all tag names (`div`, `span`, `a`...)into template function.
@@ -160,6 +162,17 @@ Also `data-*` attributes supported:
 ```coffee
   span id: 'X', data: @obj, ->
     ...
+```
+
+## Nested templates
+
+You can render template inside template
+
+```coffee
+# app/assets/javascripts/t/t3.jst.coffee
+return ->
+  div id: 'contents', =>
+    raw withOut.JSTs('t/t2') @
 ```
 
 ## Legacy
