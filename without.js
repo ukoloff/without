@@ -127,7 +127,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   }
 
   function setContext(fn){
-    if('function'!=typeof fn) throw "Call: wrap(function)";
+    if('function'!=typeof fn) throw "Call: renderable(function)";
     return (new Function(makeVars()+'return '+fn.toString())).call(scope)
   }
 
@@ -153,8 +153,32 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     }
   }
 
+  function JSTs(path)
+  {
+    var compiled, paths=arguments
+    return function(){return JSTs.apply(arguments[0], arguments)}
+    function getJST(path)
+    {
+      var z=JST[path];
+      if('function'==typeof z) return z;
+      throw "JST['"+path+"'] not found or incorrect!"
+    }
+    function JSTs()
+    {
+      if(!compiled)
+      {
+        compiled=[]
+        for(var i in paths) compiled.push(renderable(getJST(paths[i])))
+      }
+      var S=''
+      for(i in compiled) S+=compiled[i].apply(this, arguments)
+      return S
+    }
+  }
+
   return {
-    renderable: renderable
+    renderable: renderable,
+    JSTs: JSTs
   }
 })()
 
