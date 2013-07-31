@@ -1,0 +1,13 @@
+{
+  "name": "withOut",
+  "description": "Yet another CoffeScript template (without `with`, coffescript and templates)",
+  "author": {
+    "name": "Stas Ukolov",
+    "email": "ukoloff@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ukoloff/without"
+  },
+  "main": "without.js"
+}

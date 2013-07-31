@@ -2,7 +2,7 @@
 // without.js - CoffeScript template engine with lexical scoping
 //
 
-withOut=(function()
+(function()
 {
   var
     html='',
@@ -177,10 +177,16 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     }
   }
 
-  return {
+  interface={
     renderable: renderable,
     JSTs: JSTs
   }
+  if(('undefined'!=typeof module) && module.exports)
+    module.exports=interface
+  else if(('function'==typeof define) && define.amd)
+    define('withOut', [], function(){ return interface })
+  else
+    window.withOut=interface
 })()
 
 //--[EOF]------------------------------------------------------------
