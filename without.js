@@ -126,23 +126,30 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     return 'var '+v.join(',')+';'
   }
 
-  function wrap(fn){
+  function setContext(fn){
     if('function'!=typeof fn) throw "Call: wrap(function)";
     return (new Function(makeVars()+'return '+fn.toString())).call(scope)
   }
 
   function renderable(fn)
   {
-    fn=wrap(fn)
+    fn=setContext(fn)
     return function(){ return withOut.apply(this, arguments) }
     function withOut()
     {
-      _this=this;
-      html=''
-      fn.apply(this, arguments)
-      x=html
-      html=''
-      return x
+      try
+      {
+        var that=_this, x=html
+        _this=this
+        html=''
+        fn.apply(this, arguments)
+        return html
+      }
+      finally
+      {
+        _this=that
+        html=x
+      }
     }
   }
 
