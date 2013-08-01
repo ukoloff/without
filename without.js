@@ -127,9 +127,14 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   function renderable(fn)
   {
-    fn=setContext(fn)
+    var pending=true
     return function()
     {
+      if(pending)
+      {
+        fn=setContext(fn)
+        pending=false
+      }
       try
       {
         var that=_this, x=html
@@ -182,7 +187,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     }
   }
 
-  interface={
+  var interface={
     compile: compile,
     renderable: compile,
     $compile: $compile,
