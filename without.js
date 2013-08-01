@@ -147,6 +147,11 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     }
   }
 
+  function compile(fn)
+  {
+    return renderable(fn)
+  }
+
   var compiledJST=[]
 
   function JSTs(path)
@@ -172,7 +177,8 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   }
 
   interface={
-    renderable: renderable,
+    compile: compile,
+    renderable: compile,
     JSTs: JSTs
   }
   if(('undefined'!=typeof module) && module.exports)

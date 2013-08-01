@@ -7,7 +7,7 @@ Yet another CoffeScript template (without `with`, coffescript, options and templ
 * General usage
 
 ```coffee
-func=withOut.renderable ->
+func=withOut.compile ->
   div id: 'Main', =>
     span @msg
 
@@ -44,7 +44,7 @@ See above
 * Using argument(s)
 
 ```coffee
-func=withOut.renderable (data)->
+func=withOut.compile (data)->
   div id: 'Main', ->
     span data.msg
 
@@ -66,7 +66,7 @@ If in doubt, use `=>`.
 
 ## Aliasing tags
 
-Engine uses some `eval` magic to inject all tag names (`div`, `span`, `a`...)into template function.
+Engine uses some `eval` magic to inject all tag names (`div`, `span`, `a`...) into template function.
 It only fails with `<var>...</var>`, because it's reserved word in JavaScript. So function for `<var>`
 tag is named `$var`.
 
