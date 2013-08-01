@@ -51,7 +51,8 @@ func=withOut.compile (data)->
 $('#output').html func msg: "Hello"
 ```
 
-Both ways are supported. You can even mix them in one call.
+Both ways are supported. You can even mix them in one call. Sometimes it's convenient to pass *two* data
+sets into template.
 
 ## Fat arrow
 

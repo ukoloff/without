@@ -152,6 +152,12 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     return renderable(fn)
   }
 
+  function $compile(fn)
+  {
+    withOut=renderable(fn);
+    return function(){return withOut.apply(arguments[0], arguments)}
+  }
+
   var compiledJST=[]
 
   function JSTs(path)
@@ -179,6 +185,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   interface={
     compile: compile,
     renderable: compile,
+    $compile: $compile,
     JSTs: JSTs
   }
   if(('undefined'!=typeof module) && module.exports)
