@@ -78,7 +78,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
        a=[].slice.call(a, 1)
       }
       html+='>'
-      if(empty && a.length) throw "<"+name+"> must have no content!"
+      if(empty && a.length) throw SyntaxError("<"+name+"> must have no content!")
       if(empty) return
       children(a)
       html+="</"+name+">"
@@ -100,7 +100,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   function coffeeScript()
   {
     if((1!=arguments.length)||('function'!=typeof arguments[0]))
-      throw 'Usage: coffeescript -> code'
+      throw SyntaxError('Usage: coffeescript -> code')
     html+='<script>\n('+arguments[0].toString()+')()\n</script>';
   }
 
@@ -121,12 +121,12 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   }
 
   function setContext(fn){
-    if('function'!=typeof fn) throw "Call: renderable(function)";
     return (new Function(makeVars()+'\nreturn '+fn.toString())).call(scope)
   }
 
   function renderable(fn)
   {
+    if('function'!=typeof fn) throw TypeError("Call: withOut.compile(function)");
     var pending=true
     return function()
     {
@@ -177,7 +177,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
       return compiledJST[path]=
         'function'==typeof z ?
           renderable(z) :
-          function(){throw "JST['"+path+"'] not found or incorrect!"}
+          function(){throw Error("JST['"+path+"'] not found or incorrect!")}
     }
     function JSTs()
     {

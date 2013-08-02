@@ -10,8 +10,4 @@ describe 'Empty tag', ->
     expect(withOut.compile(-> hr size: null)()).to.equal '<hr>'
 
   it 'allows no content', ->
-    expect(
-      try
-        withOut.compile(-> hr name: 'A', 'Hello')()
-      catch
-        '#error#').to.equal '#error#'
+    expect(withOut.compile -> hr name: 'A', 'Hello').to.throwException()

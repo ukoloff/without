@@ -29,7 +29,7 @@ return ->
 
 ```
 
-```javascript
+```js
 // Later in JavaScript
 func=withOut.JSTs('t/t1', 't/t2')
 $('#output').html(func({msg: 'Hello'}))
