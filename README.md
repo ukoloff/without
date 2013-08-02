@@ -54,6 +54,21 @@ $('#output').html func msg: "Hello"
 Both ways are supported. You can even mix them in one call. Sometimes it's convenient to pass *two* data
 sets into template.
 
+Syntactic sugar for `withOut.compile()` named `$compile()` create template function, whose first argument
+is also passed as `@`. `withOut.JSTs()` does this either. One can pass data to such a function in the first
+(regular) argument and refer to it via `@`.
+
+```coffee
+tab=withOut.$compile(model, tabs)->
+  <b>@name</b>
+  ul class: 'nav nav-tabs '=>
+    for t in tabs
+      li => a href: '/book/'+@id+'/'+t.url, t.name  
+  ...
+# @id==model.id etc.
+
+```
+
 ## Fat arrow
 
 With `@` passing style template engine does it best to correctly set `this` in all nested functions.
@@ -154,7 +169,7 @@ argument, but it silently ignores them (nowhere to put arguments into).
 It may seem aimless, but think about:
 
 ```coffee
-  td ->
+  td =>
     (if @id then a else notag) href: '/user/'+@id, @name
 ```
 
