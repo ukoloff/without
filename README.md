@@ -100,6 +100,24 @@ func=->
       li -> tag.i '#'+i
 ```
 
+If aliasing existing tag functions is not your dream - try:
+
+## BYOT (Build Your Own Tag)
+
+Inside template function you can create another function for any tag
+
+```coffee
+func=->
+  myTag = tag 'www'
+  div ->
+    myTag 'google.com'
+# <div><www>google.com</www></div>
+```
+
+For standard tag names it will detect tag emptiness, so `(tag 'br') id: 1` will produce `<br id="1">`,
+not `<br id="1"></br>`. You can explicitly set type of created tag: `(tag 'br', false)()` gives
+`<br></br>`, whereas `(tag 'div', true)()` just `<div>`.
+
 ## Pseudo-tags
 
 Inside template function some other methods injected:

@@ -104,8 +104,22 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     html+='<script><!--\n('+arguments[0].toString()+')()\n//-->\n</script>';
   }
 
+  function adhocTag()
+  {
+    return function(name, empty){ return tag(name, empty) }
+    function isEmpty(name)
+    {
+      for(var i in eTags) if(name==eTags[i]) return true
+    }
+    function tag(name, empty)
+    {
+      return makeTag(name, null==empty? isEmpty(String(name).toLowerCase()) : empty)
+    }
+  }
+
   scope.print=function(){fragments(arguments)}
   scope.raw=function(){raw(arguments)}
+  scope.tag=adhocTag()
   scope.comment=makeComment()
   scope.coffeescript=function(){ coffeeScript.apply(this, arguments) }
 
