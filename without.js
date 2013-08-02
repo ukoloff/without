@@ -153,13 +153,13 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   function compile(fn)
   {
-    withOut=renderable(fn);
+    var withOut=renderable(fn);
     return function(){return withOut.apply(this, arguments)}
   }
 
   function $compile(fn)
   {
-    withOut=renderable(fn);
+    var withOut=renderable(fn);
     return function(){return withOut.apply(arguments[0], arguments)}
   }
 
