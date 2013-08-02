@@ -91,9 +91,9 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     return function(){ comment.apply(this, arguments) }
     function comment()
     {
-      html+= level++? '<comment level="'+level+'">' : "<!--"
+      html+= level++? '<comment level="'+level+'">' : "<!-- "
       children(arguments)
-      html+= --level? '</comment>': '-->'
+      html+= --level? '</comment>': ' -->'
     }
   }
 
