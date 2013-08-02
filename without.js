@@ -117,9 +117,15 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     }
   }
 
+  function noTag(attrs)
+  {
+    children('object'==typeof attrs ? [].slice.call(arguments, 1) : arguments)
+  }
+
   scope.print=function(){fragments(arguments)}
   scope.raw=function(){raw(arguments)}
   scope.tag=adhocTag()
+  scope.notag=function(){noTag.apply(this, arguments)}
   scope.comment=makeComment()
   scope.coffeescript=function(){ coffeeScript.apply(this, arguments) }
 

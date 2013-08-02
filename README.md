@@ -145,6 +145,19 @@ Like `print`, but doesn't escape HTML
   raw @breadcrumbs
 ```
 
+### notag
+
+`print` that can contain not only text, but any tags either. Think of `notag` as tag without name,
+who doesn't wrap its contents into `<>`...`</>`. As regular tags, it can take attributes from the first
+argument, but it silently ignores them (nowhere to put arguments into).
+
+It may seem aimless, but think about:
+
+```coffee
+  td ->
+    (if @id then a else notag) href: '/user/'+@id, @name
+```
+
 ### `comment`
 Add HTML-comment `<!--...-->`
 
