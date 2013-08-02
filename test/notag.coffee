@@ -13,8 +13,8 @@ describe 'notag', ->
     expect(withOut.compile(-> notag id: 'None', -> ol -> li '...')()).to.equal '<ol><li>...</li></ol>'
 
   it 'used to conditionally exclude tags', ->
-    t=withOut.$compile -> td -> (if @id then a else notag) url: '/user/'+@id, @name
-    expect(t id: 1, name: 'John').to.equal '<td><a url="/user/1">John</a></td>'
+    t=withOut.$compile -> td -> (if @id then a else notag) href: '/user/'+@id, @name
+    expect(t id: 1, name: 'John').to.equal '<td><a href="/user/1">John</a></td>'
     expect(t name: 'None').to.equal '<td>None</td>'
 
   
