@@ -61,12 +61,11 @@ is also passed as `@`. `withOut.JSTs()` does this either. One can pass data to s
 ```coffee
 tab=withOut.$compile(model, tabs)->
   <b>@name</b>
-  ul class: 'nav nav-tabs '=>
+  ul class: 'nav nav-tabs' =>
     for t in tabs
       li => a href: '/book/'+@id+'/'+t.url, t.name  
   ...
 # @id==model.id etc.
-
 ```
 
 ## Fat arrow
