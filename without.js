@@ -19,15 +19,19 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   function h(s)
   {
-    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
   }
 
   function children(a)
   {
-    for(var i in a)
+    var i, e
+    for(i in a)
     {
-      var e=a[i]
-      if(null==e) continue;
+      if(null==(e=a[i])) continue;
       if('function'==typeof e)
         e.call(_this)
       else
@@ -37,21 +41,14 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   function print(a)
   {
-    for(var i in a)
-    {
-      var e=a[i]
-      if(null==e) continue;
-      html+=h(e)
-    }
+    var i, e
+    for(i in a) if(null!=(e=a[i])) html+=h(e)
   }
 
   function raw(a)
   {
-    for(var i in a)
-    {
-      var e=a[i]
-      if(null!=e)html+=e
-    }
+    var i, e
+    for(i in a) if(null!=(e=a[i])) html+=e
   }
 
   function makeTag(name, empty)
@@ -59,15 +56,14 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     return function(){tag(arguments)}
     function attr(k, v)
     {
-      if((null==v) || (false===v)) return
-      if(('data'==k) && ('object'==typeof v))
+      if(null==v || false===v) return
+      if('data'==k && 'object'==typeof v)
       {
         for(k in v) attr('data-'+k, v[k])
         return
       }
       html+=' '+h(k)
-      if(true===v) return
-      html+='="'+h(v)+'"'
+      if(true!==v) html+='="'+h(v)+'"'
     }
     function tag(a)
     {
@@ -99,7 +95,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   function coffeeScript()
   {
-    if((1!=arguments.length)||('function'!=typeof arguments[0]))
+    if(1!=arguments.length ||'function'!=typeof arguments[0])
       throw SyntaxError('Usage: coffeescript -> code')
     html+='<script><!--\n('+arguments[0].toString()+')()\n//-->\n</script>';
   }
@@ -214,9 +210,9 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     $compile: $compile,
     JSTs: JSTs
   }
-  if(('undefined'!=typeof module) && module.exports)
+  if('undefined'!=typeof module && module.exports)
     module.exports=interface
-  else if(('function'==typeof define) && define.amd)
+  else if('function'==typeof define && define.amd)
     define('withOut', [], function(){ return interface })
   else
     window.withOut=interface
