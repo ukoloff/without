@@ -35,7 +35,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     }
   }
 
-  function fragments(a)
+  function print(a)
   {
     for(var i in a)
     {
@@ -122,11 +122,12 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     children('object'==typeof attrs ? [].slice.call(arguments, 1) : arguments)
   }
 
-  scope.print=function(){fragments(arguments)}
+  scope.print=function(){print(arguments)}
   scope.raw=function(){raw(arguments)}
   scope.tag=adhocTag()
   scope.notag=function(){noTag.apply(this, arguments)}
   scope.comment=makeComment()
+  scope.blackhole=function(){}
   scope.coffeescript=function(){ coffeeScript.apply(this, arguments) }
 
   for(var i in nTags) scope[nTags[i]]=makeTag(nTags[i])

@@ -184,6 +184,17 @@ Add HTML-comment `<!--...-->`
 
 Nested comment allowed.
 
+### `blackhole`
+Silently drops its contents and attributes. May be used to quickly cut HTML subtree (or include it back)
+
+```coffee
+  td ->
+    blackhole ->
+      a href: '#', "See more"
+      print '...'
+```
+Just add/remove `#` to start of `blackhole` line *et voila*!
+
 ### `coffeescript`
 
 Insert `<script>...</script>` with its argument compiled to JavaScript
