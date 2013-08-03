@@ -29,3 +29,12 @@ describe 'HTML attributes', ->
   it 'generate data-* from object', ->
     expect(withOut.compile(-> h6 data: @data).call data: a: 1, b:2, c: true, d: false, e: null, f: {}.f).to.
       equal '<h6 data-a="1" data-b="2" data-c></h6>'
+
+  it 'accept numbers', ->
+    expect(withOut.$compile(-> div id: @id) id: 5).to.equal '<div id="5"></div>'
+
+  it 'accept strings', ->
+    expect(withOut.$compile(-> div id: @id) id: 'A').to.equal '<div id="A"></div>'
+
+  it 'accept empty strings', ->
+    expect(withOut.$compile(-> div title: @title) title: '').to.equal '<div title=""></div>'

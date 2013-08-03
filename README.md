@@ -156,7 +156,8 @@ is equivalent to:
 Like `print`, but doesn't escape HTML
 
 ```coffee
-  raw @breadcrumbs
+  script =>
+    raw '<!--\n', @js, '\n//-->'
 ```
 
 ### notag
