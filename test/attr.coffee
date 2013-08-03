@@ -19,9 +19,9 @@ describe 'HTML attributes', ->
       equal '<input type="checkbox">'
 
   it 'respect true values', ->
-    expect(withOut.compile(-> input type: 'radiobutton', name: @name, value: @value, checked: @checked).
+    expect(withOut.compile(-> input type: 'radio', name: @name, value: @value, checked: @checked).
       call name: 'city', value: 'Ankh-Morpork', checked: true).to.
-      equal '<input type="radiobutton" name="city" value="Ankh-Morpork" checked>'
+      equal '<input type="radio" name="city" value="Ankh-Morpork" checked>'
 
   it 'escape values', ->
     expect(withOut.compile(-> h5 id: @id).call id: 'a&b').to.equal '<h5 id="a&amp;b"></h5>'
