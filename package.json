@@ -1,6 +1,7 @@
 {
-  "name": "withOut",
+  "name": "without",
   "description": "Yet another CoffeScript template (without `with`, coffescript and templates)",
+  "version": "0.9.0",
   "author": {
     "name": "Stas Ukolov",
     "email": "ukoloff@gmail.com"
@@ -18,7 +19,7 @@
     "render",
     "view",
     "html",
-    "teakup",
+    "teacup",
     "ck"
   ],
   "devDependencies": {
