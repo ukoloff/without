@@ -1,6 +1,30 @@
 # without
 
-Yet another CoffeScript template (without `with`, coffescript, options and templates)
+Yet another CoffeScript template
+(without `with`, coffescript, options and templates)
+
+## Concept
+
+`without` was started as proof of concept - a way to implement
+[CoffeeScript](http://coffeescript.org/) templating with lexical scope,
+without using `with`. It appeared to be possible, simple (just a couple
+of lines of code - set `setContext()` in source) and (with some small
+extra ideas) even useful.
+
+Some (very sound) reasons to use CoffeeScript as template engine are listed
+in [CoffeeKup](https://github.com/mauricemach/coffeekup#_why), `without` is just
+another implementation.
+
+Main feature of `without` is that template function is not altered in any
+way. The only thing to change is context it is executed in. It makes possible
+to pass it arbitrary arguments - any number and names. One can also use `@` as
+one of datasets, passed to template.
+
+CoffeeScript itself was intentially excluded from `without` dependencies.
+Feed `compile()` with already compiled function. Main reason for this design
+is ability to run `without` on JavaScript-only client, where .coffee->.js
+compilation is performed on server side. Or just include both without.js and
+coffee-script.js on your client and use them together.
 
 ## Usage
 
@@ -51,11 +75,14 @@ func=withOut.compile (data)->
 $('#output').html func msg: "Hello"
 ```
 
-Both ways are supported. You can even mix them in one call. Sometimes it's convenient to pass *two* data
+Both ways are supported. You can even mix them in one call.
+Sometimes it's convenient to pass *two* (or even more!) data
 sets into template.
 
-Syntactic sugar for `withOut.compile()` named `$compile()` create template function, whose first argument
-is also passed as `@`. `withOut.JSTs()` does this either. One can pass data to such a function in the first
+Syntactic sugar for `withOut.compile()` named `$compile()` create
+template function, whose first argument is also passed as `@`.
+`withOut.JSTs()` does this either.
+One can pass data to such a function in the first
 (regular) argument and refer to it via `@`.
 
 ```coffee
@@ -86,7 +113,7 @@ It only fails with `<var>...</var>`, because it's reserved word in JavaScript. S
 tag is named `$var`.
 
 You can also use same tag names (especialy `i`) inside your function as regular variables. But then
-you cannot use that tags.
+you cannot use those tags.
 
 To fix - create some aliases:
 
@@ -160,13 +187,13 @@ Like `print`, but doesn't escape HTML
     raw '<!--\n', @js, '\n//-->'
 ```
 
-### notag
+### `notag`
 
 `print` that can contain not only text, but any tags either. Think of `notag` as tag without name,
 who doesn't wrap its contents into `<>`...`</>`. As regular tags, it can take attributes from the first
 argument, but it silently ignores them (nowhere to put arguments into).
 
-It may seem aimless, but think about:
+It may seem pointless, but think about:
 
 ```coffee
   td =>
@@ -234,4 +261,5 @@ return ->
 ```
 
 ## Legacy
-Inspired by [ck](https://github.com/aeosynth/ck) and [Teacup](https://github.com/goodeggs/teacup)
+Inspired by [ck](https://github.com/aeosynth/ck)
+and [Teacup](https://github.com/goodeggs/teacup)
