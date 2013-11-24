@@ -13,17 +13,15 @@ ol optgroup option output p pre progress q rp rt ruby \
 s samp script section select small source span strike strong style sub summary sup \
 table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.split(' '),
     eTags='area base basefont br col frame hr img input link meta param'.split(' '),
+    htmlEntities={'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'},
+    slice=[].slice,
     scope={},
     html='',
     _this
 
   function h(s)
   {
-    return String(s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
+    return String(s).replace(/[&<>"]/g, function(e){return htmlEntities[e]})
   }
 
   function children(a)
@@ -72,7 +70,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
       if('object'==typeof at)
       {
        for(var k in at) attr(k, at[k])
-       a=[].slice.call(a, 1)
+       a=slice.call(a, 1)
       }
       html+='>'
       if(empty && a.length) throw new SyntaxError("<"+name+"> must have no content!")
@@ -116,7 +114,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   function noTag(attrs)
   {
-    children('object'==typeof attrs ? [].slice.call(arguments, 1) : arguments)
+    children('object'==typeof attrs ? slice.call(arguments, 1) : arguments)
   }
 
   scope.print=function(){print(arguments)}
