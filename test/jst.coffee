@@ -19,9 +19,9 @@ JST['t/4']=(self,data)->
 describe 'JST', ->
 
   it 'produces function templates', ->
-    expect(-> withOut.JSTs 't/1').to.be.a('function')
-    expect(-> withOut.JSTs 't/3').to.be.a('function')
-    expect(-> withOut.JSTs 't/none').to.be.a('function')
+    expect(withOut.JSTs 't/1').to.be.a('function')
+    expect(withOut.JSTs 't/3').to.be.a('function')
+    expect(withOut.JSTs 't/none').to.be.a('function')
 
   it 'templates can be used again', ->
     expect(do ->
