@@ -30,6 +30,6 @@ describe 'JST', ->
       equal '<ul><li>self=self</li></ul><div id="2">other</div>'
 
   it 'throws error on incorrect templates', ->
-    expect(withOut.JSTs 't/3').to.throwError()
+    expect(-> withOut.JSTs 't/3').to.throwError()
 
-    expect(withOut.JSTs 't/none').to.throwError()
+    expect(-> withOut.JSTs 't/none').to.throwError()
