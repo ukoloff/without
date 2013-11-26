@@ -179,8 +179,6 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     return function(){return withOut.apply(arguments[0], arguments)}
   }
 
-  var compiledJST={}
-
   function flatten(array)
   {
     var v, r=[]
@@ -192,24 +190,27 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     return r
   }
 
+  function fetchJSTs(paths)
+  {
+    var v
+    for(var i in paths)
+    {
+      if('function'!=typeof(v=paths[i]) &&
+         'function'!=typeof(v=JST[v]))
+        throw new Error("JST['"+paths[i]+"'] not found or incorrect!")
+      paths[i]=renderable(v)
+    }
+    return paths
+  }
+
   function JSTs(path)
   {
-    var paths=arguments
+    var Ts=fetchJSTs(flatten(arguments))
     return function(){return JSTs.apply(arguments[0], arguments)}
-    function fetchJST(path)
-    {
-      var z=compiledJST[path]
-      if(z) return z
-      z=JST[path]
-      return compiledJST[path]=
-        'function'==typeof z ?
-          renderable(z) :
-          function(){throw new Error("JST['"+path+"'] not found or incorrect!")}
-    }
     function JSTs()
     {
       var S=''
-      for(var i in paths) S+=fetchJST(paths[i]).apply(this, arguments)
+      for(var i in Ts) S+=Ts[i].apply(this, arguments)
       return S
     }
   }
