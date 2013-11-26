@@ -205,11 +205,16 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   function JSTs(path)
   {
-    var Ts=fetchJSTs(flatten(arguments))
+    var bound, Ts=flatten(arguments)
     return function(){return JSTs.apply(arguments[0], arguments)}
     function JSTs()
     {
       var S=''
+      if(!bound)
+      {
+        Ts=fetchJSTs(Ts)
+        bound=true
+      }
       for(var i in Ts) S+=Ts[i].apply(this, arguments)
       return S
     }
