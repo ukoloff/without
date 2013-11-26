@@ -58,6 +58,17 @@ return ->
 func=withOut.JSTs('t/t1', 't/t2')
 $('#output').html(func({msg: 'Hello'}))
 ```
+One can pass paths to .JSTs() as plain parameters (see above),
+or in array `.JSTs(['t/t1', 't/t2'])`,
+or even values of some hash `.JSTs({one: 't/t1', two: 't/t2'}]`,
+or mix all these ways (to any depth).
+
+It's possible to directly pass a function as any JSTs argument.
+In that case `.JSTs` works as advanced `$compile`.
+
+```coffee
+t = withOut.JSTs 't/t1', -> do hr
+```
 
 ## Passing data
 
