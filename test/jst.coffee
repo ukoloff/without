@@ -24,9 +24,8 @@ describe 'JST', ->
     expect(withOut.JSTs 't/none').to.be.a('function')
 
   it 'templates can be used again', ->
-    expect(do ->
-      t=withOut.JSTs 't/1'
-      t(X: 42)==t(X: 40+2)).to.equal(true)
+    expect(do (t=withOut.JSTs 't/1')-> t(X: 42)==t(X: 40+2)).to.
+      equal(true)
 
   it 'uses both call styles', ->
     expect(withOut.JSTs('t/1') X: 'self').to.
