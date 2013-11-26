@@ -33,3 +33,24 @@ describe 'JST', ->
     expect(-> withOut.JSTs 't/3').to.throwError()
 
     expect(-> withOut.JSTs 't/none').to.throwError()
+
+  it 'can get JSTs in arrays', ->
+    expect(withOut.JSTs(['t/1', 't/2']) X: 'self', Y: 'other').to.
+      equal '<ul><li>self=self</li></ul><div id="2">other</div>'
+
+    expect(withOut.JSTs(['t/1', [], [['t/2']]]) X: 'self', Y: 'other').to.
+      equal '<ul><li>self=self</li></ul><div id="2">other</div>'
+
+  it 'can get JSTs in object values', ->
+    expect(withOut.JSTs(one: 't/1', two: 't/2') X: 'self', Y: 'other').to.
+      equal '<ul><li>self=self</li></ul><div id="2">other</div>'
+
+    expect(withOut.JSTs(one: ['t/1', []], two: two: 't/2') X: 'self', Y: 'other').to.
+      equal '<ul><li>self=self</li></ul><div id="2">other</div>'
+
+  it 'even works as $compile', ->
+    expect(do withOut.JSTs(-> div class: 'none')).to.
+      equal '<div class="none"></div>'
+
+    expect(withOut.JSTs(-> span class: @class) class: 'label').to.
+      equal '<span class="label"></span>'
