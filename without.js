@@ -181,6 +181,17 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   var compiledJST={}
 
+  function flatten(array)
+  {
+    var v, r=[]
+    for(var i in array)
+      if('object'==typeof(v=array[i]))
+        r.push.apply(r, flatten(v))
+      else
+        r.push(v)
+    return r
+  }
+
   function JSTs(path)
   {
     var paths=arguments
