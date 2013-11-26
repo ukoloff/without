@@ -17,6 +17,17 @@ JST['t/4']=(self,data)->
     li data.X
 
 describe 'JST', ->
+
+  it 'produces function templates', ->
+    expect(-> withOut.JSTs 't/1').to.be.a('function')
+    expect(-> withOut.JSTs 't/3').to.be.a('function')
+    expect(-> withOut.JSTs 't/none').to.be.a('function')
+
+  it 'templates can be used again', ->
+    expect(do ->
+      t=withOut.JSTs 't/1'
+      t(X: 42)==t(X: 40+2)).to.equal(true)
+
   it 'uses both call styles', ->
     expect(withOut.JSTs('t/1') X: 'self').to.
     equal '<ul><li>self=self</li></ul>'
@@ -30,9 +41,8 @@ describe 'JST', ->
       equal '<ul><li>self=self</li></ul><div id="2">other</div>'
 
   it 'throws error on incorrect templates', ->
-    expect(-> withOut.JSTs 't/3').to.throwError()
-
-    expect(-> withOut.JSTs 't/none').to.throwError()
+    expect(withOut.JSTs 't/3').to.throwError()
+    expect(withOut.JSTs 't/none').to.throwError()
 
   it 'can get JSTs in arrays', ->
     expect(withOut.JSTs(['t/1', 't/2']) X: 'self', Y: 'other').to.
