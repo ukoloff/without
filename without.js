@@ -179,7 +179,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     return function(){return withOut.apply(arguments[0], arguments)}
   }
 
-  var compiledJST=[]
+  var compiledJST={}
 
   function JSTs(path)
   {
