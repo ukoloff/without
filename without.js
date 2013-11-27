@@ -231,7 +231,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   else if('function'==typeof define && define.amd)
     define('withOut', [], function(){ return interface })
   else
-    window.withOut=interface
+    this.withOut=interface
 })()
 
 //--[EOF]------------------------------------------------------------
