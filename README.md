@@ -174,12 +174,12 @@ not `<br id="1"></br>`. You can explicitly set type of created tag: `do tag 'br'
 
 Inside template function some other methods injected:
 
-### `print`
+### `text`
 Just outputs its arguments
 
 ```coffee
   div =>
-    print "That's ", @user
+    text "That's ", @user
     a href: '#', 'Read more'
 ```
 
@@ -189,9 +189,10 @@ is equivalent to:
   div "That's ", @user, ->
     a href: '#', 'Read more'
 ```
+`print` is alias for `text`
 
 ### `raw`
-Like `print`, but doesn't escape HTML
+Like `text`, but doesn't escape HTML
 
 ```coffee
   script =>
@@ -200,7 +201,7 @@ Like `print`, but doesn't escape HTML
 
 ### `notag`
 
-`print` that can contain not only text, but any tags either. Think of `notag` as tag without name,
+`text` that can contain not only text, but any tags either. Think of `notag` as tag without name,
 who doesn't wrap its contents into `<>`...`</>`. As regular tags, it can take attributes from the first
 argument, but it silently ignores them (nowhere to put arguments into).
 
