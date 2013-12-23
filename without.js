@@ -117,7 +117,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     children('object'==typeof attrs ? slice.call(arguments, 1) : arguments)
   }
 
-  scope.print=function(){print(arguments)}
+  scope.print=scope.text=function(){print(arguments)}
   scope.raw=function(){raw(arguments)}
   scope.tag=adhocTag()
   scope.notag=function(){noTag.apply(this, arguments)}
