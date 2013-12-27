@@ -1,5 +1,21 @@
-WScript.Echo('Hello, world!')
+//
+// withOut testing under Windows Scripting Host
+//
 
-var Sh = new ActiveXObject("WScript.Shell")
+$={
+  sh: new ActiveXObject("WScript.Shell"),
+  fso: new ActiveXObject("Scripting.FileSystemObject")
+}
 
-var z = Sh.Run('coffee -cp test/attr.coffee > AAAAA')
+jsLoad('withOut.js')
+WScript.Echo(withOut)
+
+function jsLoad(name)
+{
+  f=$.fso.OpenTextFile(name)
+  fn=new Function(f.ReadAll())
+  f.Close()
+  fn()
+}
+
+//--[EOF]------------------------------------------------------------
