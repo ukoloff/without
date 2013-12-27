@@ -28,6 +28,6 @@
     "expect.js": "*"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "node node_modules/mocha/bin/mocha"
   }
 }
