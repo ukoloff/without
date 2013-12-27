@@ -229,7 +229,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   if('undefined'!=typeof module && module.exports)
     module.exports=interface
   else if('function'==typeof define && define.amd)
-    define('withOut', [], function(){ return interface })
+    define(interface)
   else
     this.withOut=interface
 })()
