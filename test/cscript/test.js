@@ -10,8 +10,12 @@ $={
 jsLoad('withOut.js')
 window={}
 jsLoad('node_modules/expect.js/expect.js')
-expect=window.expect
+modules={
+  '..': withOut,
+  'expect.js': window.expect
+}
 
+coffeeLoad('test/meta.coffee')
 coffeeLoad('test/2way.coffee')
 
 function jsLoad(name, drop)
@@ -49,19 +53,25 @@ function coffeeLoad(name)
 
 function require(f)
 {
-  WScript.Echo('Load: ', f)
+  m=modules[f]
+  if(m) return m
+  throw Error("Module '"+f+"' not found!")
 }
 
 function describe(task, fn)
 {
-  WScript.Echo('Describe: ', task)
+  WScript.Echo(task+':')
   fn()
 }
 
 function it(line, fn)
 {
-  WScript.Echo('\tIt: ', line)
-//  fn()
+  WScript.Echo(' - '+line)
+  try{ fn() }
+  catch(e)
+  {
+    WScript.Echo('\t#', e.description)
+  }
 }
 
 //--[EOF]------------------------------------------------------------
