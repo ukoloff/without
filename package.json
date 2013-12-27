@@ -28,6 +28,7 @@
     "expect.js": "*"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha"
+    "test": "node node_modules/mocha/bin/mocha",
+    "www":  "node node_modules/coffee-script/bin/coffee test/www/test.coffee"
   }
 }
