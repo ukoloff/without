@@ -14,6 +14,7 @@ modules={
   '..': withOut,
   'expect.js': window.expect
 }
+GLOBAL={JST: JST={}}
 
 allTests('test')
 
