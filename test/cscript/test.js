@@ -15,8 +15,10 @@ modules={
   'expect.js': window.expect
 }
 
-coffeeLoad('test/meta.coffee')
-coffeeLoad('test/2way.coffee')
+allTests('test')
+
+//coffeeLoad('test/2way.coffee')
+//coffeeLoad('test/meta.coffee')
 
 function jsLoad(name, drop)
 {
@@ -72,6 +74,14 @@ function it(line, fn)
   {
     WScript.Echo('\t#', e.description)
   }
+}
+
+function allTests(path)
+{
+  var p
+  for(var E=new Enumerator($.fso.GetFolder(path).Files); !E.atEnd(); E.moveNext())
+    if(/\.coffee$/.test(p=E.item().Path))
+      coffeeLoad(p)
 }
 
 //--[EOF]------------------------------------------------------------
