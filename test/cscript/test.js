@@ -7,7 +7,10 @@ $={
   fso: new ActiveXObject("Scripting.FileSystemObject")
 }
 
-coffeeLoad('test/cscript/a.coffee')
+jsLoad('withOut.js')
+window={}
+jsLoad('node_modules/expect.js/expect.js')
+WScript.Echo(window.expect)
 
 function jsLoad(name, drop)
 {
