@@ -29,6 +29,6 @@
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha",
-    "wshtest": "cscript test/cscript/test.js"
+    "wshtest": "cscript //NoLogo test/cscript/test.js"
   }
 }
