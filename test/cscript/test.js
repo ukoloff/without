@@ -10,7 +10,9 @@ $={
 jsLoad('withOut.js')
 window={}
 jsLoad('node_modules/expect.js/expect.js')
-WScript.Echo(window.expect)
+expect=window.expect
+
+coffeeLoad('test/2way.coffee')
 
 function jsLoad(name, drop)
 {
@@ -43,6 +45,23 @@ function coffeeLoad(name)
   t=tmp()
   $.sh.Run('coffee -cp "'+name+'" >"'+t+'"', 0, true)
   jsLoad(t, true)
+}
+
+function require(f)
+{
+  WScript.Echo('Load: ', f)
+}
+
+function describe(task, fn)
+{
+  WScript.Echo('Describe: ', task)
+  fn()
+}
+
+function it(line, fn)
+{
+  WScript.Echo('\tIt: ', line)
+//  fn()
 }
 
 //--[EOF]------------------------------------------------------------
