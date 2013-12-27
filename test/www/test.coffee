@@ -1,5 +1,6 @@
 http = require 'http'
 url  = require 'url'
+cc   = require 'coffee-script'
 
 port = 1234
 
