@@ -1,1 +1,5 @@
-/* CSS */
+body {
+  background: white;
+  color: black;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

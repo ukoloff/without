@@ -5,7 +5,7 @@ cc   = require 'coffee-script'
 
 port = 1234
 
-scripts = 
+scripts =
   test:    __dirname
   expect:  'node_modules/expect.js'
   withOut: '.'
