@@ -24,10 +24,10 @@ function it(name, fn)
   document.writeln('<li>', h(name), '</li>')
   try
   {
-    fn()	
+    fn()
   }
   catch(e)
   {
-  	console.log('Oops:', e)
+  	console.log('Oops:', e.message)
   }
 }
