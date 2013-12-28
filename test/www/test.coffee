@@ -6,7 +6,7 @@ cc   = require 'coffee-script'
 port = 1234
 
 scripts = 
-  test:    'test/www'
+  test:    __dirname
   expect:  'node_modules/expect.js'
   withOut: '.'
 
@@ -18,8 +18,10 @@ renderScriptTag = (name)->
   "<script src='#{name}.js'></script>\n"
 
 renderStyle = (rsp)->
-  rsp.writeHead 200, 'Content-Type': 'text/css'
   fs.readFile __dirname+'/test.css', (err, data)->
+    if err
+      return render404 rsp
+    rsp.writeHead 200, 'Content-Type': 'text/css'
     rsp.end data
 
 startJS = (rsp)->
@@ -28,8 +30,10 @@ startJS = (rsp)->
 renderJS = (rsp, name)->
   unless (f = scripts[name])?
     return render404 rsp
-  startJS rsp
   fs.readFile f+'/'+name+'.js', (err, data)->
+    if err
+      return render404 rsp
+    startJS rsp
     rsp.end data
 
 renderMain = (rsp)->
