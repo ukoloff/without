@@ -17,6 +17,11 @@ render404 = (rsp)->
 renderScriptTag = (name)->
   "<script src='#{name}.js'></script>\n"
 
+renderStyle = (rsp)->
+  rsp.writeHead 200, 'Content-Type': 'text/css'
+  fs.readFile __dirname+'/test.css', encoding: 'utf8', (err, data)->
+    rsp.end data
+
 startJS = (rsp)->
   rsp.writeHead 200, 'Content-Type': 'application/javascript'
 
@@ -32,6 +37,7 @@ renderMain = (rsp)->
   rsp.write """
 <html><head>
 <title>withOut test</title>
+<link rel='STYLESHEET' type='text/css' href='test.css'>
 
 """
   rsp.write renderScriptTag k for k, v of scripts
@@ -47,6 +53,9 @@ server = (req, rsp)->
 
   if '/'==p
     return renderMain rsp
+
+  if '/test.css'==p
+    return renderStyle rsp
 
   if /^\/(\w+)\.js$/.test p
     return renderJS rsp, RegExp.$1
