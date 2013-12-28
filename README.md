@@ -272,6 +272,12 @@ return ->
     raw withOut.JSTs('t/t2') @
 ```
 
+## Testing
+
+```sh
+npm test
+```
+
 ## Legacy
 Inspired by [ck](https://github.com/aeosynth/ck)
 and [Teacup](https://github.com/goodeggs/teacup)
