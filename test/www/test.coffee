@@ -38,19 +38,15 @@ renderJS = (rsp, name)->
 
 renderMain = (rsp)->
   rsp.writeHead 200, 'Content-Type': 'text/html'
-  rsp.write """
-<html><head>
-<title>withOut test</title>
-<link rel='STYLESHEET' type='text/css' href='test.css'>
-
-"""
-  rsp.write renderScriptTag k for k, v of scripts
-  rsp.write """
-</head><body>
-<h1>withOut test</h1>
-</body></html>
-"""
-  rsp.end()
+  html = []
+  fs.readFile __dirname+'/test.html', encoding: 'utf8', (err, data)->
+    html = data.split /<#include>\s*/, 3
+    rsp.write html[0]
+    rsp.write renderScriptTag k for k, v of scripts
+    rsp.write html[1]
+    rsp.write '<!--*-->'
+    rsp.write html[2]
+    rsp.end()
 
 server = (req, rsp)->
   p = url.parse(req.url).pathname
