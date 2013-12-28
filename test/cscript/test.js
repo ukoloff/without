@@ -55,7 +55,7 @@ function it(line, fn)
   }
   catch(e)
   {
-    WScript.Echo('\t#', e.description)
+    WScript.Echo('\t#', e.message)
   }
 }
 
