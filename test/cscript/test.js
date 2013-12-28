@@ -22,37 +22,14 @@ allTests('test')
 
 WScript.Echo('Tests:\t'+progress.ok+'/'+progress.run+"\nThat's all folks!")
 
-function jsLoad(name, drop)
+function jsEval(code)
 {
-  f=$.fso.OpenTextFile(name)
-  fn=new Function(f.ReadAll())
-  f.Close()
-  if(drop) $.fso.DeleteFile(name)
-  fn()
+  new Function(code)()
 }
 
-function rnd(N)
+function jsLoad(name)
 {
- for(var S=''; S.length<(N||12); )
- {
-  var n=Math.floor(62*Math.random())
-  S+=String.fromCharCode('Aa0'.charCodeAt(n/26)+n%26)
- }
- return S
-}
-
-function tmp()
-{
-  var t=$.sh.ExpandEnvironmentStrings('%TEMP%/')
-  do var n=t+rnd(); while($.fso.FileExists(n))
-  return n
-}
-
-function coffeeLoad(name)
-{
-  t=tmp()
-  $.sh.Run('coffee -cp "'+name+'" >"'+t+'"', 0, true)
-  jsLoad(t, true)
+  jsEval($.fso.OpenTextFile(name).ReadAll())
 }
 
 function require(f)
@@ -82,12 +59,11 @@ function it(line, fn)
   }
 }
 
-function allTests(path)
+function allTests()
 {
-  var p
-  for(var E=new Enumerator($.fso.GetFolder(path).Files); !E.atEnd(); E.moveNext())
-    if(/\.coffee$/i.test(p=E.item().Path))
-      coffeeLoad(p)
+  jsEval($.sh
+    .Exec('node node_modules/coffee-script/bin/coffee test/cscript/tests.coffee')
+    .StdOut.ReadAll())
 }
 
 //--[EOF]------------------------------------------------------------
