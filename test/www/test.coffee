@@ -36,6 +36,13 @@ renderJS = (rsp, name)->
     startJS rsp
     rsp.end data
 
+renderTest = (rsp, name)->
+  fs.readFile __dirname+'/../'+name+'.coffee', encoding: 'utf8', (err, data)->
+    if err
+      return render404 rsp
+    startJS rsp
+    rsp.end cc.compile data
+
 renderMain = (rsp)->
   rsp.writeHead 200, 'Content-Type': 'text/html'
   html = []
@@ -61,6 +68,9 @@ server = (req, rsp)->
 
   if /^\/(\w+)\.js$/.test p
     return renderJS rsp, RegExp.$1
+
+  if /^\/test\/(\w+)\.js$/.test p
+    return renderTest rsp, RegExp.$1
 
   render404 rsp
 
