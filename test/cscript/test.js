@@ -10,7 +10,7 @@ $={
 jsLoad('withOut.js')
 window={}
 jsLoad('node_modules/expect.js/expect.js')
-modules={
+var modules={
   '..': withOut,
   'expect.js': window.expect
 }
@@ -18,7 +18,7 @@ GLOBAL={JST: JST={}}
 
 var progress={run: 0, ok: 0}
 
-allTests('test')
+allTests()
 
 WScript.Echo('Tests:\t'+progress.ok+'/'+progress.run+"\nThat's all folks!")
 
