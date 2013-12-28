@@ -19,7 +19,7 @@ renderScriptTag = (name)->
 
 renderStyle = (rsp)->
   rsp.writeHead 200, 'Content-Type': 'text/css'
-  fs.readFile __dirname+'/test.css', encoding: 'utf8', (err, data)->
+  fs.readFile __dirname+'/test.css', (err, data)->
     rsp.end data
 
 startJS = (rsp)->
@@ -29,7 +29,7 @@ renderJS = (rsp, name)->
   unless (f = scripts[name])?
     return render404 rsp
   startJS rsp
-  fs.readFile f+'/'+name+'.js', encoding: 'utf8', (err, data)->
+  fs.readFile f+'/'+name+'.js', (err, data)->
     rsp.end data
 
 renderMain = (rsp)->
