@@ -2,6 +2,7 @@ GLOBAL={JST: JST={}}
 
 function require(path)
 {
+  return {'..': withOut, 'expect.js': expect}[path]
 }
 
 htmlEntities={'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}
@@ -21,4 +22,12 @@ function describe(name, fn)
 function it(name, fn)
 {
   document.writeln('<li>', h(name), '</li>')
+  try
+  {
+    fn()	
+  }
+  catch(e)
+  {
+  	console.log('Oops:', e)
+  }
 }
