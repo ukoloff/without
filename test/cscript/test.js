@@ -16,10 +16,11 @@ modules={
 }
 GLOBAL={JST: JST={}}
 
+var progress={run: 0, ok: 0}
+
 allTests('test')
 
-//coffeeLoad('test/2way.coffee')
-//coffeeLoad('test/meta.coffee')
+WScript.Echo('Tests:\t'+progress.ok+'/'+progress.run+"\nThat's all folks!")
 
 function jsLoad(name, drop)
 {
@@ -69,8 +70,12 @@ function describe(task, fn)
 
 function it(line, fn)
 {
+  progress.run++
   WScript.Echo(' - '+line)
-  try{ fn() }
+  try{ 
+    fn()
+    progress.ok++
+  }
   catch(e)
   {
     WScript.Echo('\t#', e.description)
@@ -81,7 +86,7 @@ function allTests(path)
 {
   var p
   for(var E=new Enumerator($.fso.GetFolder(path).Files); !E.atEnd(); E.moveNext())
-    if(/\.coffee$/.test(p=E.item().Path))
+    if(/\.coffee$/i.test(p=E.item().Path))
       coffeeLoad(p)
 }
 
