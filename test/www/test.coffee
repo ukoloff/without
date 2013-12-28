@@ -17,17 +17,14 @@ render404 = (rsp)->
 renderScriptTag = (name)->
   "<script src='#{name}.js'></script>\n"
 
-
 startJS = (rsp)->
   rsp.writeHead 200, 'Content-Type': 'application/javascript'
 
 renderJS = (rsp, name)->
-  console.log 'JS:', name
   unless (f = scripts[name])?
-    return render404
+    return render404 rsp
   startJS rsp
   fs.readFile f+'/'+name+'.js', encoding: 'utf8', (err, data)->
-    console.log 'ERR=', err
     rsp.end data
 
 renderMain = (rsp)->
