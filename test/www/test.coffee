@@ -44,9 +44,11 @@ renderMain = (rsp)->
     rsp.write html[0]
     rsp.write renderScriptTag k for k, v of scripts
     rsp.write html[1]
-    rsp.write '<!--*-->'
-    rsp.write html[2]
-    rsp.end()
+    fs.readdir __dirname+'/..', (err, data)->
+      for f in data when /\.coffee$/.test f
+        rsp.write renderScriptTag 'test/'+RegExp.leftContext
+      rsp.write html[2]
+      rsp.end()
 
 server = (req, rsp)->
   p = url.parse(req.url).pathname
