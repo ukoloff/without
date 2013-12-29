@@ -48,7 +48,7 @@ renderTest = (rsp, name)->
       cc.compile """
         describe 'test/#{name}', ->
           it 'Line: #{e.location.first_line+1}, column: #{e.location.first_column+1}', ->
-            throw Error('#{e.message.quote()}')
+            throw SyntaxError('#{e.message.quote()}')
         """
 
 renderMain = (rsp)->
