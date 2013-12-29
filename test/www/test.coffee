@@ -36,14 +36,20 @@ renderJS = (rsp, name)->
     startJS rsp
     rsp.end data
 
+String::quote = ->
+  @replace /[\\"\r'\n]/g, (z)->'\\'+({'\r': 'r', '\n': 'n'}[z] or z)
+
 renderTest = (rsp, name)->
   fs.readFile __dirname+'/../'+name+'.coffee', encoding: 'utf8', (err, data)->
     if err
       return render404 rsp
     startJS rsp
     rsp.end try cc.compile data catch e
-      "// test/#{name}.coffee(#{e.location.first_line+1}:#{e.location.first_column+1}) #{e.message}\n"+
-      cc.compile "describe 'test/#{name}', -> it 'compilation', -> throw Error('Syntax error (see #{name}.js)')"
+      cc.compile """
+        describe 'test/#{name}', ->
+          it 'Line: #{e.location.first_line+1}, column: #{e.location.first_column+1}', ->
+            throw Error('#{e.message.quote()}')
+        """
 
 renderMain = (rsp)->
   rsp.writeHead 200, 'Content-Type': 'text/html'
