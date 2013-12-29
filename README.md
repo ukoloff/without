@@ -274,9 +274,9 @@ return ->
 
 ## Testing
 
-```sh
-npm test
-```
+  * `npm test` - node 
+  * `npm run-script www` - start Web-server to test in browser
+  * `npm run-script wshtest` - test in Windows Scripting Host (cscript, Microsoft's JScript)
 
 ## Legacy
 Inspired by [ck](https://github.com/aeosynth/ck)
