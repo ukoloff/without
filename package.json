@@ -28,6 +28,7 @@
     "expect.js": "*"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha"
+    "test": "node node_modules/mocha/bin/mocha",
+    "wshtest": "cscript //NoLogo test/cscript/test.js"
   }
 }

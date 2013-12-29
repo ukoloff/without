@@ -27,7 +27,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   function children(a)
   {
     var i, e
-    for(i in a)
+    for(i=0; i<a.length; i++)
     {
       if(null==(e=a[i])) continue;
       if('function'==typeof e)
@@ -40,13 +40,13 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   function print(a)
   {
     var i, e
-    for(i in a) if(null!=(e=a[i])) html+=h(e)
+    for(i=0; i<a.length; i++) if(null!=(e=a[i])) html+=h(e)
   }
 
   function raw(a)
   {
     var i, e
-    for(i in a) if(null!=(e=a[i])) html+=e
+    for(i=0; i<a.length; i++) if(null!=(e=a[i])) html+=e
   }
 
   function makeTag(name, empty)
@@ -205,7 +205,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   function JSTs(path)
   {
-    var bound, Ts=flatten(arguments)
+    var bound, Ts=flatten(slice.call(arguments))
     return function(){return JSTs.apply(arguments[0], arguments)}
     function JSTs()
     {
