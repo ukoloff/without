@@ -37,6 +37,6 @@ function it(name, fn)
   }
   catch(e)
   {
-  	console.log('Oops:', e.message)
+  	document.writeln('<div class="error">', h(e.message), '</div>')
   }
 }
