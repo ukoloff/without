@@ -36,9 +36,6 @@ renderJS = (rsp, name)->
     startJS rsp
     rsp.end data
 
-String::quote = ->
-  @replace /[\\"\r'\n]/g, (z)->'\\'+({'\r': 'r', '\n': 'n'}[z] or z)
-
 renderTest = (rsp, name)->
   fs.readFile __dirname+'/../'+name+'.coffee', encoding: 'utf8', (err, data)->
     if err
@@ -48,7 +45,7 @@ renderTest = (rsp, name)->
       cc.compile """
         describe 'test/#{name}', ->
           it 'Line: #{e.location.first_line+1}, column: #{e.location.first_column+1}', ->
-            throw SyntaxError('#{e.message.quote()}')
+            throw SyntaxError('''#{e.message.replace /[\\']/g, '\\$&'}''')
         """
 
 renderMain = (rsp)->
