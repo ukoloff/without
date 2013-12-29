@@ -274,7 +274,7 @@ return ->
 
 ## Testing
 
-  * `npm test` - node 
+  * `npm test` - test in node.js, using [mocha](http://visionmedia.github.io/mocha/)
   * `npm run-script www` - start Web-server to test in browser
   * `npm run-script wshtest` - test in Windows Scripting Host (cscript, Microsoft's JScript)
 
