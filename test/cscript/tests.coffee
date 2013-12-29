@@ -1,9 +1,6 @@
 fs = require 'fs'
 cc = require 'coffee-script'
 
-String::quote = ->
-  @replace /[\\"\r'\n]/g, (z)->'\\'+({'\r': 'r', '\n': 'n'}[z] or z)
-
 fs.readdir path=__dirname+'/..', (err, files)->
   if err
     console.log 'throw Error("Cannot get directory listing")'
@@ -14,5 +11,5 @@ fs.readdir path=__dirname+'/..', (err, files)->
       cc.compile """
         describe 'test/#{f}', ->
           it 'Line: #{e.location.first_line+1}, column: #{e.location.first_column+1}', ->
-            throw SyntaxError('#{e.message.quote()}')
+            throw SyntaxError('''#{e.message.replace /[\\']/g, '\\$&'}''')
         """
