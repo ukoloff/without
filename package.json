@@ -29,6 +29,7 @@
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha",
-    "wshtest": "cscript //NoLogo test/cscript/test.js"
+    "wshtest": "cscript //NoLogo test/cscript/test.js",
+    "www":  "node node_modules/coffee-script/bin/coffee test/www/test.coffee"
   }
 }
