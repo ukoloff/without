@@ -41,7 +41,9 @@ renderTest = (rsp, name)->
     if err
       return render404 rsp
     startJS rsp
-    rsp.end cc.compile data
+    rsp.end try cc.compile data catch e
+      "// test/#{name}.coffee(#{e.location.first_line+1}:#{e.location.first_column+1}) #{e.message}\n"+
+      cc.compile "describe 'test/#{name}', -> it 'compilation', -> throw Error('Syntax error (see #{name}.js)')"
 
 renderMain = (rsp)->
   rsp.writeHead 200, 'Content-Type': 'text/html'
