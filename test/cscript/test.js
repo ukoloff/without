@@ -10,12 +10,12 @@ $={
 if('msie'==$.sh.Environment('Process')('npm_config_out'))
   $.msie = getIE()
 
-jsLoad('withOut.js')
-window={}
+window=this
+jsLoad('without.js')
 jsLoad('node_modules/expect.js/expect.js')
 var modules={
-  '..': withOut,
-  'expect.js': window.expect
+  '..': this.withOut,
+  'expect.js': this.expect
 }
 
 var progress={run: 0, ok: 0, errs:[]}

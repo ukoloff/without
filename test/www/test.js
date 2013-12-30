@@ -1,6 +1,6 @@
 function require(path)
 {
-  return {'..': withOut, 'expect.js': expect}[path]
+  return {'..': this.withOut, 'expect.js': this.expect}[path]
 }
 
 mocha.setup('bdd')
