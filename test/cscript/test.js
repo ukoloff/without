@@ -94,9 +94,11 @@ function allTests()
       WScript.Echo(Number(i)+1+'.', e.task, e.line, '#'+e.error)
     }
   }
-  WScript.Echo('Tests:\t'+progress.ok+'/'+
+  setOutput('count')
+  out('Tests:\t'+progress.ok+'/'+
     progress.run+' ('+Math.round(progress.ok/(progress.run||1)*100)+'%)')
-  WScript.Echo("That's all folks!")
+  setOutput('bye')
+  out("That's all folks!")
 }
 
 //--[EOF]------------------------------------------------------------
