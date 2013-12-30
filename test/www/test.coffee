@@ -8,7 +8,7 @@ port = if /^\d{4,5}$/.test process.env.npm_config_port then process.env.npm_conf
 scripts =
   test:    __dirname
   expect:  'node_modules/expect.js'
-  withOut: '.'
+  without: '.'
 
 render404 = (rsp)->
   rsp.writeHead 404, 'Content-Type': 'text/plain'
