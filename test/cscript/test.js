@@ -26,7 +26,7 @@ function getIE()
 {
   var x = new ActiveXObject('InternetExplorer.Application')
   x.Visible = true
-  x.Navigate('about:blank')
+  x.Navigate($.fso.GetParentFolderName(WScript.ScriptFullName)+'/test.html')
   return x
 }
 
@@ -62,7 +62,6 @@ function describe(task, fn)
     else progress.ok++
   }
 }
-
 
 function allTests()
 {
