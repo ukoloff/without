@@ -275,8 +275,8 @@ return ->
 ## Testing
 
   * `npm test` - test in node.js, using [mocha](http://visionmedia.github.io/mocha/)
-  * `npm run-script www` - start Web-server to test in browser
-  * `npm run-script wshtest` - test in Windows Scripting Host (cscript, Microsoft's JScript)
+  * `npm run-script test/www` - start Web-server to test in browser
+  * `npm run-script test/wsh` - test in Windows Scripting Host (cscript, Microsoft's JScript)
 
 ## Legacy
 Inspired by [ck](https://github.com/aeosynth/ck)
