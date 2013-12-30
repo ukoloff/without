@@ -5,10 +5,10 @@ describe 'coffeescript', ->
   it 'inserts <script>', ->
     expect(do withOut.compile -> coffeescript -> alert "Hi!").to.
       match ///
-        <script><!--\s*
+        ^<script><!--\s*
         \(function\s*\(\s*\)\s*\{\s*return\s+alert\("Hi!"\);\s*\}\)\(\)
         \s*//-->\s*
-        </script>
+        </script>$
       ///
 
   it 'comments script from (very) old browsers', ->

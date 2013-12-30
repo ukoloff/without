@@ -101,7 +101,7 @@ tab=withOut.$compile(model, tabs)->
   <b>@name</b>
   ul class: 'nav nav-tabs' =>
     for t in tabs
-      li => a href: '/book/'+@id+'/'+t.url, t.name  
+      li => a href: '/book/'+@id+'/'+t.url, t.name
   ...
 # @id==model.id etc.
 ```
@@ -112,7 +112,7 @@ With `@` passing style template engine does it best to correctly set `this` in a
 It suits most templates but can fail in some complex scenarios.
 
 Fortunately, coffeescript itself can handle it! Just use fat arrow `=>` **inside** template function.
-The arrow **outside** must remain slim `->` (see examples above). If you don't use `@` in template or 
+The arrow **outside** must remain slim `->` (see examples above). If you don't use `@` in template or
 in some function in it, you can also use `->` in that scope.
 
 If in doubt, use `=>`.
@@ -248,7 +248,7 @@ Insert `<script>...</script>` with its argument compiled to JavaScript
 
 Normal tags (not pseudo-tags) support HTML attributes. Must be first (hash) argument to a tag.
 
-Shorcuts `.class` and `#id` not supported - use general form 
+Shorcuts `.class` and `#id` not supported - use general form
 
 ```coffee
   a id: 'link_'+@i, class: "btn btn-primary", href: '#/item/'+@i, @name
