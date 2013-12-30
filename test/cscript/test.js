@@ -85,14 +85,15 @@ function allTests()
   jsEval($.sh
     .Exec('node node_modules/coffee-script/bin/coffee test/cscript/tests.coffee')
     .StdOut.ReadAll())
-  WScript.Echo()
   if(progress.errs.length)
   {
-    WScript.Echo('Failed tests:')
+    setOutput('e2')
+    out('Failed tests:')
+    setOutput('errors')
     for(var i in progress.errs)
     {
       var e=progress.errs[i]
-      WScript.Echo(Number(i)+1+'.', e.task, e.line, '#'+e.error)
+      out(Number(i)+1+'. '+e.task+' '+e.line+' #'+e.error)
     }
   }
   setOutput('count')
