@@ -8,11 +8,7 @@ $={
 }
 
 if('msie'==$.sh.Environment('Process')('npm_config_out'))
-{
-  $.msie = new ActiveXObject('InternetExplorer.Application')
-  $.msie.Visible = true
-  $.msie.Navigate('about:blank')
-}
+  $.msie = getIE()
 
 jsLoad('withOut.js')
 window={}
@@ -22,9 +18,17 @@ var modules={
   'expect.js': window.expect
 }
 
-var progress={run: 0, ok: 0}
+var progress={run: 0, ok: 0, errs:[]}
 
 allTests()
+
+function getIE()
+{
+  var x = new ActiveXObject('InternetExplorer.Application')
+  x.Visible = true
+  x.Navigate('about:blank')
+  return x
+}
 
 function jsEval(code)
 {
@@ -45,30 +49,39 @@ function require(f)
 
 function describe(task, fn)
 {
-  WScript.Echo(task+':')
+  this.it = it
   fn()
+
+  function it(line, fn)
+  {
+    var fail
+    progress.run++
+    try{ fn() }catch(e){ fail = e }
+    WScript.StdOut.Write(fail? '#' : '.')
+    if(fail) progress.errs.push({task: task, line: line, error: fail.message})
+    else progress.ok++
+  }
 }
 
-function it(line, fn)
-{
-  progress.run++
-  WScript.Echo(' - '+line)
-  try{
-    fn()
-    progress.ok++
-  }
-  catch(e)
-  {
-    WScript.Echo('\t#', e.message)
-  }
-}
 
 function allTests()
 {
   jsEval($.sh
     .Exec('node node_modules/coffee-script/bin/coffee test/cscript/tests.coffee')
     .StdOut.ReadAll())
-  WScript.Echo('Tests:\t'+progress.ok+'/'+progress.run+"\nThat's all folks!")
+  WScript.Echo()
+  if(progress.errs.length)
+  {
+    WScript.Echo('Failed tests:')
+    for(var i in progress.errs)
+    {
+      var e=progress.errs[i]
+      WScript.Echo(Number(i)+1+'.', e.task, e.line, '#'+e.error)
+    }
+  }
+  WScript.Echo('Tests:\t'+progress.ok+'/'+
+    progress.run+' ('+Math.round(progress.ok/(progress.run||1)*100)+'%)')
+  WScript.Echo("That's all folks!")
 }
 
 //--[EOF]------------------------------------------------------------
