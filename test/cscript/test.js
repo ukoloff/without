@@ -7,6 +7,13 @@ $={
   fso: new ActiveXObject("Scripting.FileSystemObject")
 }
 
+if('msie'==$.sh.Environment('Process')('npm_config_out'))
+{
+  $.msie = new ActiveXObject('InternetExplorer.Application')
+  $.msie.Visible = true
+  $.msie.Navigate('about:blank')
+}
+
 jsLoad('withOut.js')
 window={}
 jsLoad('node_modules/expect.js/expect.js')
@@ -18,8 +25,6 @@ var modules={
 var progress={run: 0, ok: 0}
 
 allTests()
-
-WScript.Echo('Tests:\t'+progress.ok+'/'+progress.run+"\nThat's all folks!")
 
 function jsEval(code)
 {
@@ -63,6 +68,7 @@ function allTests()
   jsEval($.sh
     .Exec('node node_modules/coffee-script/bin/coffee test/cscript/tests.coffee')
     .StdOut.ReadAll())
+  WScript.Echo('Tests:\t'+progress.ok+'/'+progress.run+"\nThat's all folks!")
 }
 
 //--[EOF]------------------------------------------------------------
