@@ -7,3 +7,7 @@ body {
 .error {
   color: red;
 }
+
+span.duration {
+  margin-left: 1ex;
+}

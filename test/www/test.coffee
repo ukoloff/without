@@ -6,9 +6,10 @@ cc   = require 'coffee-script'
 port = if /^\d{4,5}$/.test process.env.npm_config_port then process.env.npm_config_port else 1234
 
 scripts =
-  test:    __dirname
   expect:  'node_modules/expect.js'
   without: '.'
+  mocha:   'node_modules/mocha'
+  test:    __dirname
 
 render404 = (rsp)->
   rsp.writeHead 404, 'Content-Type': 'text/plain'
