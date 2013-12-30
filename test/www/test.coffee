@@ -50,7 +50,7 @@ renderTest = (rsp, name)->
         """
 
 renderMain = (rsp)->
-  rsp.writeHead 200, 'Content-Type': 'text/html'
+  rsp.writeHead 200, 'Content-Type': 'text/html; charset=utf-8'
   html = []
   fs.readFile __dirname+'/test.html', encoding: 'utf8', (err, data)->
     html = data.split /<#include>\s*/, 3
