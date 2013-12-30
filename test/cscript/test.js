@@ -32,7 +32,8 @@ function getIE()
 
 function setOutput(id)
 {
-  if(!$.msie) return
+  if(!$.msie)
+    return WScript.Echo()
   while($.msie.Busy) WScript.Sleep(100)
   $.log = $.msie.document.getElementById(id)
 }
@@ -40,7 +41,7 @@ function setOutput(id)
 function out(S)
 {
   if($.msie)
-    $.log.innerHTML+=S
+    $.log.innerText+=S
   else
     WScript.StdOut.Write(S)
 }
