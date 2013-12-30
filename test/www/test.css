@@ -11,3 +11,11 @@ body {
 span.duration {
   margin-left: 1ex;
 }
+
+span.keyword {
+  font-weight: bold;
+}
+
+span.string {
+  font-style: italic;
+}
