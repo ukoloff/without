@@ -30,6 +30,21 @@ function getIE()
   return x
 }
 
+function setOutput(id)
+{
+  if(!$.msie) return
+  while($.msie.Busy) WScript.Sleep(100)
+  $.log = $.msie.document.getElementById(id)
+}
+
+function out(S)
+{
+  if($.msie)
+    $.log.innerHTML+=S
+  else
+    WScript.StdOut.Write(S)
+}
+
 function jsEval(code)
 {
   new Function(code)()
@@ -57,7 +72,7 @@ function describe(task, fn)
     var fail
     progress.run++
     try{ fn() }catch(e){ fail = e }
-    WScript.StdOut.Write(fail? '#' : '.')
+    out(fail? '#' : '.')
     if(fail) progress.errs.push({task: task, line: line, error: fail.message})
     else progress.ok++
   }
@@ -65,6 +80,7 @@ function describe(task, fn)
 
 function allTests()
 {
+  setOutput('progress')
   jsEval($.sh
     .Exec('node node_modules/coffee-script/bin/coffee test/cscript/tests.coffee')
     .StdOut.ReadAll())
