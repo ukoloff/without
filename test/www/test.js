@@ -1,4 +1,3 @@
-GLOBAL={JST: JST={}}
 var htmlEntities={'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}
 var progress={total: 0, ok: 0}
 

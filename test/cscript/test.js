@@ -14,7 +14,6 @@ var modules={
   '..': withOut,
   'expect.js': window.expect
 }
-GLOBAL={JST: JST={}}
 
 var progress={run: 0, ok: 0}
 
@@ -49,7 +48,7 @@ function it(line, fn)
 {
   progress.run++
   WScript.Echo(' - '+line)
-  try{ 
+  try{
     fn()
     progress.ok++
   }

@@ -1,7 +1,8 @@
 expect = require 'expect.js'
 withOut= require '..'
 
-JST=GLOBAL.JST?={}
+JST={}
+do -> @JST=JST
 
 JST['t/1']=(data)->
   ul -> li @X, '=', data.X
