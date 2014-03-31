@@ -55,13 +55,16 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     function attr(k, v)
     {
       if(null==v || false===v) return
-      if('data'==k && 'object'==typeof v)
-      {
-        for(k in v) attr('data-'+k, v[k])
-        return
-      }
       html+=' '+h(k)
       if(true!==v) html+='="'+h(v)+'"'
+    }
+    function nest(prefix, obj)
+    {
+      for(var k in obj)
+        if('object'==typeof obj[k])
+          nest(prefix+k+'-', obj[k])
+        else
+          attr(prefix+k, obj[k])
     }
     function tag(a)
     {
@@ -69,7 +72,11 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
       var at=a[0]
       if('object'==typeof at)
       {
-       for(var k in at) attr(k, at[k])
+       for(var k in at)
+         if('data'==k && 'object'==typeof at[k])
+           nest('data-', at[k])
+         else
+           attr(k, at[k])
        a=slice.call(a, 1)
       }
       html+='>'
