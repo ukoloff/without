@@ -254,7 +254,7 @@ Shorcuts `.class` and `#id` not supported - use general form
   a id: 'link_'+@i, class: "btn btn-primary", href: '#/item/'+@i, @name
 ```
 
-Also `data-*` attributes supported:
+Also `data-*` attributes (including nested hashes) supported:
 
 ```coffee
   span id: 'X', data: @obj, ->
