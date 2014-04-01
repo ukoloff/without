@@ -261,13 +261,13 @@ Also HTML5 `data-*` attributes (including nested hashes) supported:
     type: 'text'
     class: 'input-mini'
     name: 'month'
-    placeholder: 'Месяц'
+    placeholder: 'Month'
     required: true
     data:
-      placement: 'right'
+      placement: 'right'  # Bootstrap's .tooltip()
       trigger: 'manual'
       title: 'Select month'
-      date:
+      date:               # Bootstrap's .datepicker()
         format: 'mm/yyyy'
         min: view: mode: 'months'
     ...
