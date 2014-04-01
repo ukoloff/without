@@ -254,10 +254,22 @@ Shorcuts `.class` and `#id` not supported - use general form
   a id: 'link_'+@i, class: "btn btn-primary", href: '#/item/'+@i, @name
 ```
 
-Also `data-*` attributes (including nested hashes) supported:
+Also HTML5 `data-*` attributes (including nested hashes) supported:
 
 ```coffee
-  span id: 'X', data: @obj, ->
+  input
+    type: 'text'
+    class: 'input-mini'
+    name: 'month'
+    placeholder: 'Месяц'
+    required: true
+    data:
+      placement: 'right'
+      trigger: 'manual'
+      title: 'Select month'
+      date:
+        format: 'mm/yyyy'
+        min: view: mode: 'months'
     ...
 ```
 
