@@ -183,7 +183,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   function $compile(fn)
   {
     var withOut=renderable(fn);
-    return function(){return withOut.apply(arguments[0], arguments)}
+    return function(that){return withOut.apply(that, arguments)}
   }
 
   function flatten(array)
