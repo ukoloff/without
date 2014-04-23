@@ -143,8 +143,11 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     return 'var '+v.join(',')
   }
 
+  var N=0
   function setContext(fn){
-    return (new Function(makeVars()+'\nreturn '+fn.toString())).call(scope)
+    return (new Function(makeVars()
+      +'\nreturn '+fn.toString()
+      +'\n//# sourceURL=x://withOut/withOut:'+ ++N)).call(scope)
   }
 
   function renderable(fn)
