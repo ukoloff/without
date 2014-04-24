@@ -163,6 +163,8 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
         var that=_this, x=html
         _this=this
         html=''
+        if(bp())
+          debugger // Hit `Step Into` (F11) twice
         fn.apply(this, arguments)
         return html
       }
@@ -184,6 +186,14 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
       return (new Function(makeVars()
         +'\nreturn '+fn.toString()
         +'\n//# sourceURL=x://withOut/'+ name + jst + '.wo')).call(scope)
+    }
+
+    function bp()
+    {
+      if(false===interface.bp) return
+      if('number'==typeof n && 'number'==typeof wrapper.bp)
+        return n==wrapper.bp
+      return !!wrapper.bp
     }
   }
 
