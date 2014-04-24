@@ -290,6 +290,54 @@ return ->
   * `npm run-script test/www [--port=nnnn]` - start Web-server to test in browser
   * `npm run-script test/wsh [--out=msie]` - test in Windows Scripting Host (cscript, Microsoft's JScript)
 
+## Debugging
+
+Debugging coffee-script templates is always tricky task.
+Since v1.1 `withOut` make some steps toward developer.
+
+### Fake source file names
+
+After creating template (but before first rendering) you can set its id. Just
+
+``` coffee
+t = withOut.compile ->
+  ...
+
+t.id = 'view/main/footer'
+
+$('#footer').html t()
+...
+```
+
+This name will be used to name source file, where recompiled template sits.
+Modern browsers (except Firefox?) show these "fake" files next to regular scripts
+found on webpage.
+
+Templates without `id` set on first rendering get automatic names (simply 1, 2, 3...)
+
+Fresh generated templates (just after `.$?compile` or `.JSTs`) have id=null.
+
+### Breakpoint inside template
+
+``` coffee
+t = withOut.compile ->
+  ...
+
+t.bp = 1
+...
+```
+If you set `bp` property on template, every its rendering will be paused on `debugger`
+statement (which is situated inside without.js). Hit `Step Into` (or F11) twice
+and you'll get inside recompiled source code of template.
+Step it, set breakpoints, incpect stack frames, anything.
+
+You can globally disable such breakpointing by setting `withOut.bp = false`.
+If you set `withOut.bp = true` any template will pause (regardless of its own `.bp`).
+
+For `.JSTs()` templates `t.bp=1` means break on first component (since JSTs may hold series
+of sub-templates), `t.bp=2` breaks on second sub-template and so on.
+`t.bp = true` breaks on all sub-templates of JSTs-template.
+
 ## Legacy
 Inspired by [ck](https://github.com/aeosynth/ck)
 and [Teacup](https://github.com/goodeggs/teacup)
