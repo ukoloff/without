@@ -144,7 +144,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     return 'var '+v.join(',')
   }
 
-  function renderable(fn, wrapper)
+  function renderable(fn, wrapper, n)
   {
     if('function'!=typeof fn) throw new TypeError("Call: withOut.compile(function)");
     var pending=true
@@ -180,9 +180,10 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
       name=String(name).split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
       if(!name.length)name=++names
       wrapper.id=name
+      var jst = n ? '/'+n+'.jst' : ''
       return (new Function(makeVars()
         +'\nreturn '+fn.toString()
-        +'\n//# sourceURL=x://withOut/'+ name + '.wo')).call(scope)
+        +'\n//# sourceURL=x://withOut/'+ name + jst + '.wo')).call(scope)
     }
   }
 
@@ -216,6 +217,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   function JSTs(path)
   {
     var bound, Ts=flatten(slice.call(arguments))
+    wrapper.id=null
     return wrapper
 
     function wrapper(that){return JSTs.apply(that, arguments)}
@@ -230,7 +232,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
     function fetchJSTs()
     {
-      var v
+      var v, id=wrapper.id
       for(var i in Ts)
       {
         if('function'!=typeof(v=Ts[i]) &&
@@ -238,6 +240,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
           throw new Error("JST['"+Ts[i]+"'] not found or incorrect!")
         Ts[i]=renderable(v, wrapper, Number(i)+1)
       }
+      wrapper.id=id
       bound=true
     }
   }
