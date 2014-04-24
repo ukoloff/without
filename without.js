@@ -175,10 +175,14 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
     function build()
     {
-      names++
+      var name = wrapper.id
+      if(null==name) name=''
+      name=String(name).split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
+      if(!name.length)name=++names
+      wrapper.id=name
       return (new Function(makeVars()
         +'\nreturn '+fn.toString()
-        +'\n//# sourceURL=x://withOut/'+ names + '.wo')).call(scope)
+        +'\n//# sourceURL=x://withOut/'+ name + '.wo')).call(scope)
     }
   }
 
