@@ -147,7 +147,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   function setContext(fn){
     return (new Function(makeVars()
       +'\nreturn '+fn.toString()
-      +'\n//# sourceURL=x://withOut/withOut:'+ ++N)).call(scope)
+      +'\n//# sourceURL=x://withOut/'+ ++N + '.wo')).call(scope)
   }
 
   function renderable(fn)
