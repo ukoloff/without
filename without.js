@@ -16,6 +16,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     htmlEntities={'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'},
     slice=[].slice,
     scope={},
+    names=0,
     html='',
     _this
 
@@ -143,13 +144,6 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     return 'var '+v.join(',')
   }
 
-  var N=0
-  function setContext(fn){
-    return (new Function(makeVars()
-      +'\nreturn '+fn.toString()
-      +'\n//# sourceURL=x://withOut/'+ ++N + '.wo')).call(scope)
-  }
-
   function renderable(fn, wrapper)
   {
     if('function'!=typeof fn) throw new TypeError("Call: withOut.compile(function)");
@@ -160,7 +154,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     {
       if(pending)
       {
-        fn=setContext(fn)
+        fn=build()
         pending=false
       }
       try
@@ -176,6 +170,13 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
         _this=that
         html=x
       }
+    }
+    function build()
+    {
+      names++
+      return (new Function(makeVars()
+        +'\nreturn '+fn.toString()
+        +'\n//# sourceURL=x://withOut/'+ names + '.wo')).call(scope)
     }
   }
 
@@ -212,7 +213,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
       if('function'!=typeof(v=paths[i]) &&
          'function'!=typeof(v=JST[v]))
         throw new Error("JST['"+paths[i]+"'] not found or incorrect!")
-      paths[i]=renderable(v)
+      paths[i]=renderable(v, {})
     }
     return paths
   }
