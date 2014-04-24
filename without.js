@@ -150,6 +150,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     var pending=true
     wrapper.id=null
     return render
+
     function render()
     {
       if(pending)
@@ -171,6 +172,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
         html=x
       }
     }
+
     function build()
     {
       names++
@@ -184,6 +186,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   {
     var withOut=renderable(fn, wrapper)
     return wrapper
+
     function wrapper(){return withOut.apply(this, arguments)}
   }
 
@@ -191,6 +194,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
   {
     var withOut=renderable(fn, wrapper)
     return wrapper
+
     function wrapper(that){return withOut.apply(that, arguments)}
   }
 
@@ -205,33 +209,32 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     return r
   }
 
-  function fetchJSTs(paths)
-  {
-    var v
-    for(var i in paths)
-    {
-      if('function'!=typeof(v=paths[i]) &&
-         'function'!=typeof(v=JST[v]))
-        throw new Error("JST['"+paths[i]+"'] not found or incorrect!")
-      paths[i]=renderable(v, {})
-    }
-    return paths
-  }
-
   function JSTs(path)
   {
     var bound, Ts=flatten(slice.call(arguments))
-    return function(){return JSTs.apply(arguments[0], arguments)}
+    return wrapper
+
+    function wrapper(that){return JSTs.apply(that, arguments)}
+
     function JSTs()
     {
       var S=''
-      if(!bound)
-      {
-        Ts=fetchJSTs(Ts)
-        bound=true
-      }
+      if(!bound) fetchJSTs()
       for(var i in Ts) S+=Ts[i].apply(this, arguments)
       return S
+    }
+
+    function fetchJSTs()
+    {
+      var v
+      for(var i in Ts)
+      {
+        if('function'!=typeof(v=Ts[i]) &&
+           'function'!=typeof(v=JST[v]))
+          throw new Error("JST['"+Ts[i]+"'] not found or incorrect!")
+        Ts[i]=renderable(v, wrapper, Number(i)+1)
+      }
+      bound=true
     }
   }
 
