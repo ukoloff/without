@@ -150,11 +150,13 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
       +'\n//# sourceURL=x://withOut/'+ ++N + '.wo')).call(scope)
   }
 
-  function renderable(fn)
+  function renderable(fn, wrapper)
   {
     if('function'!=typeof fn) throw new TypeError("Call: withOut.compile(function)");
     var pending=true
-    return function()
+    wrapper.id=null
+    return render
+    function render()
     {
       if(pending)
       {
@@ -179,14 +181,16 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   function compile(fn)
   {
-    var withOut=renderable(fn);
-    return function(){return withOut.apply(this, arguments)}
+    var withOut=renderable(fn, wrapper)
+    return wrapper
+    function wrapper(){return withOut.apply(this, arguments)}
   }
 
   function $compile(fn)
   {
-    var withOut=renderable(fn);
-    return function(that){return withOut.apply(that, arguments)}
+    var withOut=renderable(fn, wrapper)
+    return wrapper
+    function wrapper(that){return withOut.apply(that, arguments)}
   }
 
   function flatten(array)
