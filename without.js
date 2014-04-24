@@ -183,14 +183,17 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
       if(!name.length)name=++names
       wrapper.id=name
       var jst = n ? '/'+n+'.jst' : ''
-      return (new Function(makeVars()
+      var r=(new Function(makeVars()
         +'\nreturn '+fn.toString()
         +'\n//# sourceURL=x://withOut/'+ name + jst + '.wo')).call(scope)
+      r.displayName='wO:'+name+jst
+      return r
     }
 
     function bp()
     {
       if(false===interface.bp) return
+      if(interface.bp) return true
       if('number'==typeof n && 'number'==typeof wrapper.bp)
         return n==wrapper.bp
       return !!wrapper.bp
