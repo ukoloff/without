@@ -202,11 +202,11 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
     function bp()
     {
-      if(minified || false===interface.bp) return
-      if(interface.bp) return true
+      if(minified || false===lib.bp) return
+      if(lib.bp) return true
       if(n && 'number'==typeof wrapper.bp)
         return n==wrapper.bp
-      return !!wrapper.bp
+      return wrapper.bp
     }
   }
 
@@ -268,18 +268,18 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     }
   }
 
-  var interface={
+  var lib={
     compile: compile,
     renderable: compile,
     $compile: $compile,
     JSTs: JSTs
   }
   if('undefined'!=typeof module && module.exports)
-    module.exports=interface
+    module.exports=lib
   else if('function'==typeof define && define.amd)
-    define(interface)
+    define(lib)
   else
-    this.withOut=interface
+    this.withOut=lib
 })()
 
 //--[EOF]------------------------------------------------------------
