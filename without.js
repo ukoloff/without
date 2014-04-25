@@ -194,7 +194,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     {
       if(false===interface.bp) return
       if(interface.bp) return true
-      if('number'==typeof n && 'number'==typeof wrapper.bp)
+      if(n && 'number'==typeof wrapper.bp)
         return n==wrapper.bp
       return !!wrapper.bp
     }
