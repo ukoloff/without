@@ -199,7 +199,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
     function bp()
     {
-      if(false===interface.bp) return
+      if(minified || false===interface.bp) return
       if(interface.bp) return true
       if(n && 'number'==typeof wrapper.bp)
         return n==wrapper.bp
