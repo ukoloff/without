@@ -180,7 +180,7 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
       if(!name.length)name=++names
       wrapper.id=name
       if(n)
-        name+='/'+n+'.jst'
+        name+='['+n+']'
       return name
     }
 
