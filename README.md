@@ -295,9 +295,12 @@ return ->
 Debugging coffee-script templates is always tricky task.
 Since v1.1 `withOut` make some steps toward developer.
 
+But if source function (fed to `.compile`) is minified, these debugging
+facilities are disabled.
+
 ### Fake source file names
 
-After creating template (but before first rendering) you can set its id. Just
+After creating template (but before first rendering) you can set its id. Simply
 
 ``` coffee
 t = withOut.compile ->
