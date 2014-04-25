@@ -146,18 +146,15 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
   function renderable(fn, wrapper, n)
   {
-    if('function'!=typeof fn) throw new TypeError("Call: withOut.compile(function)");
-    var pending=true
+    if('function'!=typeof fn)
+      throw new TypeError("Call: withOut.compile(function)")
+    var pending=true, minified
     wrapper.id=null
     return render
 
     function render()
     {
-      if(pending)
-      {
-        fn=build()
-        pending=false
-      }
+      if(pending) build()
       try
       {
         var that=_this, x=html
@@ -175,19 +172,29 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
       }
     }
 
-    function build()
+    function getName()
     {
       var name = wrapper.id
       if(null==name) name=''
       name=String(name).split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
       if(!name.length)name=++names
       wrapper.id=name
-      var jst = n ? '/'+n+'.jst' : ''
-      var r=(new Function(makeVars()
-        +'\nreturn '+fn.toString()
-        +'\n//# sourceURL=x://withOut/'+ name + jst + '.wo')).call(scope)
-      r.displayName='wO:'+name+jst
-      return r
+      if(n)
+        name+='/'+n+'.jst'
+      return name
+    }
+
+    function build()
+    {
+      var name
+      fn=fn.toString()
+      minified = !/[\r\n]/.test(fn)
+      fn=makeVars()+'\nreturn '+fn
+      if(!minified)
+        fn+='\n//# sourceURL=x://withOut/'+(name=getName())+'.wo'
+      fn=(new Function(fn)).call(scope)
+      if(!minified)
+        fn.displayName='{{'+name+'}}'
     }
 
     function bp()
