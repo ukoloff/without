@@ -194,7 +194,10 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
         fn+='\n//# sourceURL=x://withOut/'+(name=getName())+'.wo'
       fn=(new Function(fn)).call(scope)
       if(!minified)
-        fn.displayName='{{'+name+'}}'
+      {
+        fn.displayName='<'+name+'>'
+        wrapper.displayName='{{'+name+'}}'
+      }
     }
 
     function bp()
