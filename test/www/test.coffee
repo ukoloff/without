@@ -19,11 +19,9 @@ renderScriptTag = (name)->
   "<script src='#{name}.js'></script>\n"
 
 renderStyle = (rsp)->
-  fs.readFile __dirname+'/test.css', (err, data)->
-    if err
-      return render404 rsp
-    rsp.writeHead 200, 'Content-Type': 'text/css'
-    rsp.end data
+  rsp.writeHead 200, 'Content-Type': 'text/css'
+  fs.createReadStream __dirname+'/test.css'
+    .pipe rsp
 
 startJS = (rsp)->
   rsp.writeHead 200, 'Content-Type': 'application/javascript'
@@ -31,11 +29,9 @@ startJS = (rsp)->
 renderJS = (rsp, name)->
   unless (f = scripts[name])?
     return render404 rsp
-  fs.readFile f+'/'+name+'.js', (err, data)->
-    if err
-      return render404 rsp
-    startJS rsp
-    rsp.end data
+  fs.createReadStream f+'/'+name+'.js'
+    .pipe rsp
+  startJS rsp
 
 renderTest = (rsp, name)->
   fs.readFile __dirname+'/../'+name+'.coffee', encoding: 'utf8', (err, data)->
