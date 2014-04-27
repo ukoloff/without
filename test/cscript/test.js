@@ -12,7 +12,7 @@ if('msie'==$.sh.Environment('Process')('npm_config_out'))
 
 window=this
 jsLoad('without.js')
-jsLoad('node_modules/expect.js/expect.js')
+jsLoad('node_modules/expect.js/index.js')
 var modules={
   '..': this.withOut,
   'expect.js': this.expect
