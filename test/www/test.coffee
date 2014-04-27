@@ -6,10 +6,10 @@ cc   = require 'coffee-script'
 port = if /^\d{4,5}$/.test process.env.npm_config_port then process.env.npm_config_port else 1234
 
 scripts =
-  expect:  'node_modules/expect.js'
-  without: '.'
-  mocha:   'node_modules/mocha'
-  test:    __dirname
+  expect:  'expect.js'
+  without: '../..'
+  mocha:   'mocha/mocha.js'
+  test:    './test.js'
 
 render404 = (rsp)->
   rsp.writeHead 404, 'Content-Type': 'text/plain'
@@ -31,7 +31,7 @@ startJS = (rsp)->
 renderJS = (rsp, name)->
   unless (f = scripts[name])?
     return render404 rsp
-  fs.createReadStream f+'/'+name+'.js'
+  fs.createReadStream require.resolve f
   .on 'error', -> render404 rsp
   .on 'open', ->
     @pipe rsp
