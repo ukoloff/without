@@ -24,8 +24,8 @@
   ],
   "devDependencies": {
     "coffee-script": "~1.7.1",
-    "expect.js": "~0.2.0",
-    "mocha": "~1.18.2"
+    "mocha": "~1.18.2",
+    "expect.js": "~0.3.1"
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha",
