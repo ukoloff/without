@@ -341,6 +341,12 @@ For `.JSTs()` templates `t.bp=1` means break on first component (since JSTs may 
 of sub-templates), `t.bp=2` breaks on second sub-template and so on.
 `t.bp = true` breaks on all sub-templates of JSTs-template.
 
+## RoR
+
+Simple [gem](https://rubygems.org/gems/without-rails)
+was [developed](https://github.com/ukoloff/without-rails)
+to simplify using withOut in Ruby on Rails assets pipeline.
+
 ## Legacy
 Inspired by [ck](https://github.com/aeosynth/ck)
 and [Teacup](https://github.com/goodeggs/teacup)
