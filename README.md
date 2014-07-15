@@ -8,7 +8,7 @@ Yet another CoffeScript template
 `without` was started as proof of concept - a way to implement
 [CoffeeScript](http://coffeescript.org/) templating with lexical scope,
 without using `with`. It appeared to be possible, simple (just a couple
-of lines of code - see `setContext()` in source) and (with some small
+of lines of code - see `build()` in source) and (with some small
 extra ideas) even useful.
 
 Some (very sound) reasons to use CoffeeScript as template engine are listed
