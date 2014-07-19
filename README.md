@@ -1,5 +1,7 @@
 # without
 
+[![NPM version](https://badge.fury.io/js/without.svg)](http://badge.fury.io/js/without)
+
 Yet another CoffeScript template
 (without `with`, coffescript, options and templates)
 
