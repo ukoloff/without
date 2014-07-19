@@ -1,5 +1,6 @@
 # without
 
+[![Build Status](https://travis-ci.org/ukoloff/without.svg?branch=master)](https://travis-ci.org/ukoloff/without)
 [![NPM version](https://badge.fury.io/js/without.svg)](http://badge.fury.io/js/without)
 
 Yet another CoffeScript template
