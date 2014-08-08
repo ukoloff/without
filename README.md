@@ -344,11 +344,21 @@ For `.JSTs()` templates `t.bp=1` means break on first component (since JSTs may 
 of sub-templates), `t.bp=2` breaks on second sub-template and so on.
 `t.bp = true` breaks on all sub-templates of JSTs-template.
 
-## RoR
+## Installation
 
-Simple [gem](https://rubygems.org/gems/without-rails)
-was [developed](https://github.com/ukoloff/without-rails)
-to simplify using withOut in Ruby on Rails assets pipeline.
+`without` is ready to be used in most environments:
+
+  * Plain script in browser
+    `<script src=without.js></script>`
+
+  * [requirejs](http://requirejs.org/)
+    `require(['without'], function(withOut){ t = withOut.compile(...) })`
+
+  * [Node.js](http://nodejs.org/) (including [Browserify](http://browserify.org/))
+    use npm module [without](https://www.npmjs.org/package/without), eg `npm install without`
+
+  * [Ruby](https://www.ruby-lang.org/ru/) on [Rails](http://rubyonrails.org/) assets pipeline
+    use gem [without-rails](https://rubygems.org/gems/without-rails), eg `gem install without-rails`
 
 ## Legacy
 Inspired by [ck](https://github.com/aeosynth/ck)
