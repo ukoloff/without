@@ -351,7 +351,7 @@ of sub-templates), `t.bp=2` breaks on second sub-template and so on.
   * Plain script in browser
     `<script src=without.js></script>`
 
-  * [requirejs](http://requirejs.org/)
+  * [RequireJS](http://requirejs.org/)
     `require(['without'], function(withOut){ t = withOut.compile(...) })`
 
   * [Node.js](http://nodejs.org/) (including [Browserify](http://browserify.org/))
