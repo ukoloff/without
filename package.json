@@ -28,8 +28,6 @@
     "mocha": "~1.21.4"
   },
   "scripts": {
-    "test": "node test/npm",
-    "test/wsh": "cscript //NoLogo test/cscript/test.js",
-    "test/www": "node node_modules/coffee-script/bin/coffee test/www/test.coffee"
+    "test": "node test/npm"
   }
 }
