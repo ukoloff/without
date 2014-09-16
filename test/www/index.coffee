@@ -3,7 +3,7 @@ url  = require 'url'
 fs   = require 'fs'
 cc   = require 'coffee-script'
 
-port = if /^\d{4,5}$/.test process.env.npm_config_port then process.env.npm_config_port else 1234
+port = if /^\d{4,5}$/.test process.env.npm_config_www then process.env.npm_config_www else 1234
 
 scripts =
   expect:  'expect.js'
