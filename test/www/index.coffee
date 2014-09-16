@@ -63,7 +63,15 @@ renderMain = (rsp)->
       rsp.write html[2]
       rsp.end()
 
+renderQuit = (rsp)->
+  rsp.writeHead 200, 'Content-Type': 'text/html'
+  rsp.end()
+  process.exit 0
+
 server = (req, rsp)->
+  if 'POST'==req.method
+    return renderQuit rsp
+
   p = url.parse(req.url).pathname
 
   if '/'==p

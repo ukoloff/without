@@ -19,3 +19,13 @@ span.keyword {
 span.string {
   font-style: italic;
 }
+
+form {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+iframe {
+  display: none;
+}
