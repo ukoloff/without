@@ -7,7 +7,7 @@ $={
   fso: new ActiveXObject("Scripting.FileSystemObject")
 }
 
-if('msie'==$.sh.Environment('Process')('npm_config_out'))
+if(1==WScript.Arguments.length && 'msie'==WScript.Arguments(0))
   $.msie = getIE()
 
 window=this

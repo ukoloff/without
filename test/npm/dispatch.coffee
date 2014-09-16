@@ -9,10 +9,10 @@ wait = (child)->
 
 if process.env.npm_config_www
   require '../www'
-else if process.env.npm_config_win
+else if param = process.env.npm_config_win
   unless /^win/i.test require('os').platform()
     console.error 'Windows Scripting Host implies Microsoft Windows!'
     process.exit 1
-  wait child_process.spawn 'cscript', ['//NoLogo', 'test/cscript/test.js'], stdio: 'inherit'
+  wait child_process.spawn 'cscript', ['//NoLogo', 'test/cscript/test.js', param], stdio: 'inherit'
 else
   wait child_process.fork 'node_modules/mocha/bin/mocha'
