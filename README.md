@@ -290,8 +290,8 @@ return ->
 ## Testing
 
   * `npm test` - test in node.js, using [mocha](http://visionmedia.github.io/mocha/)
-  * `npm run-script test/www [--port=nnnn]` - start Web-server to test in browser
-  * `npm run-script test/wsh [--out=msie]` - test in Windows Scripting Host (cscript, Microsoft's JScript)
+  * `npm test --www[=nnnn]` - start Web-server to test in browser
+  * `npm test --win[=msie]` - test in Windows Scripting Host (cscript, Microsoft's JScript)
 
 ## Debugging
 
