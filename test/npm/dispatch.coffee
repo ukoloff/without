@@ -15,4 +15,4 @@ else if param = process.env.npm_config_win
     process.exit 1
   wait child_process.spawn 'cscript', ['//NoLogo', 'test/cscript/test.js', param], stdio: 'inherit'
 else
-  wait child_process.fork 'node_modules/mocha/bin/mocha'
+  wait child_process.spawn process.argv[0], ['node_modules/mocha/bin/mocha'], stdio: 'inherit'
