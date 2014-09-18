@@ -26,15 +26,27 @@ function getIE()
 {
   var x = new ActiveXObject('InternetExplorer.Application')
   x.Visible = true
-  x.Navigate($.fso.GetParentFolderName(WScript.ScriptFullName)+'/test.html')
+  initIE(x)
   return x
+}
+
+function initIE(ie)
+{
+  ie.Navigate('about:blank')
+  while(ie.Busy) WScript.Sleep(100)
+  var name = $.fso.GetParentFolderName(WScript.ScriptFullName)+'/test.'
+  ie.document.writeln(
+    $.fso.OpenTextFile(name+'html').ReadAll().replace(
+      '@CSS@',
+      $.fso.OpenTextFile(name+'css').ReadAll()
+    )
+  )
 }
 
 function setOutput(id)
 {
   if(!$.msie)
     return WScript.Echo()
-  while($.msie.Busy) WScript.Sleep(100)
   $.log = $.msie.document.getElementById(id)
 }
 
