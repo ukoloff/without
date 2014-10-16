@@ -202,8 +202,8 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
 
     function bp()
     {
-      if(minified || false===lib.bp) return
-      if(lib.bp) return true
+      if(minified || false===$compile.bp) return
+      if($compile.bp) return true
       if(n && 'number'==typeof wrapper.bp)
         return n==wrapper.bp
       return wrapper.bp
@@ -268,18 +268,17 @@ table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.spli
     }
   }
 
-  var lib={
-    compile: compile,
-    renderable: compile,
-    $compile: $compile,
-    JSTs: JSTs
-  }
+  $compile.$compile = $compile
+  $compile.compile = compile
+  $compile.renderable = compile
+  $compile.JSTs = JSTs
+
   if('undefined'!=typeof module && module.exports)
-    module.exports=lib
+    module.exports=$compile
   else if('function'==typeof define && define.amd)
-    define(lib)
+    define(function(){return $compile})
   else
-    this.withOut=lib
+    this.withOut=$compile
 })()
 
 //--[EOF]------------------------------------------------------------
