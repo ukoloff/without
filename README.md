@@ -109,6 +109,16 @@ tab=withOut.$compile(model, tabs)->
 # @id==model.id etc.
 ```
 
+Since v1.1.1 `withOut` itself is alias for `withOut.$compile`, so
+the following syntax is recommended:
+
+```coffee
+t = withOut ->
+  div id: @
+
+t 'Hi' # <div id="Hi"></div>
+```
+
 ## Fat arrow
 
 With `@` passing style template engine does it best to correctly set `this` in all nested functions.
