@@ -3,5 +3,5 @@ withOut= require '..'
 
 describe '$compile', ->
   it 'uses both call styles', ->
-    expect(withOut.$compile((data)-> print @X, '=', data.X) X: 'word').to.equal 'word=word'
+    expect(withOut((data)-> print @X, '=', data.X) X: 'word').to.equal 'word=word'
 

@@ -12,7 +12,7 @@ describe 'print', ->
     expect(withOut.compile(-> text 21*2)()).to.equal '42'
 
   it 'renders booleans', ->
-    t=withOut.$compile -> print @x
+    t=withOut -> print @x
     expect(t x: 1==1).to.equal 'true'
     expect(t x: 1==2).to.equal 'false'
 
