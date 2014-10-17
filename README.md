@@ -114,9 +114,9 @@ the following syntax is recommended:
 
 ```coffee
 t = withOut ->
-  div id: @
+  h1 'Hello, ', @, '!'
 
-t 'Hi' # <div id="Hi"></div>
+t 'world' # <h1>Hello, world!</h1>
 ```
 
 ## Fat arrow
