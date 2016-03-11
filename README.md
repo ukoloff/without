@@ -378,7 +378,7 @@ of sub-templates), `t.bp=2` breaks on second sub-template and so on.
     use npm module [without](https://www.npmjs.org/package/without), eg `npm install without`
 
   * [DocPad](http://docpad.org)
-    `docpad install [without](https://github.com/ukoloff/docpad-plugin-without)`
+    docpad install [without](https://github.com/ukoloff/docpad-plugin-without)
 
   * [Ruby](https://www.ruby-lang.org/ru/) on [Rails](http://rubyonrails.org/) assets pipeline
     use gem [without-rails](https://rubygems.org/gems/without-rails), eg `gem install without-rails`
