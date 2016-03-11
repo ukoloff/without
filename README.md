@@ -183,6 +183,16 @@ For standard tag names it will detect tag emptiness, so `(tag 'br') id: 1` will 
 not `<br id="1"></br>`. You can explicitly set type of created tag: `do tag 'br', false` gives
 `<br></br>`, whereas `do tag 'div', true` just `<div>`.
 
+To add HTML5 doctype (intentionally omitted from `withOut`) fire:
+```coffee
+(tag "!DOCTYPE", true) html: true
+html ->
+  head ->
+     # ...
+```
+
+To add other doctypes, one should use `raw` pseudo-tag.
+
 ## Pseudo-tags
 
 Inside template function some other methods injected:
@@ -366,6 +376,9 @@ of sub-templates), `t.bp=2` breaks on second sub-template and so on.
 
   * [Node.js](http://nodejs.org/) (including [Browserify](http://browserify.org/))
     use npm module [without](https://www.npmjs.org/package/without), eg `npm install without`
+
+  * [DocPad](http://docpad.org)
+    `docpad install [without](https://github.com/ukoloff/docpad-plugin-without)`
 
   * [Ruby](https://www.ruby-lang.org/ru/) on [Rails](http://rubyonrails.org/) assets pipeline
     use gem [without-rails](https://rubygems.org/gems/without-rails), eg `gem install without-rails`
