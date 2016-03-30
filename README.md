@@ -377,6 +377,9 @@ of sub-templates), `t.bp=2` breaks on second sub-template and so on.
   * [Node.js](http://nodejs.org/) (including [Browserify](http://browserify.org/))
     use npm module [without](https://www.npmjs.org/package/without), eg `npm install without`
 
+  * [Bower](http://bower.io/)
+    `bower install without`
+
   * [DocPad](http://docpad.org)
     docpad install [without](https://github.com/ukoloff/docpad-plugin-without)
 
