@@ -1,0 +1,36 @@
+{
+  "name": "without",
+  "description": "Yet another CoffeScript template (without `with`, coffescript and templates)",
+  "main": "without.js",
+  "authors": [
+    {
+      "name": "Stas Ukolov",
+      "email": "ukoloff@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "template",
+    "coffeescript",
+    "coffee-script",
+    "coffee",
+    "render",
+    "view",
+    "html",
+    "teacup",
+    "ck"
+  ],
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "homepage": "https://github.com/ukoloff/without",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
