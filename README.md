@@ -1,6 +1,7 @@
 # without
 
 [![Build Status](https://travis-ci.org/ukoloff/without.svg?branch=master)](https://travis-ci.org/ukoloff/without)
+[![Build status](https://ci.appveyor.com/api/projects/status/mwtk1p80nigwgr6g?svg=true)](https://ci.appveyor.com/project/ukoloff/without)
 [![NPM version](https://badge.fury.io/js/without.svg)](http://badge.fury.io/js/without)
 
 Yet another CoffeScript template
@@ -389,3 +390,8 @@ of sub-templates), `t.bp=2` breaks on second sub-template and so on.
 ## Legacy
 Inspired by [ck](https://github.com/aeosynth/ck)
 and [Teacup](https://github.com/goodeggs/teacup)
+
+## Credits
+
+  * [Travis CI](https://travis-ci.org/)
+  * [AppVeyor](http://www.appveyor.com/)
