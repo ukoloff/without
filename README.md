@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/ukoloff/without.svg?branch=master)](https://travis-ci.org/ukoloff/without)
 [![Build status](https://ci.appveyor.com/api/projects/status/mwtk1p80nigwgr6g?svg=true)](https://ci.appveyor.com/project/ukoloff/without)
 [![NPM version](https://badge.fury.io/js/without.svg)](http://badge.fury.io/js/without)
+[![Bower version](https://badge.fury.io/bo/without.svg)](https://badge.fury.io/bo/without)
 
 Yet another CoffeScript template
 (without `with`, coffescript, options and templates)
