@@ -95,7 +95,7 @@ function allTests()
 {
   setOutput('progress')
   jsEval($.sh
-    .Exec('node node_modules/coffee-script/bin/coffee test/cscript/tests.coffee')
+    .Exec('node_modules\\.bin\\coffee.cmd test/cscript/tests.coffee')
     .StdOut.ReadAll())
   if(progress.errs.length)
   {
@@ -112,7 +112,7 @@ function allTests()
   out('Tests:\t'+progress.ok+'/'+
     progress.run+' ('+Math.round(progress.ok/(progress.run||1)*100)+'%)')
   setOutput('bye')
-  out("That's all folks!")
+  out("That's all folks!\n")
 }
 
 //--[EOF]------------------------------------------------------------
