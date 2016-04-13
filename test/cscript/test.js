@@ -95,7 +95,7 @@ function allTests()
 {
   setOutput('progress')
   jsEval($.sh
-    .Exec('node node_modules/coffee-script/bin/coffee test/cscript/tests.coffee')
+    .Exec('node_modules\\.bin\\coffee.cmd test/cscript/tests.coffee')
     .StdOut.ReadAll())
   if(progress.errs.length)
   {
