@@ -112,7 +112,7 @@ function allTests()
   out('Tests:\t'+progress.ok+'/'+
     progress.run+' ('+Math.round(progress.ok/(progress.run||1)*100)+'%)')
   setOutput('bye')
-  out("That's all folks!")
+  out("That's all folks!\n")
 }
 
 //--[EOF]------------------------------------------------------------
