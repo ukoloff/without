@@ -2,6 +2,7 @@ http = require 'http'
 url  = require 'url'
 fs   = require 'fs'
 cc   = require 'coffee-script'
+opener = require "opener"
 
 port = if /^\d{4,5}$/.test process.env.npm_config_www then process.env.npm_config_www else 1234
 
@@ -94,3 +95,5 @@ console.log "Point your browser to:"
 for k, v of require('os').networkInterfaces()
   for x in v when x.family=='IPv4'
     console.log " - http://#{x.address}:#{port}"
+
+opener "http://127.0.0.1:#{port}"
