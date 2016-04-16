@@ -22,10 +22,12 @@
     "teacup",
     "ck"
   ],
+  "license": "ISC",
   "devDependencies": {
     "coffee-script": "~1.10.0",
     "expect.js": "~0.3.1",
-    "mocha": "~2.4.5"
+    "mocha": "~2.4.5",
+    "opener": "^1.4.1"
   },
   "scripts": {
     "test": "node test/npm"
