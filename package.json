@@ -32,6 +32,8 @@
     "opener": "^1.4.1"
   },
   "scripts": {
+    "prepublish": "coffee src/build",
+    "pretest": "coffee src/build",
     "test": "node test/npm"
   }
 }
