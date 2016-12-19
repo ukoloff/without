@@ -166,7 +166,7 @@ function makeTag(name, empty)
          nest('data-', at[k])
        else
          attr(k, at[k])
-     a = slice.call(a, 1)
+     a = shift(a)
     }
     html += '>'
     if(empty && a.length)
@@ -180,7 +180,7 @@ function makeTag(name, empty)
 
 function noTag(a)
 {
-  children('object' == typeof a[0] ? slice.call(a, 1) : a)
+  children('object' == typeof a[0] ? shift(a) : a)
 }
 
 function print(a)
@@ -278,15 +278,27 @@ function renderable(fn, wrapper, n)
 
 var slice = [].slice
 
-var nTags='a abbr acronym address applet article aside audio b bdo big blockquote body button \
-canvas caption center cite code colgroup command datalist dd del details dfn dir div dl dt \
-em embed fieldset figcaption figure font footer form frameset h1 h2 h3 h4 h5 h6 head header hgroup html \
-i iframe ins keygen kbd label legend li map mark menu meter nav noframes noscript object \
-ol optgroup option output p pre progress q rp rt ruby \
-s samp script section select small source span strike strong style sub summary sup \
-table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'.split(' ')
+function shift(a)
+{
+  return slice.call(a, 1)
+}
 
-var eTags='area base basefont br col frame hr img input link meta param'.split(' ')
+function split(s)
+{
+  return s.split(' ')
+}
+
+var nTags = split('a abbr acronym address applet article aside audio ' +
+  'b bdo big blockquote body button canvas caption center cite code colgroup command ' +
+  'datalist dd del details dfn dir div dl dt em embed ' +
+  'fieldset figcaption figure font footer form frameset ' +
+  'h1 h2 h3 h4 h5 h6 head header hgroup html i iframe ins keygen kbd ' +
+  'label legend li map mark menu meter nav noframes noscript ' +
+  'object ol optgroup option output p pre progress q rp rt ruby ' +
+  's samp script section select small source span strike strong style sub summary sup ' +
+  'table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp')
+
+var eTags = split('area base basefont br col frame hr img input link meta param')
 
 function makeVars()
 {
