@@ -1,11 +1,11 @@
 var scope = {
   print: function() { print(arguments) },
   raw: function() { raw(arguments) },
-  tag: adhocTag(),
   notag: function() { noTag(arguments) },
-  comment: makeComment(),
-  blackhole: function() {},
   coffeescript: function() { coffeeScript(arguments) },
+  blackhole: function() {},
+  comment: makeComment(),
+  tag: adhocTag(),
   $var: makeTag('var')
 }
 

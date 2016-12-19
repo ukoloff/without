@@ -4,7 +4,7 @@ function makeTag(name, empty)
 
   function attr(k, v)
   {
-    if(null==v || false===v) return
+    if(null == v || false === v) return
     html += ' ' + h(k)
     if(true !== v)
       html += '="' + h(v) + '"'
@@ -23,10 +23,10 @@ function makeTag(name, empty)
   {
     html += '<' + name
     var at = a[0]
-    if('object'==typeof at)
+    if('object' == typeof at)
     {
      for(var k in at)
-       if('data'==k && 'object'==typeof at[k])
+       if('data' == k && 'object' == typeof at[k])
          nest('data-', at[k])
        else
          attr(k, at[k])

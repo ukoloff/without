@@ -49,9 +49,9 @@ function makeComment()
   return function() { comment(arguments) }
   function comment(a)
   {
-    html += level++? '<comment level="' + level + '">' : "<!-- "
+    html += level++ ? '<comment level="' + level + '">' : "<!-- "
     children(a)
-    html += --level? '</comment>' : ' -->'
+    html += --level ? '</comment>' : ' -->'
   }
 }
 
@@ -68,7 +68,7 @@ if('undefined' != typeof module && module.exports)
 else if('function' == typeof define && define.amd)
   define(function() { return $compile })
 else
-  this.withOut = $compile
+  withOut = $compile
 
 $compile.$compile = $compile
 $compile.compile = compile
@@ -140,7 +140,7 @@ function makeTag(name, empty)
 
   function attr(k, v)
   {
-    if(null==v || false===v) return
+    if(null == v || false === v) return
     html += ' ' + h(k)
     if(true !== v)
       html += '="' + h(v) + '"'
@@ -159,10 +159,10 @@ function makeTag(name, empty)
   {
     html += '<' + name
     var at = a[0]
-    if('object'==typeof at)
+    if('object' == typeof at)
     {
      for(var k in at)
-       if('data'==k && 'object'==typeof at[k])
+       if('data' == k && 'object' == typeof at[k])
          nest('data-', at[k])
        else
          attr(k, at[k])
@@ -207,7 +207,7 @@ var
 function renderable(fn, wrapper, n)
 {
   if('function' != typeof fn)
-    throw TypeError("Call: withOut.compile(function)")
+    throw TypeError("Call: withOut(function)")
   var pending = true, minified
   wrapper.id = null
 
@@ -266,11 +266,11 @@ function renderable(fn, wrapper, n)
 
   function bp()
   {
-    if(minified || false===$compile.bp)
+    if(minified || false === $compile.bp)
       return
     if($compile.bp)
       return true
-    if(n && 'number'==typeof wrapper.bp)
+    if(n && 'number' == typeof wrapper.bp)
       return n == wrapper.bp
     return wrapper.bp
   }
@@ -311,11 +311,11 @@ function makeVars()
 var scope = {
   print: function() { print(arguments) },
   raw: function() { raw(arguments) },
-  tag: adhocTag(),
   notag: function() { noTag(arguments) },
-  comment: makeComment(),
-  blackhole: function() {},
   coffeescript: function() { coffeeScript(arguments) },
+  blackhole: function() {},
+  comment: makeComment(),
+  tag: adhocTag(),
   $var: makeTag('var')
 }
 

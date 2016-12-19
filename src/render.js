@@ -6,7 +6,7 @@ var
 function renderable(fn, wrapper, n)
 {
   if('function' != typeof fn)
-    throw TypeError("Call: withOut.compile(function)")
+    throw TypeError("Call: withOut(function)")
   var pending = true, minified
   wrapper.id = null
 
@@ -65,11 +65,11 @@ function renderable(fn, wrapper, n)
 
   function bp()
   {
-    if(minified || false===$compile.bp)
+    if(minified || false === $compile.bp)
       return
     if($compile.bp)
       return true
-    if(n && 'number'==typeof wrapper.bp)
+    if(n && 'number' == typeof wrapper.bp)
       return n == wrapper.bp
     return wrapper.bp
   }

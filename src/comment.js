@@ -4,8 +4,8 @@ function makeComment()
   return function() { comment(arguments) }
   function comment(a)
   {
-    html += level++? '<comment level="' + level + '">' : "<!-- "
+    html += level++ ? '<comment level="' + level + '">' : "<!-- "
     children(a)
-    html += --level? '</comment>' : ' -->'
+    html += --level ? '</comment>' : ' -->'
   }
 }
