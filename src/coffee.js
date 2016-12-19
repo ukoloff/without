@@ -1,6 +1,6 @@
-function coffeeScript()
+function coffeeScript(a)
 {
-  if(1 != arguments.length || 'function' != typeof arguments[0])
+  if(1 != a.length || 'function' != typeof a[0])
     throw SyntaxError('Usage: coffeescript -> code')
-  html += '<script><!--\n(' + arguments[0].toString() + ')()\n//-->\n</script>';
+  html += '<script><!--\n(' + a[0].toString() + ')()\n//-->\n</script>';
 }

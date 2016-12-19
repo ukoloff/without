@@ -1,4 +1,4 @@
-function noTag(attrs)
+function noTag(a)
 {
-  children('object' == typeof attrs ? slice.call(arguments, 1) : arguments)
+  children('object' == typeof a[0] ? slice.call(a, 1) : a)
 }
