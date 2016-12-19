@@ -21,8 +21,7 @@ fs.readdirSync folder = path.join __dirname, '..'
     dst.write "\n"
 
 dst.write """
-}()
-//--[EOF]------------------------------------------------------------
+}();
 
 """
 
