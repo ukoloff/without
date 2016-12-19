@@ -30,7 +30,7 @@ function makeTag(name, empty)
          nest('data-', at[k])
        else
          attr(k, at[k])
-     a = slice.call(a, 1)
+     a = shift(a)
     }
     html += '>'
     if(empty && a.length)
