@@ -8,6 +8,7 @@
   },
   "main": "without.js",
   "files": ["without.js"],
+  "homepage": "https://github.com/ukoloff/without",
   "repository": {
     "type": "git",
     "url": "https://github.com/ukoloff/without"
