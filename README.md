@@ -211,6 +211,37 @@ You can explicitly set type of created tag:
 `do tag 'br', false` gives `<br></br>`,
 whereas `do tag 'div', true` just `<div>`.
 
+### Global BYOT
+
+If you plan to use some specific tag
+in many templates, you can create global tag:
+
+```
+withOut.tag 'oops'
+
+t = withOut ->
+  oops 'I did it again!'
+```
+
+Due to lazy template compilation
+global tag can be added *after* creating template
+that uses it
+(but before its first evaluation).
+
+```
+t = withOut ->
+  me id: @
+
+withOut.tag 'me', true # Empty tag!
+
+# ...
+
+$view.html t 42
+```
+
+Finally `withOut.tag(name, '#')` removes global tag
+(including regular ones, created by `withOut` itself).
+
 To add HTML5 doctype
 (intentionally omitted from `withOut`) fire:
 
