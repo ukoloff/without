@@ -1,0 +1,4 @@
+function text()
+{
+  print(arguments)
+}
