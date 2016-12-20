@@ -211,6 +211,19 @@ You can explicitly set type of created tag:
 `do tag 'br', false` gives `<br></br>`,
 whereas `do tag 'div', true` just `<div>`.
 
+HTML5 doctype is intentionally omitted from `withOut`.
+If needed,
+it can be generated as follow:
+
+```coffee
+(tag "!DOCTYPE", true) html: true
+html ->
+  head ->
+     # ...
+```
+
+To add other doctypes, one should use `raw` pseudo-tag.
+
 ### Global BYOT
 
 If you plan to use some specific tag
@@ -241,18 +254,6 @@ $view.html t 42
 
 Finally `withOut.tag(name, '#')` removes global tag
 (including regular ones, created by `withOut` itself).
-
-To add HTML5 doctype
-(intentionally omitted from `withOut`) fire:
-
-```coffee
-(tag "!DOCTYPE", true) html: true
-html ->
-  head ->
-     # ...
-```
-
-To add other doctypes, one should use `raw` pseudo-tag.
 
 ## Pseudo-tags
 
