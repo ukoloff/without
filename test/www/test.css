@@ -22,8 +22,8 @@ span.string {
 
 form {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 1ex;
+  right: 1ex;
 }
 
 iframe {

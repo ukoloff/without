@@ -208,15 +208,14 @@ function renderable(fn, wrapper, n)
 {
   if('function' != typeof fn)
     throw TypeError("Call: withOut(function)")
-  var pending = true, minified
+  var minified
   wrapper.id = null
 
   return render
 
   function render()
   {
-    if(pending)
-      build()
+    build()
     try
     {
       var that = _this, x = html
@@ -251,8 +250,10 @@ function renderable(fn, wrapper, n)
   function build()
   {
     var name
+    build = function() {}
     fn = fn.toString()
     minified = !/[\r\n]/.test(fn)
+    makeScope()
     fn = makeVars() + '\nreturn ' + fn
     if(!minified)
       fn += '\n//# sourceURL=eval://withOut/' + (name = getName()) + '.wo'
@@ -274,6 +275,28 @@ function renderable(fn, wrapper, n)
       return n == wrapper.bp
     return wrapper.bp
   }
+}
+
+var scope
+
+function makeScope()
+{
+  makeScope = function() {}
+
+  scope = {
+    print: text,
+    text: text,
+    raw: function() { raw(arguments) },
+    notag: function() { noTag(arguments) },
+    coffeescript: function() { coffeeScript(arguments) },
+    blackhole: function() {},
+    comment: makeComment(),
+    tag: adhocTag(),
+    $var: makeTag('var')
+  }
+
+  for(var i in nTags) scope[nTags[i]] = makeTag(nTags[i])
+  for(var i in eTags) scope[eTags[i]] = makeTag(eTags[i], true)
 }
 
 var slice = [].slice
@@ -300,6 +323,11 @@ var nTags = split('a abbr acronym address applet article aside audio ' +
 
 var eTags = split('area base basefont br col frame hr img input link meta param')
 
+function text()
+{
+  print(arguments)
+}
+
 function makeVars()
 {
   var v = []
@@ -307,21 +335,5 @@ function makeVars()
     v.push(tag + '=this.' + tag)
   return 'var ' + v.join(',')
 }
-
-var scope = {
-  print: function() { print(arguments) },
-  raw: function() { raw(arguments) },
-  notag: function() { noTag(arguments) },
-  coffeescript: function() { coffeeScript(arguments) },
-  blackhole: function() {},
-  comment: makeComment(),
-  tag: adhocTag(),
-  $var: makeTag('var')
-}
-
-scope.text = scope.print
-
-for(var i in nTags) scope[nTags[i]] = makeTag(nTags[i])
-for(var i in eTags) scope[eTags[i]] = makeTag(eTags[i], true)
 
 }();

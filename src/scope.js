@@ -3,6 +3,7 @@ var scope
 function makeScope()
 {
   makeScope = function() {}
+
   scope = {
     print: text,
     text: text,
