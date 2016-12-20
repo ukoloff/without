@@ -68,12 +68,13 @@ if('undefined' != typeof module && module.exports)
 else if('function' == typeof define && define.amd)
   define(function() { return $compile })
 else
-  withOut = $compile
+  this.withOut = $compile
 
 $compile.$compile = $compile
 $compile.compile = compile
 $compile.renderable = compile
 $compile.JSTs = JSTs
+$compile.tag = globalTag
 
 function flatten(array)
 {
@@ -84,6 +85,22 @@ function flatten(array)
     else
       r.push(v)
   return r
+}
+
+function globalTag(name, empty)
+{
+  global(name, !!empty)
+}
+
+function global(name, empty)
+{
+  makeScope()
+  if('#' == empty)
+  {
+    delete scope[name]
+    return
+  }
+  scope[name] = makeTag(name, empty)
 }
 
 var htmlEntities = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}
@@ -201,7 +218,7 @@ function raw(a)
 
 var
   names = 0,
-  html = '',
+  html,
   _this
 
 function renderable(fn, wrapper, n)
