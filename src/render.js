@@ -52,6 +52,7 @@ function renderable(fn, wrapper, n)
     build = function() {}
     fn = fn.toString()
     minified = !/[\r\n]/.test(fn)
+    makeScope()
     fn = makeVars() + '\nreturn ' + fn
     if(!minified)
       fn += '\n//# sourceURL=eval://withOut/' + (name = getName()) + '.wo'
