@@ -7,15 +7,14 @@ function renderable(fn, wrapper, n)
 {
   if('function' != typeof fn)
     throw TypeError("Call: withOut(function)")
-  var pending = true, minified
+  var minified
   wrapper.id = null
 
   return render
 
   function render()
   {
-    if(pending)
-      build()
+    build()
     try
     {
       var that = _this, x = html
@@ -50,6 +49,7 @@ function renderable(fn, wrapper, n)
   function build()
   {
     var name
+    build = function() {}
     fn = fn.toString()
     minified = !/[\r\n]/.test(fn)
     fn = makeVars() + '\nreturn ' + fn
