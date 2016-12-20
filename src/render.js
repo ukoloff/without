@@ -1,6 +1,6 @@
 var
   names = 0,
-  html = '',
+  html,
   _this
 
 function renderable(fn, wrapper, n)
