@@ -12,6 +12,10 @@ describe 'Global tags', ->
     withOut.tag 'hello', true
     expect(do withOut -> hello class: false).to.equal '<hello>'
 
+  it 'validate name', ->
+    expect(-> withOut.tag 'a+b').to.throwError (e)->
+      expect(e).to.be.a SyntaxError
+
   it 'use lazy compilation', ->
     t = withOut -> none id: @
     withOut.tag 'none', true

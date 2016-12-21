@@ -94,6 +94,8 @@ function globalTag(name, empty)
 
 function global(name, empty)
 {
+  if(!/^[\$\w]+$/.test(name))
+    throw SyntaxError("Invalid tag name: " + name)
   makeScope()
   if('#' == empty)
   {
