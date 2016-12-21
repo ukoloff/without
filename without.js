@@ -112,7 +112,7 @@ function h(s)
   return String(s).replace(/[&<>"]/g, function(e) { return htmlEntities[e] })
 }
 
-function JSTs(path)
+function JSTs()
 {
   var bound, Ts = flatten(slice.call(arguments))
   wrapper.id = null

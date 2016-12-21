@@ -1,4 +1,4 @@
-function JSTs(path)
+function JSTs()
 {
   var bound, Ts = flatten(slice.call(arguments))
   wrapper.id = null
