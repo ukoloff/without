@@ -145,6 +145,28 @@ function JSTs(path)
   }
 }
 
+function filterLocals(locals)
+{
+  if('function' == typeof locals)
+    locals = locals()
+  if('object' != typeof locals)
+    return
+  var res
+  for(var k in locals)
+  {
+    if(!/^[\$\w]+$/.test(k))
+        throw SyntaxError("Invalid identifier: " + k)
+    if(!res)
+        res = {}
+    var v = locals[k]
+    res[k] = 'string'==typeof v && /<(\/?)>/.test(v) ?
+      makeTag(k, !!RegExp.$1)
+      :
+      v
+  }
+  return res
+}
+
 function $compile(fn)
 {
   var withOut = renderable(fn, wrapper)
@@ -195,6 +217,33 @@ function makeTag(name, empty)
     children(a)
     html += "</" + name + ">"
   }
+}
+
+function merge()
+{
+  var res, dup, len = arguments.length
+  for(var i = 0; i < len; i++)
+  {
+    var rec = arguments[i]
+    if('object' != typeof rec)
+      continue
+    if(!res)
+    {
+      res = rec
+      continue;
+    }
+    if(!dup)
+    {
+      dup = {}
+      for(var k in res)
+        dup[k] = res[k]
+      res = dup
+      dup = 1
+    }
+    for(var k in rec)
+      res[k] = rec[k]
+  }
+  return res
 }
 
 function noTag(a)
@@ -268,20 +317,19 @@ function renderable(fn, wrapper, n)
 
   function build()
   {
-    var name
     build = function() {}
     fn = fn.toString()
     minified = !/[\r\n]/.test(fn)
     makeScope()
-    fn = makeVars() + '\nreturn ' + fn
+    var name, myScope = merge(scope, filterLocals($compile.locals), filterLocals(wrapper.locals))
+    fn = makeVars(myScope) + '\nreturn ' + fn
     if(!minified)
       fn += '\n//# sourceURL=eval://withOut/' + (name = getName()) + '.wo'
-    fn = (new Function(fn)).call(scope)
-    if(!minified)
-    {
-      fn.displayName = '<' + name + '>'
-      wrapper.displayName = '{{' + name + '}}'
-    }
+    fn = (new Function(fn)).call(myScope)
+    if(minified)
+      return
+    fn.displayName = '<' + name + '>'
+    wrapper.displayName = '{{' + name + '}}'
   }
 
   function bp()
@@ -347,7 +395,7 @@ function text()
   print(arguments)
 }
 
-function makeVars()
+function makeVars(scope)
 {
   var v = []
   for(var tag in scope)

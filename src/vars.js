@@ -1,4 +1,4 @@
-function makeVars()
+function makeVars(scope)
 {
   var v = []
   for(var tag in scope)
