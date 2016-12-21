@@ -1,6 +1,10 @@
 expect = require 'expect.js'
 withOut= require '..'
 
+describe 'Invalid locals', ->
+  it 'are errors', ->
+    expect(withOut -> oops true).to.throwError()
+
 describe 'Locals', ->
 
   it 'are injected into templates', ->
