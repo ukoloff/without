@@ -8,3 +8,4 @@ describe 'Tags', ->
       text ++i.n
     for j in [1..5]
       expect(do t).to.equal "#{j}"
+    return
