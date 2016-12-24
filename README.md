@@ -182,13 +182,13 @@ retain full control over `this` and `arguments`.
 ### Via global variables
 
 `withOut` templates are recompiled
-before first evaluation.
+before first rendering.
 
 Because of that they cannot access
 local variables available in the scope
 they are declared in.
 
-```
+```coffee
 myVar = 1;
 
 t = withOut ->
