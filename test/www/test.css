@@ -21,7 +21,8 @@ span.string {
 }
 
 form {
-  position: absolute;
+  position: fixed;
+  -position: absolute;
   top: 1ex;
   right: 1ex;
 }
