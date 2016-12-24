@@ -74,7 +74,6 @@ $compile.$compile = $compile
 $compile.compile = compile
 $compile.renderable = compile
 $compile.JSTs = JSTs
-$compile.tag = globalTag
 
 function flatten(array)
 {
@@ -85,24 +84,6 @@ function flatten(array)
     else
       r.push(v)
   return r
-}
-
-function globalTag(name, empty)
-{
-  global(name, !!empty)
-}
-
-function global(name, empty)
-{
-  if(!/^[\$\w]+$/.test(name))
-    throw SyntaxError("Invalid tag name: " + name)
-  makeScope()
-  if('#' == empty)
-  {
-    delete scope[name]
-    return
-  }
-  scope[name] = makeTag(name, empty)
 }
 
 var htmlEntities = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}
