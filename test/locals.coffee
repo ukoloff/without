@@ -75,4 +75,10 @@ describe 'Locals', ->
     withOut.locals = value: 2
     expect(do t).to.equal res
 
+    t2 = withOut ->
+      u value
+
     delete withOut.locals
+
+    expect(do t).to.equal res
+    expect(t2).to.throwError()
