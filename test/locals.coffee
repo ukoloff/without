@@ -14,8 +14,8 @@ describe 'Locals', ->
     delete withOut.locals
 
   it 'check their names', ->
+    t = withOut ->
     z = (name)->
-      t = withOut ->
       t.locals = "#{name}": 1
       expect(t).to.throwError (e)->
         expect(e).to.be.a SyntaxError

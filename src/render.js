@@ -48,15 +48,15 @@ function renderable(fn, wrapper, n)
 
   function build()
   {
-    build = function() {}
-    fn = fn.toString()
-    minified = !/[\r\n]/.test(fn)
+    var name, code = fn.toString()
+    minified = !/[\r\n]/.test(code)
     makeScope()
-    var name, myScope = merge(scope, filterLocals($compile.locals), filterLocals(wrapper.locals))
-    fn = makeVars(myScope) + '\nreturn ' + fn
+    var myScope = merge(scope, filterLocals($compile.locals), filterLocals(wrapper.locals))
+    code = makeVars(myScope) + '\nreturn ' + code
     if(!minified)
-      fn += '\n//# sourceURL=eval://withOut/' + (name = getName()) + '.wo'
-    fn = (new Function(fn)).call(myScope)
+      code += '\n//# sourceURL=eval://withOut/' + (name = getName()) + '.wo'
+    fn = (new Function(code)).call(myScope)
+    build = function() {}
     if(minified)
       return
     fn.displayName = '<' + name + '>'
