@@ -7,11 +7,25 @@ describe 'Invalid locals', ->
 
 describe 'Locals', ->
 
-  it 'are injected into templates', ->
+  describe 'are injected into templates', ->
 
-    withOut.locals = secret: 6*7
-    expect(do withOut -> i secret).to.equal '<i>42</i>'
-    delete withOut.locals
+    it 'globally', ->
+      withOut.locals = secret: 6 * 7
+      expect(do withOut -> i secret).to.equal '<i>42</i>'
+
+      withOut.locals = -> secret: 9 * 3
+      expect(do withOut -> i secret).to.equal '<i>27</i>'
+
+      delete withOut.locals
+
+    it 'locally', ->
+      t = withOut -> b self
+      t.locals = self: 2 * 2
+      expect(do t).to.equal '<b>4</b>'
+
+      t = withOut -> s self
+      t.locals = self: 4 * 27
+      expect(do t).to.equal '<s>108</s>'
 
   it 'check their names', ->
     t = withOut ->
