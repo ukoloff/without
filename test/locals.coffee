@@ -64,3 +64,15 @@ describe 'Locals', ->
       oops: '</>'
       time: 'again'
     expect(do t).to.equal '<oops when="again">'
+
+  it 'bind lazily', ->
+    t = withOut ->
+      u value
+
+    withOut.locals = value: 1
+    expect(do t).to.equal res = '<u>1</u>'
+
+    withOut.locals = value: 2
+    expect(do t).to.equal res
+
+    delete withOut.locals
