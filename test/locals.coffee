@@ -49,3 +49,18 @@ describe 'Locals', ->
       $a: 42
       b$: 108
     expect(do t).to.equal '<i a="42" b="108" $="27"></i>'
+
+  it 'can be tags', ->
+    t = withOut ->
+      oops time
+    t.locals =
+      oops: '<>'
+      time: 'again'
+    expect(do t).to.equal '<oops>again</oops>'
+
+    t = withOut ->
+      oops when: time
+    t.locals =
+      oops: '</>'
+      time: 'again'
+    expect(do t).to.equal '<oops when="again">'

@@ -8,11 +8,11 @@ function filterLocals(locals)
   for(var k in locals)
   {
     if(!/^[\$\w]+$/.test(k))
-        throw SyntaxError("Invalid identifier: " + k)
+      throw SyntaxError("Invalid identifier: " + k)
     if(!res)
         res = {}
     var v = locals[k]
-    res[k] = 'string'==typeof v && /<(\/?)>/.test(v) ?
+    res[k] = 'string'==typeof v && /^<(\/?)>$/.test(v) ?
       makeTag(k, !!RegExp.$1)
       :
       v
