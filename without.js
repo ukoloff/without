@@ -135,7 +135,7 @@ function filterLocals(locals)
   var res
   for(var k in locals)
   {
-    if(!/^[\$\w]+$/.test(k))
+    if(!/^[$\w]+$/.test(k))
       throw SyntaxError("Invalid identifier: " + k)
     if(!res)
         res = {}
