@@ -1,7 +1,15 @@
-function compile(fn)
+function compile()
 {
-  var withOut = renderable(fn, wrapper)
-  return wrapper
+  return function withOut(fn)
+  {
+    return compile(fn)
+  }
 
-  function wrapper() { return withOut.apply(this, arguments) }
+  function compile(fn)
+  {
+    var withOut = renderable(fn, template)
+    return template
+
+    function template() { return withOut.apply(this, arguments) }
+  }
 }
