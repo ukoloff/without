@@ -55,25 +55,33 @@ function makeComment()
   }
 }
 
-function compile(fn)
+function compile()
 {
-  var withOut = renderable(fn, wrapper)
-  return wrapper
+  return function withOut(fn)
+  {
+    return compile(fn)
+  }
 
-  function wrapper() { return withOut.apply(this, arguments) }
+  function compile(fn)
+  {
+    var withOut = renderable(fn, template)
+    return template
+
+    function template() { return withOut.apply(this, arguments) }
+  }
 }
 
 if('undefined' != typeof module && module.exports)
-  module.exports = $compile
+  module.exports = withOut
 else if('function' == typeof define && define.amd)
-  define(function() { return $compile })
+  define(function() { return withOut })
 else
-  this.withOut = $compile
+  this.withOut = withOut
 
-$compile.$compile = $compile
-$compile.compile = compile
-$compile.renderable = compile
-$compile.JSTs = JSTs
+withOut.$compile = withOut
+withOut.compile =
+withOut.renderable = compile()
+withOut.JSTs = JSTs
 
 function flatten(array)
 {
@@ -95,7 +103,12 @@ function h(s)
 
 function JSTs()
 {
-  var bound, Ts = flatten(slice.call(arguments))
+  return JST$(arguments)
+}
+
+function JST$(a)
+{
+  var bound, Ts = flatten(slice.call(a))
   wrapper.id = null
   return wrapper
 
@@ -148,12 +161,17 @@ function filterLocals(locals)
   return res
 }
 
+function withOut(fn)
+{
+  return $compile(fn)
+}
+
 function $compile(fn)
 {
-  var withOut = renderable(fn, wrapper)
-  return wrapper
+  var withOut = renderable(fn, template)
+  return template
 
-  function wrapper(that) { return withOut.apply(that, arguments) }
+  function template(that) { return withOut.apply(that, arguments) }
 }
 
 function makeTag(name, empty)
@@ -253,12 +271,12 @@ var
   html,
   _this
 
-function renderable(fn, wrapper, n)
+function renderable(fn, template, n)
 {
   if('function' != typeof fn)
     throw TypeError("Call: withOut(function)")
   var minified
-  wrapper.id = null
+  template.id = null
 
   return render
 
@@ -284,13 +302,13 @@ function renderable(fn, wrapper, n)
 
   function getName()
   {
-    var name = wrapper.id
+    var name = template.id
     if(null == name)
       name = ''
     name = String(name).split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
     if(!name.length)
       name = ++names
-    wrapper.id = name
+    template.id = name
     if(n)
       name += '[' + n + ']'
     return name
@@ -301,7 +319,7 @@ function renderable(fn, wrapper, n)
     var name, code = fn.toString()
     minified = !/[\r\n]/.test(code)
     makeScope()
-    var myScope = merge(scope, filterLocals($compile.locals), filterLocals(wrapper.locals))
+    var myScope = merge(scope, filterLocals(withOut.locals), filterLocals(template.locals))
     code = makeVars(myScope) + '\nreturn ' + code
     if(!minified)
       code += '\n//# sourceURL=eval://withOut/' + (name = getName()) + '.wo'
@@ -310,7 +328,7 @@ function renderable(fn, wrapper, n)
     if(minified)
       return
     fn.displayName = '<' + name + '>'
-    wrapper.displayName = '{{' + name + '}}'
+    template.displayName = '{{' + name + '}}'
   }
 
   function bp()
@@ -319,9 +337,9 @@ function renderable(fn, wrapper, n)
       return
     if($compile.bp)
       return true
-    if(n && 'number' == typeof wrapper.bp)
-      return n == wrapper.bp
-    return wrapper.bp
+    if(n && 'number' == typeof template.bp)
+      return n == template.bp
+    return template.bp
   }
 }
 

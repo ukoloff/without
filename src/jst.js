@@ -1,6 +1,11 @@
 function JSTs()
 {
-  var bound, Ts = flatten(slice.call(arguments))
+  return JST$(arguments)
+}
+
+function JST$(a)
+{
+  var bound, Ts = flatten(slice.call(a))
   wrapper.id = null
   return wrapper
 
