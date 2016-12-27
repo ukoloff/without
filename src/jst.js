@@ -5,17 +5,16 @@ function JSTs()
 
 function JST$(a)
 {
-  var bound, Ts = flatten(slice.call(a))
-  wrapper.id = null
-  return wrapper
+  var Ts = flatten(slice.call(a))
+  template.id = null
+  return template
 
-  function wrapper(that) { return JSTs.apply(that, arguments) }
+  function template(that) { return JSTs.apply(that, arguments) }
 
   function JSTs()
   {
     var S = ''
-    if(!bound)
-      fetchJSTs()
+    fetchJSTs()
     for(var i in Ts)
       S += Ts[i].apply(this, arguments)
     return S
@@ -23,15 +22,15 @@ function JST$(a)
 
   function fetchJSTs()
   {
-    var v, id = wrapper.id
+    var v, id = template.id
     for(var i in Ts)
     {
-      if('function' != typeof(v=Ts[i]) &&
-         'function' != typeof(v=JST[v]))
+      if('function' != typeof(v = Ts[i]) &&
+         'function' != typeof(v = JST[v]))
         throw Error("JST['" + Ts[i] + "'] not found or incorrect!")
-      Ts[i] = renderable(v, wrapper, Number(i) + 1)
+      Ts[i] = renderable(v, template, Number(i) + 1)
     }
-    wrapper.id = id
-    bound = true
+    template.id = id
+    fetchJSTs = function() {}
   }
 }
