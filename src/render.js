@@ -3,12 +3,12 @@ var
   html,
   _this
 
-function renderable(fn, wrapper, n)
+function renderable(fn, template, n)
 {
   if('function' != typeof fn)
     throw TypeError("Call: withOut(function)")
   var minified
-  wrapper.id = null
+  template.id = null
 
   return render
 
@@ -34,13 +34,13 @@ function renderable(fn, wrapper, n)
 
   function getName()
   {
-    var name = wrapper.id
+    var name = template.id
     if(null == name)
       name = ''
     name = String(name).split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
     if(!name.length)
       name = ++names
-    wrapper.id = name
+    template.id = name
     if(n)
       name += '[' + n + ']'
     return name
@@ -51,7 +51,7 @@ function renderable(fn, wrapper, n)
     var name, code = fn.toString()
     minified = !/[\r\n]/.test(code)
     makeScope()
-    var myScope = merge(scope, filterLocals($compile.locals), filterLocals(wrapper.locals))
+    var myScope = merge(scope, filterLocals(withOut.locals), filterLocals(template.locals))
     code = makeVars(myScope) + '\nreturn ' + code
     if(!minified)
       code += '\n//# sourceURL=eval://withOut/' + (name = getName()) + '.wo'
@@ -60,7 +60,7 @@ function renderable(fn, wrapper, n)
     if(minified)
       return
     fn.displayName = '<' + name + '>'
-    wrapper.displayName = '{{' + name + '}}'
+    template.displayName = '{{' + name + '}}'
   }
 
   function bp()
@@ -69,8 +69,8 @@ function renderable(fn, wrapper, n)
       return
     if($compile.bp)
       return true
-    if(n && 'number' == typeof wrapper.bp)
-      return n == wrapper.bp
-    return wrapper.bp
+    if(n && 'number' == typeof template.bp)
+      return n == template.bp
+    return template.bp
   }
 }

@@ -1,7 +1,12 @@
+function withOut(fn)
+{
+  return $compile(fn)
+}
+
 function $compile(fn)
 {
-  var withOut = renderable(fn, wrapper)
-  return wrapper
+  var withOut = renderable(fn, template)
+  return template
 
-  function wrapper(that) { return withOut.apply(that, arguments) }
+  function template(that) { return withOut.apply(that, arguments) }
 }

@@ -1,6 +1,6 @@
 if('undefined' != typeof module && module.exports)
-  module.exports = $compile
+  module.exports = withOut
 else if('function' == typeof define && define.amd)
-  define(function() { return $compile })
+  define(function() { return withOut })
 else
-  this.withOut = $compile
+  this.withOut = withOut
