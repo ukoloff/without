@@ -27,10 +27,8 @@
   ],
   "homepage": "https://github.com/ukoloff/without",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "*",
+    "!/README.md",
+    "!/package.json"
   ]
 }
