@@ -12,7 +12,6 @@ dst.write """
 //
 !function(){
 
-
 """
 
 out = strip()
@@ -23,7 +22,6 @@ fs.readdirSync folder = path.join __dirname, '..'
 .forEach (file)->
   try
     dst.write fs.readFileSync path.join folder, file
-    dst.write "\n"
 
 dst.write """
 }();
