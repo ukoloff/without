@@ -1,3 +1,4 @@
+// Merge objects preserving original(s)
 function merge()
 {
   var res, dup, len = arguments.length

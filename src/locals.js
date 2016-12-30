@@ -1,3 +1,4 @@
+// Find values with valid names
 function filterLocals(locals)
 {
   if('function' == typeof locals)
