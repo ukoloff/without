@@ -51,7 +51,7 @@ function renderable(fn, template, n)
     var name, code = fn.toString()
     minified = !/[\r\n]/.test(code)
     makeScope()
-    var myScope = merge(scope, filterLocals(withOut.locals), filterLocals(template.locals))
+    var myScope = merge(scope, filterLocals(withOut.$), filterLocals(template.$))
     code = makeVars(myScope) + '\nreturn ' + code
     if(!minified)
       code += '\n//# sourceURL=eval://withOut/' + (name = getName()) + '.wo'

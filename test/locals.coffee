@@ -10,27 +10,27 @@ describe 'Locals', ->
   describe 'are injected into templates', ->
 
     it 'globally', ->
-      withOut.locals = secret: 6 * 7
+      withOut.$ = secret: 6 * 7
       expect(do withOut -> i secret).to.equal '<i>42</i>'
 
-      withOut.locals = -> secret: 9 * 3
+      withOut.$ = -> secret: 9 * 3
       expect(do withOut -> i secret).to.equal '<i>27</i>'
 
-      delete withOut.locals
+      delete withOut.$
 
     it 'locally', ->
       t = withOut -> b self
-      t.locals = self: 2 * 2
+      t.$ = self: 2 * 2
       expect(do t).to.equal '<b>4</b>'
 
       t = withOut -> s self
-      t.locals = self: 4 * 27
+      t.$ = self: 4 * 27
       expect(do t).to.equal '<s>108</s>'
 
   it 'check their names', ->
     t = withOut ->
     z = (name)->
-      t.locals = "#{name}": 1
+      t.$ = "#{name}": 1
       expect(t).to.throwError (e)->
         expect(e).to.be.a SyntaxError
     z 'a b'
@@ -44,7 +44,7 @@ describe 'Locals', ->
         a: $a
         b: b$
         $: $
-    t.locals =
+    t.$ =
       $: 27
       $a: 42
       b$: 108
@@ -53,14 +53,14 @@ describe 'Locals', ->
   it 'can be tags', ->
     t = withOut ->
       oops time
-    t.locals =
+    t.$ =
       oops: '<>'
       time: 'again'
     expect(do t).to.equal '<oops>again</oops>'
 
     t = withOut ->
       oops when: time
-    t.locals =
+    t.$ =
       oops: '</>'
       time: 'again'
     expect(do t).to.equal '<oops when="again">'
@@ -69,16 +69,16 @@ describe 'Locals', ->
     t = withOut ->
       u value
 
-    withOut.locals = value: 1
+    withOut.$ = value: 1
     expect(do t).to.equal res = '<u>1</u>'
 
-    withOut.locals = value: 2
+    withOut.$ = value: 2
     expect(do t).to.equal res
 
     t2 = withOut ->
       u value
 
-    delete withOut.locals
+    delete withOut.$
 
     expect(do t).to.equal res
     expect(t2).to.throwError()

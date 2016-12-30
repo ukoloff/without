@@ -206,12 +206,12 @@ you can use them inside `withOut` templates too.
 ### Via local variables
 
 Finally, some emulation for local variables
-was added to `withOut` using `.locals` member
+was added to `withOut` using `.$` member
 (of individual templates or `withOut` itself).
 
 ```coffee
-withOut.locals ||= {}
-withOut.locals.myVar = 2016 # "Common" local var
+withOut.$ ||= {}
+withOut.$.myVar = 2016 # "Common" local var
 
 t = withOut ->
   span id: myVar # Ok
@@ -221,7 +221,7 @@ alert t()
 t2 = withOut ->
   span id: anotherVar # See below
 
-t2.locals = anotherVar: 2016  # Local var
+t2.$ = anotherVar: 2016  # Local var
 
 alert t2()
 ```
@@ -230,7 +230,7 @@ Locals are copied inside template when
 the latter is recompiled,
 ie on its first evaluation.
 
-If `.locals` is a function,
+If `.$` is a function,
 it is called at that moment
 and its result is used instead.
 
@@ -239,9 +239,9 @@ one can create non-standard HTML tags
 to use inside template(s).
 
 ```coffee
-withOut.locals ||= {}
-withOut.locals.google = '<>'  # "Global" tag <google>...</google>
-withOut.locals.fb = '</>'     # "Global" tag <fb/>
+withOut.$ ||= {}
+withOut.$.google = '<>'  # "Global" tag <google>...</google>
+withOut.$.fb = '</>'     # "Global" tag <fb/>
 
 t = withOut ->
   google "https://www.google.com/"
@@ -249,7 +249,7 @@ t = withOut ->
   ms "https://www.microsoft.com/"
   apple src: "http://www.apple.com/"
 
-t.locals = ->   # Get locals on demand
+t.$ = ->   # Get locals on demand
   ms: "<>"      # Tag <ms>...</ms>
   apple: "</>"  # Tag <apple/>
 ```
