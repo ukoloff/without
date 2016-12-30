@@ -1,3 +1,4 @@
+// Lazy compilation of template
 var
   names = 0,
   html,
@@ -12,6 +13,7 @@ function renderable(fn, wrapper, n)
 
   return render
 
+  // Template rendering function
   function render()
   {
     build()
@@ -32,6 +34,7 @@ function renderable(fn, wrapper, n)
     }
   }
 
+  // Build name for template
   function getName()
   {
     var name = wrapper.id
@@ -46,6 +49,7 @@ function renderable(fn, wrapper, n)
     return name
   }
 
+  // Compile template
   function build()
   {
     var name
@@ -64,6 +68,7 @@ function renderable(fn, wrapper, n)
     }
   }
 
+  // Check whether template should be step in (breakpoint)
   function bp()
   {
     if(minified || false === $compile.bp)

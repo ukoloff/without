@@ -1,3 +1,4 @@
+// List of regular tags
 var nTags = split('a abbr acronym address applet article aside audio ' +
   'b bdo big blockquote body button canvas caption center cite code colgroup command ' +
   'datalist dd del details dfn dir div dl dt em embed ' +

@@ -1,3 +1,4 @@
+// Functions to export
 $compile.$compile = $compile
 $compile.compile = compile
 $compile.renderable = compile

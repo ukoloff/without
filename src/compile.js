@@ -1,3 +1,4 @@
+// Direct template compiler
 function compile(fn)
 {
   var withOut = renderable(fn, wrapper)

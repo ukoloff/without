@@ -1,3 +1,4 @@
+// Output text
 function print(a)
 {
   var i, e

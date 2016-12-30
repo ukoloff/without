@@ -1,3 +1,4 @@
+// HTML escaping
 var htmlEntities = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}
 
 function h(s)

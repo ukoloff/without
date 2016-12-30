@@ -1,3 +1,4 @@
+// Output text preserving HTML tags
 function raw(a)
 {
   var i, e

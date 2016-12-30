@@ -1,7 +1,9 @@
+// Build tag rendering function
 function makeTag(name, empty)
 {
   return function() { tag(arguments) }
 
+  // Output single attribute
   function attr(k, v)
   {
     if(null == v || false === v) return
@@ -10,6 +12,7 @@ function makeTag(name, empty)
       html += '="' + h(v) + '"'
   }
 
+  // Output data-* attribute(s)
   function nest(prefix, obj)
   {
     for(var k in obj)
@@ -19,6 +22,7 @@ function makeTag(name, empty)
         attr(prefix + k, obj[k])
   }
 
+  // Output full tag
   function tag(a)
   {
     html += '<' + name

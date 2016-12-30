@@ -1,3 +1,4 @@
+// Compile JST template(s)
 function JSTs()
 {
   var bound, Ts = flatten(slice.call(arguments))
@@ -6,6 +7,7 @@ function JSTs()
 
   function wrapper(that) { return JSTs.apply(that, arguments) }
 
+  // Render sub-templates and join result(s)
   function JSTs()
   {
     var S = ''
@@ -16,6 +18,7 @@ function JSTs()
     return S
   }
 
+  // Feed sub-templates to compiler
   function fetchJSTs()
   {
     var v, id = wrapper.id
