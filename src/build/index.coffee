@@ -27,7 +27,6 @@ fs.readdirSync folder = path.join __dirname, '..'
 
 dst.write """
 }();
-
 """
 
 dst.end()
