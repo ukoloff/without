@@ -4,7 +4,7 @@ function adhocTag()
 
   function isEmpty(name)
   {
-    for(var i in eTags)
+    for(var i = eTags.length - 1; i >= 0; i--)
       if(name == eTags[i])
         return true
   }

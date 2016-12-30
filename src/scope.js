@@ -16,6 +16,8 @@ function makeScope()
     $var: makeTag('var')
   }
 
-  for(var i in nTags) scope[nTags[i]] = makeTag(nTags[i])
-  for(var i in eTags) scope[eTags[i]] = makeTag(eTags[i], true)
+  for(var i = nTags.length - 1; i >= 0; i--)
+    scope[nTags[i]] = makeTag(nTags[i])
+  for(var i = eTags.length - 1; i >= 0; i--)
+    scope[eTags[i]] = makeTag(eTags[i], true)
 }

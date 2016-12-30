@@ -15,7 +15,7 @@ function JST$(a)
   {
     var S = ''
     fetchJSTs()
-    for(var i in Ts)
+    for(var i = 0, len = Ts.length; i < len; i++)
       S += Ts[i].apply(this, arguments)
     return S
   }
@@ -23,12 +23,12 @@ function JST$(a)
   function fetchJSTs()
   {
     var v, id = template.id
-    for(var i in Ts)
+    for(var i = Ts.length - 1; i >= 0; i--)
     {
       if('function' != typeof(v = Ts[i]) &&
          'function' != typeof(v = JST[v]))
         throw Error("JST['" + Ts[i] + "'] not found or incorrect!")
-      Ts[i] = renderable(v, template, Number(i) + 1)
+      Ts[i] = renderable(v, template, i + 1)
     }
     template.id = id
     fetchJSTs = function() {}
