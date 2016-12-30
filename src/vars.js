@@ -1,3 +1,4 @@
+// Create list of template local variables
 function makeVars(scope)
 {
   var v = []

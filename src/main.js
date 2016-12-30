@@ -1,3 +1,4 @@
+// Compiler with @ syntax sugar
 function withOut(fn)
 {
   return $compile(fn)

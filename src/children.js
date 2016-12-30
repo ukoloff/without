@@ -1,3 +1,4 @@
+// Output text & inner tags
 function children(a)
 {
   var e, len = a.length

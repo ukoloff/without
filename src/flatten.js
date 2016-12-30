@@ -1,3 +1,4 @@
+// Flatten array/objects
 function flatten(array)
 {
   var v, r = []

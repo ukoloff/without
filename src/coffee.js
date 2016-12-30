@@ -1,3 +1,4 @@
+// Output <script>
 function coffeeScript(a)
 {
   if(1 != a.length || 'function' != typeof a[0])

@@ -1,3 +1,4 @@
+// Output [nested] HTML comments
 function makeComment()
 {
   var level = 0

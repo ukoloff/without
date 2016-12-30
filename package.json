@@ -32,7 +32,8 @@
     "coffee-script": "^1.10.0",
     "expect.js": "^0.3.1",
     "mocha": "^3.2.0",
-    "opener": "^1.4.1"
+    "opener": "^1.4.1",
+    "split": "^1.0.0"
   },
   "scripts": {
     "prepublish": "coffee src/build",

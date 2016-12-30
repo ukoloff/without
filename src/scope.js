@@ -1,3 +1,4 @@
+// Create list of tags available
 var scope
 
 function makeScope()

@@ -1,3 +1,4 @@
+// Compile JST template(s)
 function JSTs()
 {
   return JST$(arguments)
@@ -11,6 +12,7 @@ function JST$(a)
 
   function template(that) { return JSTs.apply(that, arguments) }
 
+  // Render sub-templates and join result(s)
   function JSTs()
   {
     var S = ''
@@ -20,6 +22,7 @@ function JST$(a)
     return S
   }
 
+  // Feed sub-templates to compiler
   function fetchJSTs()
   {
     var v, id = template.id
