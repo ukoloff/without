@@ -21,9 +21,10 @@ span.string {
 }
 
 form {
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: fixed;
+  -position: absolute;
+  top: 1ex;
+  right: 1ex;
 }
 
 iframe {

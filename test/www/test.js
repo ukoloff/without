@@ -13,5 +13,21 @@ function mochaRun(){
 
 function Quit(f)
 {
-  setTimeout(function(){f.parentElement.removeChild(f)})
+  setTimeout(stop)
+
+  function stop()
+  {
+    f.elements[0].value = 'Close window'
+    f.onsubmit = close
+  }
+
+  function close()
+  {
+    setTimeout(die)
+  }
+
+  function die()
+  {
+    window.close()
+  }
 }

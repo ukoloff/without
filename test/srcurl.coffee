@@ -28,11 +28,21 @@ describe 'Fake source file', ->
     expect(x.displayName).to.equal "{{#{x.id}}}"
 
   it 'can have some path inside', ->
-    x = withOut.compile -> div id: 'A'
+    x = withOut -> div id: 'A'
     x.id = ' a b c'
     do x
     expect(x.id).to.equal 'a/b/c'
     expect(x.displayName).to.equal "{{#{x.id}}}"
+
+  it 'is assigned once', ->
+    t = withOut -> 0
+    expect(t.id).to.equal null
+    t.id = 'path to'
+    expect(do t).to.equal ''
+    expect(n = t.displayName).to.be.ok()
+    t.id = 'path#2'
+    do t
+    expect(t.displayName).to.equal n
 
   it 'adds count to JSTs.displayName', ->
     x = withOut.JSTs
