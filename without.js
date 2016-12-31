@@ -1,5 +1,5 @@
 //
-// without.js v1.1.2: Yet another CoffeScript template (without `with`, coffescript and templates)
+// without.js v1.2.0: Yet another CoffeScript template (without `with`, coffescript and templates)
 // https://github.com/ukoloff/without
 //
 !function(){
