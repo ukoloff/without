@@ -37,8 +37,10 @@ function renderable(fn, template, n)
   // Build name for template
   function getName()
   {
-    var name = String(template.id || '')
-      .split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
+    var name = template.id
+    if(null == name)
+      name = ''
+    name = String(name).split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
     if(!name.length)
       name = ++names
     template.id = name
