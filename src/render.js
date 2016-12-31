@@ -37,10 +37,8 @@ function renderable(fn, template, n)
   // Build name for template
   function getName()
   {
-    var name = template.id
-    if(null == name)
-      name = ''
-    name = String(name).split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
+    var name = String(template.id || '')
+      .split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
     if(!name.length)
       name = ++names
     template.id = name
@@ -70,9 +68,9 @@ function renderable(fn, template, n)
   // Check whether template should be step in (breakpoint)
   function bp()
   {
-    if(minified || false === $compile.bp)
+    if(minified || false === withOut.bp)
       return
-    if($compile.bp)
+    if(withOut.bp)
       return true
     if(n && 'number' == typeof template.bp)
       return n == template.bp
