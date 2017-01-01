@@ -2,8 +2,9 @@
 
 [![Gem Version](https://badge.fury.io/rb/without-rails.svg)](http://badge.fury.io/rb/without-rails)
 
-without-rails wraps [withOut](https://github.com/ukoloff/without)
-template engine for simple use with rails asset pipeline.
+Without::Rails wraps [withOut][]
+template engine for simple use with
+[Rails][] asset pipeline.
 The gem includes the development (non-minified) source
 for ease of exploration.
 The asset pipeline will minify in production.
@@ -48,3 +49,7 @@ t = withOut ->
 $('#test').html t 'world' # <h1>Hello, world!</h1>
 
 ```
+
+[withOut]: https://github.com/ukoloff/without
+[Ruby]: https://www.ruby-lang.org/ru/
+[Rails]: http://rubyonrails.org/
