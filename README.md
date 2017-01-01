@@ -624,7 +624,7 @@ and [Teacup][].
 [DocPad]: http://docpad.org
 [Ruby]: https://www.ruby-lang.org/ru/
 [Rails]: http://rubyonrails.org/
-[without-rails]: https://rubygems.org/gems/without-rails
+[without-rails]: rails
 [Windows Script Host]: https://en.wikipedia.org/wiki/Windows_Script_Host
 [ck]: https://github.com/aeosynth/ck
 [Teacup]: https://github.com/goodeggs/teacup
