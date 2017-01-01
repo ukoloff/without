@@ -1,9 +1,21 @@
 fs = require 'fs'
 path = require 'path'
+
+mkdirp = require 'mkdirp'
+
 pckg = require '../../package'
 strip = require './strip'
 
-dst = fs.createWriteStream path.join __dirname, '../../', pckg.main
+dst = fs.createWriteStream js = path.join __dirname, '../../', pckg.main
+
+dst.on 'finish', ->
+  assets = path.join __dirname, '../../rails/vendor/assets/javascripts'
+  mkdirp assets, (err)->
+    throw err if err
+    fs.createReadStream js
+    .pipe fs.createWriteStream js = path.join assets, pckg.main
+    .on 'error', ->
+      throw Error 'File copy error:', js
 
 dst.write """
 //
