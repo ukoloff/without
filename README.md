@@ -4,6 +4,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/mwtk1p80nigwgr6g?svg=true)](https://ci.appveyor.com/project/ukoloff/without)
 [![NPM version](https://badge.fury.io/js/without.svg)](http://badge.fury.io/js/without)
 [![Bower version](https://badge.fury.io/bo/without.svg)](https://badge.fury.io/bo/without)
+[![Gem Version](https://badge.fury.io/rb/without-rails.svg)](http://badge.fury.io/rb/without-rails)
 
 Yet another CoffeScript template
 (without `with`, coffescript, options and templates)
@@ -623,7 +624,7 @@ and [Teacup][].
 [DocPad]: http://docpad.org
 [Ruby]: https://www.ruby-lang.org/ru/
 [Rails]: http://rubyonrails.org/
-[without-rails]: https://rubygems.org/gems/without-rails
+[without-rails]: rails
 [Windows Script Host]: https://en.wikipedia.org/wiki/Windows_Script_Host
 [ck]: https://github.com/aeosynth/ck
 [Teacup]: https://github.com/goodeggs/teacup
