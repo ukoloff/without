@@ -5,6 +5,7 @@ mkdirp = require 'mkdirp'
 
 pckg = require '../../package'
 strip = require './strip'
+require './ver'
 
 dst = fs.createWriteStream js = path.join __dirname, '../../', pckg.main
 

@@ -1,5 +1,10 @@
+pckg = require '../../package'
+
+module.exports = """
 module Without
   module Rails
-    VERSION = "1.2.0"
+    VERSION = #{JSON.stringify pckg.version}
   end
 end
+
+"""
