@@ -4,6 +4,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/mwtk1p80nigwgr6g?svg=true)](https://ci.appveyor.com/project/ukoloff/without)
 [![NPM version](https://badge.fury.io/js/without.svg)](http://badge.fury.io/js/without)
 [![Bower version](https://badge.fury.io/bo/without.svg)](https://badge.fury.io/bo/without)
+[![Gem Version](https://badge.fury.io/rb/without-rails.svg)](http://badge.fury.io/rb/without-rails)
 
 Yet another CoffeScript template
 (without `with`, coffescript, options and templates)
