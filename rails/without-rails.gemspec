@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["ukoloff@gmail.com"]
   spec.description   = "Use withOut with Rails"
   spec.summary       = "This gem provides withOut template engine for Rails application"
-  spec.homepage      = "https://github.com/ukoloff/without-rails"
+  spec.homepage      = "https://github.com/ukoloff/without/tree/master/rails"
   spec.license       = "MIT"
 
   spec.files         = Dir['lib/**/*', 'vendor/**/*']
