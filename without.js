@@ -1,5 +1,5 @@
 //
-// without.js v1.2.0: Yet another CoffeScript template (without `with`, coffescript and templates)
+// without.js v1.2.1: Yet another CoffeScript template (without `with`, coffescript and templates)
 // https://github.com/ukoloff/without
 //
 !function(){
@@ -35,7 +35,8 @@ function coffeeScript(a)
 {
   if(1 != a.length || 'function' != typeof a[0])
     throw SyntaxError('Usage: coffeescript -> code')
-  html += '<script><!--\n(' + a[0].toString() + ')()\n//-->\n</script>';
+  html += '<script><!--\n(' + a[0].toString() + ')()\n//-->\n</'
+  html += 'script>'
 }
 function makeComment()
 {

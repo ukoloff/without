@@ -20,7 +20,7 @@ dst.on 'finish', ->
 
 dst.write """
 //
-// #{pckg.name}.js v#{pckg.version}: #{pckg.description}
+// #{pckg.main} v#{pckg.version}: #{pckg.description}
 // #{pckg.homepage}
 //
 !function(){
