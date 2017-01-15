@@ -21,13 +21,13 @@ function makeScope()
 
   split(nTags)
   // Allow to garbage collect
-  nTags = 0
+  nTags = makeScope
   while(tag = tags.pop())
     scope[tag] = makeTag(tag)
 
   split(eTags)
   // Allow to garbage collect too
-  eTags = 0
+  eTags = makeScope
   while(tag = tags.pop())
   {
     scope[tag] = makeTag(tag, 1)
