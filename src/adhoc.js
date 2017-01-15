@@ -14,7 +14,7 @@ function adhocTag()
   function tag(name, empty)
   {
     if(null==empty)
-      empty = isEmpty(String(name).toLowerCase())
+      empty = isEmpty(('' + name).toLowerCase())
     return makeTag(name, empty)
   }
 }
