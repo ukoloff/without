@@ -17,8 +17,25 @@ function makeScope()
     $var: makeTag('var')
   }
 
-  for(var i = nTags.length - 1; i >= 0; i--)
-    scope[nTags[i]] = makeTag(nTags[i])
-  for(var i = eTags.length - 1; i >= 0; i--)
-    scope[eTags[i]] = makeTag(eTags[i], true)
+  var tag, tags
+
+  split(nTags)
+  // Allow to garbage collect
+  nTags = 0
+  while(tag = tags.pop())
+    scope[tag] = makeTag(tag)
+
+  split(eTags)
+  // Allow to garbage collect too
+  eTags = 0
+  while(tag = tags.pop())
+  {
+    scope[tag] = makeTag(tag, 1)
+    emptyTags[tag] = 1
+  }
+
+  function split(fn)
+  {
+    tags = fn().split(' ')
+  }
 }
