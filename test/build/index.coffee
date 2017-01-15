@@ -31,7 +31,7 @@ out = strip()
 out.pipe dst
 dst = out
 
-fs.readdirSync folder = path.join __dirname, '..'
+fs.readdirSync folder = path.join __dirname, '../../src'
 .forEach (file)->
   try
     dst.write fs.readFileSync path.join folder, file

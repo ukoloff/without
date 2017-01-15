@@ -37,8 +37,7 @@
     "split": "^1.0.0"
   },
   "scripts": {
-    "prepublish": "coffee src/build",
-    "pretest": "coffee src/build",
+    "prepublish": "coffee test/build",
     "test": "node test/npm"
   }
 }
