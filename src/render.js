@@ -60,7 +60,7 @@ function renderable(fn, template, n)
     if(!minified)
       code += '\n//# sourceURL=eval://withOut/' + (name = getName()) + '.wo'
     fn = (new Function(code)).call(myScope)
-    build = function() {}
+    build = nop
     if(minified)
       return
     fn.displayName = '<' + name + '>'

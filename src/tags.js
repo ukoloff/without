@@ -1,6 +1,7 @@
 // List of regular tags
 function nTags()
 {
+  nTags = nop
   var s = 'a abbr acronym address applet article aside audio '
   s += 'b bdo big blockquote body button canvas caption center cite code colgroup command '
   s += 'datalist dd del details dfn dir div dl dt em embed '

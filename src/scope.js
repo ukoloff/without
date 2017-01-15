@@ -3,7 +3,7 @@ var scope
 
 function makeScope()
 {
-  makeScope = function() {}
+  makeScope = nop
 
   scope = {
     print: text,
@@ -11,7 +11,7 @@ function makeScope()
     raw: function() { raw(arguments) },
     notag: function() { noTag(arguments) },
     coffeescript: function() { coffeeScript(arguments) },
-    blackhole: function() {},
+    blackhole: nop,
     comment: makeComment(),
     tag: adhocTag(),
     $var: makeTag('var')
@@ -20,14 +20,10 @@ function makeScope()
   var tag, tags
 
   split(nTags)
-  // Allow to garbage collect
-  nTags = makeScope
   while(tag = tags.pop())
     scope[tag] = makeTag(tag)
 
   split(eTags)
-  // Allow to garbage collect too
-  eTags = makeScope
   while(tag = tags.pop())
   {
     scope[tag] = makeTag(tag, 1)
