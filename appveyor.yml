@@ -31,3 +31,16 @@ before_test:
 test_script:
   - npm test
   - npm test --win
+
+after_test:
+  - npm pack
+  - cd rails
+  - rake build
+  - mv pkg/* ..
+
+artifacts:
+  - path: "*.tgz"
+    name: NPM package
+  - path: "*.gem"
+    name: Ruby gem
+
