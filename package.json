@@ -1,7 +1,7 @@
 {
   "name": "without",
   "description": "Yet another CoffeScript template (without `with`, coffescript and templates)",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "author": {
     "name": "Stas Ukolov",
     "email": "ukoloff@gmail.com"
