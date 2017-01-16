@@ -1,5 +1,7 @@
 child_process = require 'child_process'
 
+require '../build'
+
 wait = (child)->
   child.on 'exit', (code, signal)->
     if signal

@@ -34,6 +34,6 @@ function JST$(a)
       Ts[i] = renderable(v, template, i + 1)
     }
     template.id = id
-    fetchJSTs = function() {}
+    fetchJSTs = nop
   }
 }

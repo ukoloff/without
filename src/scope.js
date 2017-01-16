@@ -3,7 +3,7 @@ var scope
 
 function makeScope()
 {
-  makeScope = function() {}
+  makeScope = nop
 
   scope = {
     print: text,
@@ -11,14 +11,27 @@ function makeScope()
     raw: function() { raw(arguments) },
     notag: function() { noTag(arguments) },
     coffeescript: function() { coffeeScript(arguments) },
-    blackhole: function() {},
+    blackhole: nop,
     comment: makeComment(),
     tag: adhocTag(),
     $var: makeTag('var')
   }
 
-  for(var i = nTags.length - 1; i >= 0; i--)
-    scope[nTags[i]] = makeTag(nTags[i])
-  for(var i = eTags.length - 1; i >= 0; i--)
-    scope[eTags[i]] = makeTag(eTags[i], true)
+  var tag, tags
+
+  split(nTags)
+  while(tag = tags.pop())
+    scope[tag] = makeTag(tag)
+
+  split(eTags)
+  while(tag = tags.pop())
+  {
+    scope[tag] = makeTag(tag, 1)
+    emptyTags[tag] = 1
+  }
+
+  function split(fn)
+  {
+    tags = fn().split(' ')
+  }
 }

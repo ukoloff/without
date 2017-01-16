@@ -1,21 +1,20 @@
 //
-// without.js v1.2.1: Yet another CoffeScript template (without `with`, coffescript and templates)
+// without.js v1.2.2: Yet another CoffeScript template (without `with`, coffescript and templates)
 // https://github.com/ukoloff/without
 //
 !function(){
+var emptyTags = {}
 function adhocTag()
 {
-  return function(name, empty) { return tag(name, empty) }
-  function isEmpty(name)
-  {
-    for(var i = eTags.length - 1; i >= 0; i--)
-      if(name == eTags[i])
-        return true
-  }
+  return Tag
+  function Tag(name, empty) { return tag(name, empty) }
   function tag(name, empty)
   {
-    if(null==empty)
-      empty = isEmpty(String(name).toLowerCase())
+    if(null == empty)
+    {
+      makeScope()
+      empty = emptyTags[('' + name).toLowerCase()]
+    }
     return makeTag(name, empty)
   }
 }
@@ -35,13 +34,14 @@ function coffeeScript(a)
 {
   if(1 != a.length || 'function' != typeof a[0])
     throw SyntaxError('Usage: coffeescript -> code')
-  html += '<script><!--\n(' + a[0].toString() + ')()\n//-->\n</'
+  html += '<script><!--\n(' + a[0] + ')()\n//-->\n</'
   html += 'script>'
 }
 function makeComment()
 {
   var level = 0
-  return function() { comment(arguments) }
+  return Comment
+  function Comment() { comment(arguments) }
   function comment(a)
   {
     html += level++ ? '<comment level="' + level + '">' : "<!-- "
@@ -51,7 +51,8 @@ function makeComment()
 }
 function compile()
 {
-  return function withOut(fn)
+  return withOut
+  function withOut(fn)
   {
     return compile(fn)
   }
@@ -85,7 +86,7 @@ function flatten(array)
 var htmlEntities = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}
 function h(s)
 {
-  return String(s).replace(/[&<>"]/g, function(e) { return htmlEntities[e] })
+  return ('' + s).replace(/[&<>"]/g, function(e) { return htmlEntities[e] })
 }
 function JSTs()
 {
@@ -116,7 +117,7 @@ function JST$(a)
       Ts[i] = renderable(v, template, i + 1)
     }
     template.id = id
-    fetchJSTs = function() {}
+    fetchJSTs = nop
   }
 }
 function filterLocals(locals)
@@ -152,7 +153,8 @@ function $compile(fn)
 }
 function makeTag(name, empty)
 {
-  return function() { tag(arguments) }
+  return Tag
+  function Tag() { tag(arguments) }
   function attr(k, v)
   {
     if(null == v || false === v) return
@@ -216,6 +218,9 @@ function merge()
   }
   return res
 }
+function nop()
+{
+}
 function noTag(a)
 {
   children('object' == typeof a[0] ? shift(a) : a)
@@ -269,7 +274,7 @@ function renderable(fn, template, n)
     var name = template.id
     if(null == name)
       name = ''
-    name = String(name).split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
+    name = ('' + name).split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
     if(!name.length)
       name = ++names
     template.id = name
@@ -279,7 +284,7 @@ function renderable(fn, template, n)
   }
   function build()
   {
-    var name, code = fn.toString()
+    var name, code = '' + fn
     minified = !/[\r\n]/.test(code)
     makeScope()
     var myScope = merge(scope, filterLocals(withOut.$), filterLocals(template.$))
@@ -287,7 +292,7 @@ function renderable(fn, template, n)
     if(!minified)
       code += '\n//# sourceURL=eval://withOut/' + (name = getName()) + '.wo'
     fn = (new Function(code)).call(myScope)
-    build = function() {}
+    build = nop
     if(minified)
       return
     fn.displayName = '<' + name + '>'
@@ -307,42 +312,56 @@ function renderable(fn, template, n)
 var scope
 function makeScope()
 {
-  makeScope = function() {}
+  makeScope = nop
   scope = {
     print: text,
     text: text,
     raw: function() { raw(arguments) },
     notag: function() { noTag(arguments) },
     coffeescript: function() { coffeeScript(arguments) },
-    blackhole: function() {},
+    blackhole: nop,
     comment: makeComment(),
     tag: adhocTag(),
     $var: makeTag('var')
   }
-  for(var i = nTags.length - 1; i >= 0; i--)
-    scope[nTags[i]] = makeTag(nTags[i])
-  for(var i = eTags.length - 1; i >= 0; i--)
-    scope[eTags[i]] = makeTag(eTags[i], true)
+  var tag, tags
+  split(nTags)
+  while(tag = tags.pop())
+    scope[tag] = makeTag(tag)
+  split(eTags)
+  while(tag = tags.pop())
+  {
+    scope[tag] = makeTag(tag, 1)
+    emptyTags[tag] = 1
+  }
+  function split(fn)
+  {
+    tags = fn().split(' ')
+  }
 }
 var slice = [].slice
 function shift(a)
 {
   return slice.call(a, 1)
 }
-function split(s)
+function nTags()
 {
-  return s.split(' ')
+  nTags = nop
+  var s = 'a abbr acronym address applet article aside audio '
+  s += 'b bdo big blockquote body button canvas caption center cite code colgroup command '
+  s += 'datalist dd del details dfn dir div dl dt em embed '
+  s += 'fieldset figcaption figure font footer form frameset '
+  s += 'h1 h2 h3 h4 h5 h6 head header hgroup html i iframe ins keygen kbd '
+  s += 'label legend li map mark menu meter nav noframes noscript '
+  s += 'object ol optgroup option output p pre progress q rp rt ruby '
+  s += 's samp script section select small source span strike strong style sub summary sup '
+  return s + 'table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp'
 }
-var nTags = split('a abbr acronym address applet article aside audio ' +
-  'b bdo big blockquote body button canvas caption center cite code colgroup command ' +
-  'datalist dd del details dfn dir div dl dt em embed ' +
-  'fieldset figcaption figure font footer form frameset ' +
-  'h1 h2 h3 h4 h5 h6 head header hgroup html i iframe ins keygen kbd ' +
-  'label legend li map mark menu meter nav noframes noscript ' +
-  'object ol optgroup option output p pre progress q rp rt ruby ' +
-  's samp script section select small source span strike strong style sub summary sup ' +
-  'table tbody td textarea tfoot th thead time title tr tt u ul video wbr xmp')
-var eTags = split('area base basefont br col frame hr img input link meta param')
+function eTags()
+{
+  eTags = nop
+  return 'area base basefont br col frame hr img input link meta param'
+}
 function text()
 {
   print(arguments)

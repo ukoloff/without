@@ -40,7 +40,7 @@ function renderable(fn, template, n)
     var name = template.id
     if(null == name)
       name = ''
-    name = String(name).split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
+    name = ('' + name).split(/\W+/).join('/').replace(/^\/+|\/+$/g, '')
     if(!name.length)
       name = ++names
     template.id = name
@@ -52,7 +52,7 @@ function renderable(fn, template, n)
   // Compile template
   function build()
   {
-    var name, code = fn.toString()
+    var name, code = '' + fn
     minified = !/[\r\n]/.test(code)
     makeScope()
     var myScope = merge(scope, filterLocals(withOut.$), filterLocals(template.$))
@@ -60,7 +60,7 @@ function renderable(fn, template, n)
     if(!minified)
       code += '\n//# sourceURL=eval://withOut/' + (name = getName()) + '.wo'
     fn = (new Function(code)).call(myScope)
-    build = function() {}
+    build = nop
     if(minified)
       return
     fn.displayName = '<' + name + '>'
