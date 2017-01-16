@@ -1,7 +1,9 @@
 // Direct template compiler
 function compile()
 {
-  return function withOut(fn)
+  return withOut
+
+  function withOut(fn)
   {
     return compile(fn)
   }

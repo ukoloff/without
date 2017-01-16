@@ -1,7 +1,9 @@
 // Build tag rendering function
 function makeTag(name, empty)
 {
-  return function() { tag(arguments) }
+  return Tag
+
+  function Tag() { tag(arguments) }
 
   // Output single attribute
   function attr(k, v)

@@ -2,7 +2,10 @@
 function makeComment()
 {
   var level = 0
-  return function() { comment(arguments) }
+  return Comment
+
+  function Comment() { comment(arguments) }
+
   function comment(a)
   {
     html += level++ ? '<comment level="' + level + '">' : "<!-- "

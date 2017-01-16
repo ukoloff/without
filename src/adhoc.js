@@ -3,7 +3,9 @@ var emptyTags = {}
 
 function adhocTag()
 {
-  return function(name, empty) { return tag(name, empty) }
+  return Tag
+
+  function Tag(name, empty) { return tag(name, empty) }
 
   function tag(name, empty)
   {
