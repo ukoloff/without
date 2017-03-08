@@ -6,16 +6,12 @@ function children(a)
   {
     if(null == (e = a[i])) continue;
     if('function' == typeof e)
-      try
-      {
-        prev = html
-        html = ''
-        e.call(_this)
-      }
-      finally
-      {
-        html = prev + html
-      }
+    {
+      prev = html
+      html = ''
+      try { e.call(_this) }
+      finally { html = prev + html }
+    }
     else
       html += h(e)
   }
