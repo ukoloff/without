@@ -3,18 +3,20 @@ function children(a)
 {
   var e, len = a.length, prev
   for(var i = 0; i < len; i++)
-    try
-    {
-      prev = html
-      html = ''
-      if(null == (e = a[i])) continue;
-      if('function' == typeof e)
+  {
+    if(null == (e = a[i])) continue;
+    if('function' == typeof e)
+      try
+      {
+        prev = html
+        html = ''
         e.call(_this)
-      else
-        html = h(e)
-    }
-    finally
-    {
-      html = prev + html
-    }
+      }
+      finally
+      {
+        html = prev + html
+      }
+    else
+      html += h(e)
+  }
 }
