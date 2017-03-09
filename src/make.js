@@ -17,7 +17,7 @@ function makeTag(name, empty)
          nest('data-', at[k])
        else
          attr(k, at[k])
-     a = shift(a)
+     a = cdr(a)
     }
     html += me + '>'
     if(empty && a.length)
