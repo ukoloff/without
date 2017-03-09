@@ -7,7 +7,7 @@ function attributes(prefix, obj)
       me += attributes(prefix + k + '-', v)
     else if(null != v && false !== v)
     {
-      me += ' ' + prefix + h(k)
+      me += prefix + h(k)
       if(true !== v)
         me += '="' + h(v) + '"'
     }

@@ -12,7 +12,7 @@ function makeTag(name, empty)
     var at = a[0]
     if('object' == typeof at)
     {
-      me += attributes('', at)
+      me += attributes(' ', at)
       a = cdr(a)
     }
     html += me + '>'
