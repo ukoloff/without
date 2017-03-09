@@ -13,10 +13,10 @@ function makeTag(name, empty)
     if('object' == typeof at)
     {
      for(var k in at)
-       if('data' == k && 'object' == typeof at[k])
-         nest('data-', at[k])
-       else
-         attr(k, at[k])
+       me += 'data' == k && 'object' == typeof at[k] ?
+         nestAttr('data-', at[k])
+         :
+         attribute(k, at[k])
      a = cdr(a)
     }
     html += me + '>'
@@ -26,24 +26,5 @@ function makeTag(name, empty)
       return
     children(a)
     html += "</" + name + ">"
-
-    // Output single attribute
-    function attr(k, v)
-    {
-      if(null == v || false === v) return
-      me += ' ' + h(k)
-      if(true !== v)
-        me += '="' + h(v) + '"'
-    }
-
-    // Output data-* attribute(s)
-    function nest(prefix, obj)
-    {
-      for(var k in obj)
-        if('object' == typeof obj[k])
-          nest(prefix + k + '-', obj[k])
-        else
-          attr(prefix + k, obj[k])
-    }
   }
 }
