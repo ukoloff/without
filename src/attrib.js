@@ -1,19 +1,15 @@
-// Output single attribute
-function attribute(k, v)
+// Output attribute(s)
+function attributes(prefix, obj)
 {
-  if(null == v || false === v) return ''
-  var me = ' ' + h(k)
-  return true === v ? me : me + '="' + h(v) + '"'
-}
-
-// Output data-* attribute(s)
-function nestAttr(prefix, obj)
-{
-  var me = ''
+  var v, me = ''
   for(var k in obj)
-    me += 'object' == typeof obj[k] ?
-      nestAttr(prefix + k + '-', obj[k])
-      :
-      attribute(prefix + k, obj[k])
+    if('object' == typeof(v = obj[k]))
+      me += attributes(prefix + k + '-', v)
+    else if(null != v && false !== v)
+    {
+      me += ' ' + prefix + h(k)
+      if(true !== v)
+        me += '="' + h(v) + '"'
+    }
   return me
 }

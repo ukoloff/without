@@ -34,12 +34,13 @@ describe 'HTML attributes', ->
     expect(withOut.$compile(-> i data: @) x: 108, y: z: 42, none: false).to.
       equal '<i data-x="108" data-y-z="42"></i>'
 
-  it 'ignore hashes for not data-', ->
-    expect(withOut.$compile(-> s datum: @) p: 1, q: 2, r: 3).to.
-      equal '<s datum="[object Object]"></s>'
+  it 'allow hashes for any object as attribute', ->
+    expect withOut.$compile(-> s datum: @) p: 1, q: 2, r: 3
+    .to.equal '<s datum-p="1" datum-q="2" datum-r="3"></s>'
 
   it 'accept numbers', ->
-    expect(withOut.$compile(-> div id: @id) id: 5).to.equal '<div id="5"></div>'
+    expect withOut.$compile(-> div id: @id) id: 5
+    .to.equal '<div id="5"></div>'
 
   it 'accept strings', ->
     expect(withOut.$compile(-> div id: @id) id: 'A').to.equal '<div id="A"></div>'

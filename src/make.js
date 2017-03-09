@@ -12,12 +12,8 @@ function makeTag(name, empty)
     var at = a[0]
     if('object' == typeof at)
     {
-     for(var k in at)
-       me += 'data' == k && 'object' == typeof at[k] ?
-         nestAttr('data-', at[k])
-         :
-         attribute(k, at[k])
-     a = cdr(a)
+      me += attributes('', at)
+      a = cdr(a)
     }
     html += me + '>'
     if(empty && a.length)
