@@ -8,14 +8,15 @@ function makeTag(name, empty)
   // Output full tag
   function tag(a)
   {
-    var me = '<' + name
     var at = a[0]
     if('object' == typeof at)
     {
-      me += attributes(' ', at)
+      at = attributes(' ', at)
       a = cdr(a)
     }
-    html += me + '>'
+    else
+      at = ''
+    html += '<' + name + at + '>'
     if(empty && a.length)
       throw SyntaxError("<" + name + "> must have no content!")
     if(empty)
