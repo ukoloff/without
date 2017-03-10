@@ -1,5 +1,5 @@
 // Export withOut
-if('undefined' != typeof module && module.exports)
+if('object' == typeof module && module.exports)
   // Node.js
   module.exports = withOut
 else if('function' == typeof define && define.amd)
