@@ -2,17 +2,21 @@
 function children(a)
 {
   var e, len = a.length, prev
-  for(var i = 0; i < len; i++)
+  prev = html
+  html = ''
+  try
   {
-    if(null == (e = a[i])) continue;
-    if('function' == typeof e)
+    for(var i = 0; i < len; i++)
     {
-      prev = html
-      html = ''
-      try { e.call(_this) }
-      finally { html = prev + html }
+      if(null == (e = a[i])) continue;
+      if('function' == typeof e)
+        e.call(_this)
+      else
+        html += h(e)
     }
-    else
-      html += h(e)
+  }
+  finally
+  {
+    html = prev + html
   }
 }
