@@ -1,5 +1,5 @@
 //
-// without.js v1.2.2: Yet another CoffeScript template (without `with`, coffescript and templates)
+// without.js v1.2.3: Yet another CoffeScript template (without `with`, coffescript and templates)
 // https://github.com/ukoloff/without
 //
 !function(){
@@ -18,16 +18,39 @@ function adhocTag()
     return makeTag(name, empty)
   }
 }
+function attributes(prefix, obj)
+{
+  var v, me = ''
+  for(var k in obj)
+    if('object' == typeof(v = obj[k]))
+      me += attributes(prefix + k + '-', v)
+    else if(null != v && false !== v)
+    {
+      me += prefix + h(k)
+      if(true !== v)
+        me += '="' + h(v) + '"'
+    }
+  return me
+}
 function children(a)
 {
-  var e, len = a.length
-  for(var i = 0; i < len; i++)
+  var e, len = a.length, prev
+  prev = html
+  html = ''
+  try
   {
-    if(null == (e = a[i])) continue;
-    if('function' == typeof e)
-      e.call(_this)
-    else
-      html += h(e)
+    for(var i = 0; i < len; i++)
+    {
+      if(null == (e = a[i])) continue;
+      if('function' == typeof e)
+        e.call(_this)
+      else
+        html += h(e)
+    }
+  }
+  finally
+  {
+    html = prev + html
   }
 }
 function coffeeScript(a)
@@ -63,7 +86,7 @@ function compile()
     function template() { return withOut.apply(this, arguments) }
   }
 }
-if('undefined' != typeof module && module.exports)
+if('object' == typeof module && module.exports)
   module.exports = withOut
 else if('function' == typeof define && define.amd)
   define(function() { return withOut })
@@ -155,35 +178,17 @@ function makeTag(name, empty)
 {
   return Tag
   function Tag() { tag(arguments) }
-  function attr(k, v)
-  {
-    if(null == v || false === v) return
-    html += ' ' + h(k)
-    if(true !== v)
-      html += '="' + h(v) + '"'
-  }
-  function nest(prefix, obj)
-  {
-    for(var k in obj)
-      if('object' == typeof obj[k])
-        nest(prefix + k + '-', obj[k])
-      else
-        attr(prefix + k, obj[k])
-  }
   function tag(a)
   {
-    html += '<' + name
     var at = a[0]
     if('object' == typeof at)
     {
-     for(var k in at)
-       if('data' == k && 'object' == typeof at[k])
-         nest('data-', at[k])
-       else
-         attr(k, at[k])
-     a = shift(a)
+      at = attributes(' ', at)
+      a = cdr(a)
     }
-    html += '>'
+    else
+      at = ''
+    html += '<' + name + at + '>'
     if(empty && a.length)
       throw SyntaxError("<" + name + "> must have no content!")
     if(empty)
@@ -223,14 +228,15 @@ function nop()
 }
 function noTag(a)
 {
-  children('object' == typeof a[0] ? shift(a) : a)
+  children('object' == typeof a[0] ? cdr(a) : a)
 }
 function print(a)
 {
-  var e, len = a.length
+  var e, len = a.length, me = ''
   for(var i = 0; i < len; i++)
     if(null != (e = a[i]))
-      html += h(e)
+      me += h(e)
+  html += me
 }
 function raw(a)
 {
@@ -340,7 +346,7 @@ function makeScope()
   }
 }
 var slice = [].slice
-function shift(a)
+function cdr(a)
 {
   return slice.call(a, 1)
 }
