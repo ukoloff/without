@@ -483,7 +483,7 @@ return ->
 
 ## Testing
 
-  * `npm test` - test in node.js, using [mocha](http://visionmedia.github.io/mocha/)
+  * `npm test` - test in node.js, using [mocha](http://mochajs.org/)
   * `npm test --www[=nnnn]` - start Web-server to test in browser
   * `npm test --win[=msie]` - test in [Windows Script Host][] (cscript, Microsoft's JScript)
 
